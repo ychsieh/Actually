@@ -26,16 +26,33 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
 
 # Application definition
 
+TEMPLATE_DIRS = (
+    '/Users/MAC/Actually/templates'
+)
+
+# TEMPLATE_CONTEXT_PROESSORS = (
+#     'django.core.context_processors.request',
+# )
+
+# AUTHENTICATION_BACKENDS = (
+#     'django.contrib.auth.backends.ModelBackend',
+#     'socialregistration.contrib.github.auth.GithubAuth'
+# )
+
 INSTALLED_APPS = (
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'Auth_App',
+    'south',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,9 +73,11 @@ WSGI_APPLICATION = 'Actually.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'default': { 
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'django_db',                     
+        'USER': 'Yachen',
+        'PASSWORD': '543840928',
     }
 }
 
