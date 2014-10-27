@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Actually</title>
+    <title>New Project</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/site_media/css/bootstrap.min.css" rel="stylesheet">
@@ -17,14 +17,8 @@
     <!-- MetisMenu CSS -->
     <link href="/site_media/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
 
-    <!-- Timeline CSS -->
-    <link href="/site_media/css/plugins/timeline.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="/site_media/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="/site_media/css/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="/site_media/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -35,9 +29,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-   <!--  <link href="/site_media/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/site_media/css/landing-page.css" rel="stylesheet">
-    <link href="/site_media/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
 
 </head>
 
@@ -46,7 +37,7 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -54,7 +45,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="http://127.0.0.1:8000/main">ACTUALLY</a>
+                <a class="navbar-brand" href="index.html">ACTUALLY</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -66,7 +57,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
                         <li>
-                            <a href="http://127.0.0.1:8000/project1">
+                            <a href="#">
                                 <div>
                                     <p>
                                         <strong>Project 1</strong>
@@ -82,7 +73,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="http://127.0.0.1:8000/project2">
+                            <a href="#">
                                 <div>
                                     <p>
                                         <strong>Project 2</strong>
@@ -114,8 +105,24 @@
                         </li>
                         <li class="divider"></li>
                         <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Project 4</strong>
+                                        <span class="pull-right text-muted">0% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">0% Complet</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
                             <a class="text-center" href="#">
-                                <strong>See All Projects</strong>
+                                <strong>See All Tasks</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
@@ -134,7 +141,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="https://github.com/login/oauth/authorize"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -158,10 +165,10 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a class="active" href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="http://127.0.0.1:8000/newproject"><i class="fa fa-edit fa-fw"></i> New Project</a>
+                            <a class="active" href="forms.html"><i class="fa fa-edit fa-fw"></i> New Project</a>
                         </li>
                     </ul>
                 </div>
@@ -173,85 +180,73 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <br>
-                    <h1 class="page-header">Projects Overview</h1>
+                    <h1 class="page-header">Add a Project</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <a href="http://127.0.0.1:8000/project1">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
                         <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">40%</div>
-                                    <div>Project 1</div>
-                                </div>
-                            </div>
+                            Basic Information
                         </div>
-                        
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <a href="http://127.0.0.1:8000/project2">
-                        <div class="panel-heading">
+                        <div class="panel-body">
                             <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
+                                <div class="col-lg-6">
+                                    <form role="form" action="http://127.0.0.1:8000/main2">
+                                        <div class="form-group">
+                                            <label>Project Name</label>
+                                            <input class="form-control" placeholder="Please choose a name for your new project">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Project url</label>
+                                            <input class="form-control" placeholder="Paste the url of your github project to import">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Section 1 </label>
+                                            <br>
+                                            <p class="form-control-static">Section Name: </>
+                                            <input class="form-control-inline">
+                                            <br>
+                                            <p class="form-control-static">Weight in the whole project:
+                                            <select class="form-control-inline">
+                                                <option>20%</option>
+                                                <option>40%</option>
+                                                <option>60%</option>
+                                                <option>80%</option>
+                                            </select>
+                                            </p>
+                                            <p class="form-control-static">Assign developers:
+                                                <select multiple class="form-control">
+                                                    <option>Developer 1</option>
+                                                    <option>Developer 2</option>
+                                                    <option>Developer 3</option>
+                                                    <option>All</option>
+                                                </select>
+                                            </p>
+                                            <button type="button" class="btn btn-xs btn-link"><i class="fa fa-plus fa-fw"></i>Add another section...</button>
+                                            <p class="help-block">The percentages must add up to 100%.</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label> Estimate Deadline: </label>
+                                            <input class="form-control" type="date">
+                                        </div>
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                        <button type="reset" class="btn btn-default">Reset</button>
+                                    </form>
                                 </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">20%</div>
-                                    <div>Project 2</div>
-                                </div>
+                                
                             </div>
+                            <!-- /.row (nested) -->
                         </div>
-                        
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
+                        <!-- /.panel-body -->
                     </div>
+                    <!-- /.panel -->
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <!-- <a href="Project.html"> -->
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">60%</div>
-                                    <div>Project 3</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
+                <!-- /.col-lg-12 -->
             </div>
-            
+            <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
 
@@ -266,11 +261,6 @@
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
