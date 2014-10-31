@@ -28,7 +28,7 @@ class Project(models.Model):
 
 	def update(self, progress):
 		self.prevProgress = self.progress
-		self.progress = self.progress + progress
+		self.progress = progress
 		self.save()
 
 
