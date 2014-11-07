@@ -20,6 +20,7 @@
     <!-- Timeline CSS -->
     <link href="/site_media/css/plugins/timeline.css" rel="stylesheet">
 
+<link href="/site_media/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/site_media/css/sb-admin-2.css" rel="stylesheet">
 
@@ -28,16 +29,12 @@
 
     <!-- Custom Fonts -->
     <link href="/site_media/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-   <!--  <link href="/site_media/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/site_media/css/landing-page.css" rel="stylesheet">
-    <link href="/site_media/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
 
 </head>
 
@@ -54,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="http://127.0.0.1:8000/main">ACTUALLY</a>
+                <a class="navbar-brand" href="http://127.0.0.1:8000/auth?code=8659a4c18d07b6e4f79a">ACTUALLY</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -65,56 +62,37 @@
                         <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
+                        {% for project in projects%}
                         <li>
-                            <a href="http://127.0.0.1:8000/project1">
+                            <a href="/viewproject?type={{project.type}}&id={{project.id}}">
                                 <div>
                                     <p>
-                                        <strong>Project 1</strong>
-                                        <span class="pull-right text-muted">40% Complete</span>
+                                        <strong>{{project.name}}</strong>
+                                        <span class="pull-right text-muted">{{project.progress}}% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
+                                    {% if project.color == 'red'%}
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{project.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{project.progress}}%">
+                                    {% endif %}
+
+                                    {% if project.color == 'yellow'%}
+                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{project.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{project.progress}}%">
+                                    {% endif %}
+
+                                    {% if project.color == 'green'%}
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{project.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{project.progress}}%">
+                                    {% endif %}
+
+                                            <span class="sr-only">{{project.progress}}% Complete (success)</span>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </li>
                         <li class="divider"></li>
+                        {% endfor %}
                         <li>
-                            <a href="http://127.0.0.1:8000/project2">
-                                <div>
-                                    <p>
-                                        <strong>Project 2</strong>
-                                        <span class="pull-right text-muted">20% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                            <span class="sr-only">20% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Project 3</strong>
-                                        <span class="pull-right text-muted">60% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete (warning)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
+                            <a class="text-center" href="http://127.0.0.1:8000/auth?code=2055b1ff8b4be0682542">
                                 <strong>See All Projects</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
@@ -134,7 +112,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="https://github.com/login/oauth/authorize"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -158,10 +136,8 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a class="active" href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="http://127.0.0.1:8000/newproject"><i class="fa fa-edit fa-fw"></i> New Project</a>
+
+                            <a href="/site_templates/forms.html"><i class="fa fa-edit fa-fw"></i> New Project</a>
                         </li>
                     </ul>
                 </div>
@@ -180,78 +156,48 @@
             </div>
             <!-- /.row -->
             <div class="row">
+                {% for project in projects %}
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <a href="http://127.0.0.1:8000/project1">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">40%</div>
-                                    <div>Project 1</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <a href="http://127.0.0.1:8000/project2">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">20%</div>
-                                    <div>Project 2</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <!-- <a href="Project.html"> -->
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">60%</div>
-                                    <div>Project 3</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
 
-            </div>
-            
+                    {% if project.color == 'none'%}
+                    <div class="panel panel-primary">
+                    {% endif %}
+
+                    {% if project.color == 'red'%}
+                    <div class="panel panel-red">
+                    {% endif %}
+
+                    {% if project.color == 'yellow'%}
+                    <div class="panel panel-yellow">
+                    {% endif %}
+
+                    {% if project.color == 'green'%}
+                    <div class="panel panel-green">
+                    {% endif %}
+
+                        <a href="/viewproject?type={{project.type}}&id={{project.id}}">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-tasks fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{project.progress}}%</div>
+                                    <div>{{project.expected}}% Expected</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                            <div class="panel-footer">
+                                <span class="pull-left lead"><b>{{project.name}}</b> ({{project.type}})</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>            
         </div>
         <!-- /#page-wrapper -->
 
@@ -259,21 +205,22 @@
     <!-- /#wrapper -->
 
     <!-- jQuery Version 1.11.0 -->
-    <script src="js/jquery-1.11.0.js"></script>
+    <script src="/site_media/js/jquery-1.11.0.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/site_media/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+    <script src="/site_media/js/plugins/metisMenu/metisMenu.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
+    <script src="/site_media/js/plugins/morris/raphael.min.js"></script>
+    <script src="/site_media/js/plugins/morris/morris.min.js"></script>
+    <script src="/site_media/js/plugins/morris/morris-data1.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="js/sb-admin-2.js"></script>
+    <script src="/site_media/js/sb-admin-2.js"></script>
+
 
 </body>
 

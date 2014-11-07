@@ -20,6 +20,8 @@
     <!-- Timeline CSS -->
     <link href="/site_media/css/plugins/timeline.css" rel="stylesheet">
 
+    <!-- DataTables CSS -->
+    <link href="/site_media/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/site_media/css/sb-admin-2.css" rel="stylesheet">
 
@@ -63,91 +65,54 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="http://127.0.0.1:8000/main">ACTUALLY</a>
+                <a class="navbar-brand" href="http://127.0.0.1:8000/auth?code=8659a4c18d07b6e4f79a">ACTUALLY</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
+                        {% for project in projects1 %}
                         <li>
-                            <a href="http://127.0.0.1:8000/project1">
+                            <a href="/viewproject?type={{project.type}}&id={{project.id}}">
                                 <div>
                                     <p>
-                                        <strong>Project 1</strong>
-                                        <span class="pull-right text-muted">40% Complete</span>
+                                        <strong>{{project.name}}({{project.type}})</strong>
+                                        <span class="pull-right text-muted">{{project.progress}}% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
+                                    {% if project.color == 'red'%}
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{project.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{project.progress}}%">
+                                    {% endif %}
+
+                                    {% if project.color == 'yellow'%}
+                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{project.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{project.progress}}%">
+                                    {% endif %}
+
+                                    {% if project.color == 'green'%}
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{project.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{project.progress}}%">
+                                    {% endif %}
+
+                                            <span class="sr-only">{{project.progress}}% Complete (success)</span>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </li>
                         <li class="divider"></li>
+                        {% endfor %}
                         <li>
-                            <a href="http://127.0.0.1:8000/project2">
-                                <div>
-                                    <p>
-                                        <strong>Project 2</strong>
-                                        <span class="pull-right text-muted">20% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                            <span class="sr-only">20% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="Project.html">
-                                <div>
-                                    <p>
-                                        <strong>Project 3</strong>
-                                        <span class="pull-right text-muted">60% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete (warning)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-<!--                         <li>
-                            <a href="Project2.html">
-                                <div>
-                                    <p>
-                                        <strong>Project 4</strong>
-                                        <span class="pull-right text-muted">0% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                                            <span class="sr-only">0%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li> -->
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
+                            <a class="text-center" href="http://127.0.0.1:8000/auth?code=2055b1ff8b4be0682542">
                                 <strong>See All Projects</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
                     </ul>
                     <!-- /.dropdown-tasks -->
-                </li>
-                
+                </li>                
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -195,29 +160,77 @@
         <div id="page-wrapper">
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 col-md-12" >
                     <br>
                     <h1 class="page-header">
-                            Project 2
+                            {{project.name}}
                     </h1>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-signal fa-fw"></i> Progress in Detail
+                            <i class="fa fa-signal fa-fw"></i> Progress Overview
                         </div>
-                        <div class="panel-body">
-                            <div class="col-lg-4">
-                                    <div id="morris-donut-chart1"></div>
-                                    <h4 class="text-center">Project 2</h4>
+                        <div class="panel-body" >
+                            <div class="col-lg-6 col-md-6">
+                                    <div id="morris-donut-chart1" class ="large"></div>
+                                   
                             </div>
-                            <div class="col-lg-4">
-                                    <div id="morris-donut-chart2"></div>
-                                    <h4 class="text-center">Section 1</h4>
+                            <div class="col-lg-6 col-md-6">
+                                    <div id="morris-donut-chart2" class ="large"></div>
+                                    
                             </div>
-                            <div class="col-lg-4">
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-signal fa-fw"></i> Current Task
+                            </div>
+                            <div class="panel-body">
+                            <div class="col-lg-3">
                                     <div id="morris-donut-chart3"></div>
-                                    <h4 class="text-center">Task 3</h4>
                             </div>
+                            <div class="col-lg-3">
+                                    <div id="morris-donut-chart4"></div>
+                            </div>
+                            <div class="col-lg-3">
+                                    <div id="morris-donut-chart5"></div>
+                            </div>
+                            <div class="col-lg-3">
+                                    <div id="morris-donut-chart6"></div>
+                            </div>
+                            </div>
+                    </div>
+                    <!-- /.panel -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-sitemap fa-fw"></i> Task List
                         </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Task Name</th>
+                                            <th>Status</th>
+                                            <th>Weight</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for task in tasks %}
+                                        <tr class="odd gradeX">
+                                            <td>{{task.name}}</td>
+                                            <td>{{task.optional1}}</td>
+                                            <td>{{task.percentage}}%</td>
+                                            <td class="center">Description of {{task.description}}.</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
                 </div>
@@ -238,6 +251,9 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="/site_media/js/plugins/metisMenu/metisMenu.min.js"></script>
 
+    <!-- DataTables JavaScript -->
+    <script src="/site_media/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="/site_media/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <!-- Morris Charts JavaScript -->
     <script src="/site_media/js/plugins/morris/raphael.min.js"></script>
     <script src="/site_media/js/plugins/morris/morris.min.js"></script>
@@ -246,6 +262,12 @@
     <!-- Custom Theme JavaScript -->
     <script src="/site_media/js/sb-admin-2.js"></script>
 
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').dataTable();
+    });
+    </script>
 
 </body>
 

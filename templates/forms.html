@@ -45,7 +45,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">ACTUALLY</a>
+                <a class="navbar-brand" href="http://127.0.0.1:8000/auth?code=8659a4c18d07b6e4f79a">ACTUALLY</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -165,7 +165,8 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="http://127.0.0.1:8000/auth?code=8659a4c18d07b6e4f79a
+                            "><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a class="active" href="forms.html"><i class="fa fa-edit fa-fw"></i> New Project</a>
@@ -189,51 +190,28 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Basic Information
+                            Select A Repository
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form role="form" action="http://127.0.0.1:8000/main2">
+                                    <form role="form" action="forms2.html">
                                         <div class="form-group">
                                             <label>Project Name</label>
-                                            <input class="form-control" placeholder="Please choose a name for your new project">
+                                            <input class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>Project url</label>
-                                            <input class="form-control" placeholder="Paste the url of your github project to import">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Section 1 </label>
-                                            <br>
-                                            <p class="form-control-static">Section Name: </>
-                                            <input class="form-control-inline">
-                                            <br>
-                                            <p class="form-control-static">Weight in the whole project:
-                                            <select class="form-control-inline">
-                                                <option>20%</option>
-                                                <option>40%</option>
-                                                <option>60%</option>
-                                                <option>80%</option>
+                                            <label>Github Repository</label>
+                                            <select multiple class="form-control">
+                                                    <option>Actually</option>
+                                                    <option>Pushcart</option>
+                                                    <option>Lifestream</option>
+                                                    <option>EAF</option>
+                                                    <option>ohmage</option>
                                             </select>
-                                            </p>
-                                            <p class="form-control-static">Assign developers:
-                                                <select multiple class="form-control">
-                                                    <option>Developer 1</option>
-                                                    <option>Developer 2</option>
-                                                    <option>Developer 3</option>
-                                                    <option>All</option>
-                                                </select>
-                                            </p>
-                                            <button type="button" class="btn btn-xs btn-link"><i class="fa fa-plus fa-fw"></i>Add another section...</button>
-                                            <p class="help-block">The percentages must add up to 100%.</p>
                                         </div>
-                                        <div class="form-group">
-                                            <label> Estimate Deadline: </label>
-                                            <input class="form-control" type="date">
-                                        </div>
-                                        <button type="submit" class="btn btn-default">Submit</button>
-                                        <button type="reset" class="btn btn-default">Reset</button>
+                                        
+                                        <button type="submit" class="btn btn-default">Add</button>
                                     </form>
                                 </div>
                                 
@@ -254,16 +232,35 @@
     <!-- /#wrapper -->
 
     <!-- jQuery Version 1.11.0 -->
-    <script src="js/jquery-1.11.0.js"></script>
+    <script src="/site_media/js/jquery-1.11.0.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/site_media/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+    <script src="/site_media/js/plugins/metisMenu/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="js/sb-admin-2.js"></script>
+    <script src="/site_media/js/sb-admin-2.js"></script>
+    <script type="text/javascript">
+            var count = 1;
+            $("#newSecBtn").click(function() {
+                    window.count += 1;
+                    var sectionName = "Section " + window.count.toString();
+                    var title = $("<label></label>").text(sectionName);
+                    //alert("ads");
+                    $("#sections").append(title);
+                    var oldSection = document.getElementsByClassName("addsection")[count-2];
+                    var newSection = oldSection.cloneNode(true);
+                    $("#sections").append(newSection);
+                    //var newBtn = $("<button></button>").text("Add another section...");
+                    var newBtn = $("#newSecBtn").clone(true,true);
+                    $("#newSecBtn").remove();
+                    var msg = $(".totalPer").clone(true,true);
+                    $(".totalPer").remove();
+                    $("#sections").append(newBtn,msg);
+    })
+    </script>
 
 </body>
 

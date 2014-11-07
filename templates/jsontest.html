@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Project</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/site_media/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/site_media/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="/site_media/css/plugins/timeline.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/site_media/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="/site_media/css/plugins/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/site_media/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- <link rel="stylesheet" type="text/css" href="https://google-developers.appspot.com/_static/a893f627aa/css/screen-docs.css" /> -->
+    <!--<link rel="stylesheet" href="http://www.google.com/cse/style/look/default.css" type="text/css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://google-developers.appspot.com/chart/interactive/css/charts_gallery.css">
+    <script src="https://google-developers.appspot.com/_static/a893f627aa/js/prettify-bundle.js"></script>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script id="jqueryui" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" defer async></script>
+    <script src="http://www.google.com/jsapi?key=AIzaSyCZfHRnq7tigC-COeQRmoa9Cxr0vbrK6xw"></script> -->
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--<script src="https://google-developers.appspot.com/_static/a893f627aa/js/framebox.js"></script>-->
+
+</head>
+
+<body class="docs slim framebox_body">
+
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://127.0.0.1:8000/auth?code=8659a4c18d07b6e4f79a">ACTUALLY</a>
+            </div>
+            <!-- /.navbar-header -->
+
+             <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        {% for project in projects1 %}
+                        <li>
+                            <a href="/viewproject?type={{project.type}}&id={{project.id}}">
+                                <div>
+                                    <p>
+                                        <strong>{{project.name}}({{project.type}})</strong>
+                                        <span class="pull-right text-muted">{{project.progress}}% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                    {% if project.color == 'red'%}
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{project.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{project.progress}}%">
+                                    {% endif %}
+
+                                    {% if project.color == 'yellow'%}
+                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{project.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{project.progress}}%">
+                                    {% endif %}
+
+                                    {% if project.color == 'green'%}
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{project.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{project.progress}}%">
+                                    {% endif %}
+
+                                            <span class="sr-only">{{project.progress}}% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        {% endfor %}
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Projects</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>                
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a class="active" href="#progress"><i class="fa fa-tasks fa-fw"></i> Progress Overview</a>
+                        </li>
+                        <li>
+                            <a href="#detail"><i class="fa fa-signal fa-fw"></i> Progress in Detail</a>
+                        </li>
+                        <li>
+                            <a href="#updates"><i class="fa fa-clock-o fa-fw"></i> Recent Commits</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <br>
+                    <h1 class="page-header" id="progress">
+                            {{project.name}}
+                    </h1>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-tasks fa-fw"></i> Progress Overview
+                        </div>
+                        <!-- /.panel-heading -->
+                        <!--<div class="panel-body">
+                            <div class="item_container">
+                                <div class="chart_container" id="treemap"></div>
+                            </div>
+                        </div>-->
+                        <div class="panel-body">
+                            <div id="morris-bar-chart"></div>
+                            <div id="detail"></div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-signal fa-fw"></i> Progress in Detail: lines of coding
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="morris-area-chart"></div>
+                            <div id="updates"></div>
+                            <br>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-clock-o fa-fw"></i> Recent Commits
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul class="timeline">
+                            {% load app_filters %}
+                            {% for developer in developers %}
+                                {% if forloop.counter0|mymod:2 %}
+                                 <li>
+                                    <div class="timeline-badge"><i class="fa fa-check"></i>
+                                    </div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">{{developer.lastName}}, {{developer.firstName}}</h4>
+                                            <p><small class="text-muted"><i class="fa fa-clock-o"></i> 11 hours ago</small>
+                                            </p>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>{{developer.commit}}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% else %}
+                                <li class="timeline-inverted">
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">{{developer.lastName}}, {{developer.firstName}}</h4>
+                                            <p><small class="text-muted"><i class="fa fa-clock-o"></i> 1 day ago</small>
+                                            </p>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>{{developer.commit}}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endif %}               
+                            {% endfor %}
+                            </ul>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery Version 1.11.0 -->
+    <script src="/site_media/js/jquery-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/site_media/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/site_media/js/plugins/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="/site_media/js/plugins/morris/raphael.min.js"></script>
+    <script src="/site_media/js/plugins/morris/morris.min.js"></script>
+    <script src="/site_media/js/plugins/morris/morris-data.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/site_media/js/sb-admin-2.js"></script>
+
+
+</body>
+
+</html>

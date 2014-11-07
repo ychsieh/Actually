@@ -26,4 +26,4 @@ $(function() {
             $("#page-wrapper1").css("min-height", (height) + "px");
         }
     })
-})
+});

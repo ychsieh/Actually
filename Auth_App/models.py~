@@ -155,7 +155,7 @@ class Task(models.Model):
 		self.section.update(updateProgress)
 		self.save()
 
-	def add_task(self, name, description, percentage, section):
+	def __init__(self, name, description, percentage, section):
 		self.name = name
 		self.description = description
 		self.percentage = percentage

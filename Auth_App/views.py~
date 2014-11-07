@@ -24,12 +24,12 @@ def index(request):
 
 def project1(request):
     p1 = Project.objects.filter(name = 'Fake')
-    getcommits_from_project(p1[0])
+    getcommits_from_project(p1)
     return render_to_response('Project.html')
 
 def project2(request):
     p1 = Project.objects.filter(name = 'Fasta')
-    getcommits_from_project(p1[0])
+    getcommits_from_project(p1)
     return render_to_response('Project2.html')
 
 def newproject(request):
@@ -117,11 +117,8 @@ def getStats():
 def save_to_db(percentage, sub_name, person, project, time):
 #to be implement
 	if(Project.objects.filter(name= project) is None):
-		print '32223'
 		return 'No Project'
 	else:
-		print 'name'
-		print project
 		p1 = Project.objects.filter(name= project)
 	if(Developer.objects.filter(githubName = person) is None):
 		return 'No Developer'
@@ -137,7 +134,7 @@ def save_to_db(percentage, sub_name, person, project, time):
 				print '111111111111111111111111111'
 				print p1
 				print p1[0]
-				new_commit = Commit(commitTime = time, progress = percentage, developer = developer1[0], project = project, task=task1[0])
+				new_commit = Commit(commitTime = time, progress = percentage, developer = developer1[0], project = p1[0], task=task1[0])
 				new_commit.save()
 			else:
 				pass
