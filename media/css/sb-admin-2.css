@@ -12,6 +12,24 @@ body {
     width: 100%;
 }
 
+#profile {
+    height: 55px;
+    padding-left: 15px;
+    padding-top: 8px;
+}
+
+#profile-pic {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+#profile-name {
+    display: inline-block;
+}
+
 #page-wrapper {
     padding: 0 15px;
     min-height: 568px;

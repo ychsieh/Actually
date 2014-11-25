@@ -181,7 +181,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Add a Project</h1>
+                    <h2 class="page-header">Project Name and Repository</h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -242,25 +242,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="/site_media/js/sb-admin-2.js"></script>
-    <script type="text/javascript">
-            var count = 1;
-            $("#newSecBtn").click(function() {
-                    window.count += 1;
-                    var sectionName = "Section " + window.count.toString();
-                    var title = $("<label></label>").text(sectionName);
-                    //alert("ads");
-                    $("#sections").append(title);
-                    var oldSection = document.getElementsByClassName("addsection")[count-2];
-                    var newSection = oldSection.cloneNode(true);
-                    $("#sections").append(newSection);
-                    //var newBtn = $("<button></button>").text("Add another section...");
-                    var newBtn = $("#newSecBtn").clone(true,true);
-                    $("#newSecBtn").remove();
-                    var msg = $(".totalPer").clone(true,true);
-                    $(".totalPer").remove();
-                    $("#sections").append(newBtn,msg);
-    })
-    </script>
 
 </body>
 

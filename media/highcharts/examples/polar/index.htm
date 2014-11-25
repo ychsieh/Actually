@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+		<script type="text/javascript">
+$(function () {
+
+    $('#container').highcharts({
+
+        chart: {
+            polar: true
+        },
+
+        title: {
+            text: 'Project Overview'
+        },
+
+        pane: {
+            startAngle: 0,
+            endAngle: 360
+        },
+
+        xAxis: {
+            tickInterval: 72,
+            min: 0,
+            max: 360,
+            labels: {
+                formatter: function () {
+                    return this.value + '°';
+                }
+            }
+        },
+
+        yAxis: {
+            min: 0
+        },
+
+        plotOptions: {
+            series: {
+                pointStart: 0,
+                pointInterval: 72
+            },
+            column: {
+                pointPadding: 0,
+                groupPadding: 0
+            }
+        },
+
+        series: [{
+            type: 'area',
+            name: 'Expected Progress',
+            data: [80, 70, 60, 50, 40]
+        }, {
+            type: 'area',
+            name: 'Actual Progress',
+            data: [50, 80, 40, 50, 30]
+        }, {
+            type: 'line',
+            name: 'Difficulty Level',
+            data: [10, 25, 75, 45, 60]
+        }]
+    });
+});
+		</script>
+	</head>
+	<body>
+<script src="../../js/highcharts.js"></script>
+<script src="../../js/highcharts-more.js"></script>
+<script src="../../js/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; max-width: 400px; height: 400px; margin: 0 auto"></div>
+
+	</body>
+</html>
