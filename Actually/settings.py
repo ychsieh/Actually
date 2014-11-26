@@ -53,8 +53,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'Auth_App',
     'ShowViewApp',
-   # 'south',
-   #'bootstrap_toolkit',
+    'south',
+    'import_export',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -79,8 +79,8 @@ DATABASES = {
     'default': { 
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'actually',                     
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'yachen',
+        'PASSWORD': '543840928',
     }
 }
 
