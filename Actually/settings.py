@@ -53,12 +53,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'Auth_App',
     'ShowViewApp',
-<<<<<<< Updated upstream
-
-=======
-    #'south',
-    #'import_export',
->>>>>>> Stashed changes
+    'south',
+    'import_export',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -80,21 +76,11 @@ WSGI_APPLICATION = 'Actually.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
-<<<<<<< Updated upstream
     'default': { 
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'actually',                     
-        'USER': 'root',
-        'PASSWORD': 'password',
-=======
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Actually',
-        'USER': 'zhenan',
-        'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
->>>>>>> Stashed changes
+        'USER': 'yachen',
+        'PASSWORD': '543840928',
     }
 }
 
