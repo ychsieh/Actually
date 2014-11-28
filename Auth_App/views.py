@@ -146,7 +146,7 @@ def auth(request):
         dict["progress"] = project.progress * 100
         dict["expected"] = float(project.optional1) * 100
         if(project.progress / float(project.optional1) >= 1):
-            dict["color"] = "green"
+           dict["color"] = "green"
         if(project.progress / float(project.optional1) < 1 and project.progress / float(project.optional1) > 0.7):
             dict["color"] = "yellow"
         if(project.progress / float(project.optional1) <= 0.7):
