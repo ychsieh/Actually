@@ -100,11 +100,15 @@
                     </ul>
                     <!-- /.dropdown-tasks -->
                 </li>
-                
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <i id="profile">
+                                <span id="profile-name">Jin Sha</span>
+                                <img id="profile-pic" class="img-circle img-responsive" src="/site_media/img/default_profile.jpg">
+                            </i>
+                            <!--<i class="fa fa-caret-down"></i>-->
+                        <!--<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>-->
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -121,15 +125,12 @@
             </ul>
             <!-- /.navbar-top-links -->
 
-            <div class="navbar-default sidebar" role="navigation">
+            <!--<div class="navbar-default sidebar" role="navigation" style="display:none">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>  
-                            <div id="profile">
-                                <img id="profile-pic" class="img-circle img-responsive" src="/site_media/img/default_profile.jpg">
-                                <h4 id="profile-name">Jin Sha</h4>
-                            </div>
-                            <!-- /input-group -->
+
+                            
                         </li>
                         <li>
 
@@ -137,32 +138,31 @@
                         </li>
                     </ul>
                 </div>
-                <!-- /.sidebar-collapse -->
-            </div>
+                
+            </div>-->
             <!-- /.navbar-static-side -->
         </nav>
 
         <div id="page-wrapper">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 page-header">
                     <br>
-                    <h1 class="page-header">Projects Overview</h1>
+                    <h1 id="homeHeading">Projects Overview</h1>
+                    <!--<div class="col-lg-6 col-md-6 col-sm-12 homeHeading">-->
+                        <!--<a href="/site_templates/forms.html" class="btn btn-xs btn-link" id="addProject"><i class="fa fa-plus-circle"></i> Add a new project</a>-->
+                    <!--</div>-->
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-
             <!-- /.row -->
             <div class="row">
-                <div class="col-md-8 col-md-offset-4">
-                    <h4 class="green pull-right"><i class="fa fa-stop"></i> Advanced Progress</h4>
-                    <h4 class="yellow pull-right"><i class="fa fa-stop"></i> Delayed Progress　</h4>
-                    <h4 class="red pull-right"><i class="fa fa-stop"></i> Seriously Delayed Progress　</h4>
+                <div class="col-lg-3 col-md-6">
+                    <a href="/site_templates/forms.html" id="addProject">
+                        <div class="panel" id="addNew">
+                        <i class="fa fa-plus-circle" style="font-size:36px"></i><br>Add a new project
+                        </div>
+                    </a>
                 </div>
-            </div> 
-
-            <!-- /.row -->
-            <div class="row">
-                <br>
                 {% for project in projects %}
                 <div class="col-lg-3 col-md-6">
 
@@ -204,8 +204,8 @@
                     </div>
                 </div>
                 {% endfor %}
-            </div> 
-                      
+                
+            </div>            
         </div>
         <!-- /#page-wrapper -->
 
