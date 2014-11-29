@@ -150,8 +150,19 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+
             <!-- /.row -->
             <div class="row">
+                <div class="col-md-8 col-md-offset-4">
+                    <h4 class="green pull-right"><i class="fa fa-stop"></i> Advanced Progress</h4>
+                    <h4 class="yellow pull-right"><i class="fa fa-stop"></i> Delayed Progress　</h4>
+                    <h4 class="red pull-right"><i class="fa fa-stop"></i> Seriously Delayed Progress　</h4>
+                </div>
+            </div> 
+
+            <!-- /.row -->
+            <div class="row">
+                <br>
                 {% for project in projects %}
                 <div class="col-lg-3 col-md-6">
 
@@ -193,7 +204,8 @@
                     </div>
                 </div>
                 {% endfor %}
-            </div>            
+            </div> 
+                      
         </div>
         <!-- /#page-wrapper -->
 
