@@ -55,6 +55,7 @@ def findSectionByProjectIDDeveloperID(projectID,developerID):
     section = Section.objects.get(project = projectID, developer = developerID)
     return section
 
+
 def findLinesofCodebyProjectIDDeverloperID(projectID, developerID):
 	commit = Commit.objects.get(project = projectID, developer = developerID)
 	return commit.linescode
@@ -71,8 +72,19 @@ def findProjectById(pid):
     return Project.objects.get(id = pid)
 
 def test(request):
-	section = findSectionByProjectIDDeveloperID(4, 1)
-	return render_to_response('test.html',{'test':section})
+    developers = findDevelopersByProjectId(1)
+    #    json_developer = []
+        #for developer in developers:
+    #dict
+    #developer = developers.size
+    json_developer = []
+    for developer in developers:
+        dict = {}
+        dict['name'] = developer.lastName + ", " + developer.firstName
+        json_developer.append(dict)
+    
+    #data = findTasksBySectionID(section.id)
+    return render_to_response('test.html',{'test':json_developer})
 
 
 

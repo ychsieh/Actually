@@ -55,6 +55,7 @@ def findSectionByProjectIDDeveloperID(projectID,developerID):
     section = Section.objects.get(project = projectID, developer = developerID)
     return section
 
+
 def findLinesofCodebyProjectIDDeverloperID(projectID, developerID):
 	commit = Commit.objects.get(project = projectID, developer = developerID)
 	return commit.linescode
@@ -71,8 +72,8 @@ def findProjectById(pid):
     return Project.objects.get(id = pid)
 
 def test(request):
-	section = findSectionByProjectIDDeveloperID(4, 1)
-	return render_to_response('test.html',{'test':section})
+	section = findSectionByProjectIDDeveloperID(1, 1)
+    return render_to_response('test.html',{'test':section})
 
 
 
