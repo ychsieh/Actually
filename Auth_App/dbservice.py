@@ -51,6 +51,7 @@ def findTasksBySectionID(sectionID):
     tasks = Task.objects.filter(section = sectionID)
     return tasks
 
+
 def findSectionByProjectIDDeveloperID(projectID,developerID):
     section = Section.objects.get(project = projectID, developer = developerID)
     return section
