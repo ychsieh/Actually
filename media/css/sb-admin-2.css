@@ -13,21 +13,38 @@ body {
 }
 
 #profile {
-    height: 55px;
-    padding-left: 15px;
-    padding-top: 8px;
+    background-color: #eee;
+    padding-top: 15px;
 }
 
 #profile-pic {
-    width: 40px;
-    height: 40px;
-    float: left;
-    margin-right: 10px;
-    vertical-align: middle;
+    width: 28px;
+    height: 28px;
+    float: right;
+    margin-left: 8px;
 }
 
 #profile-name {
-    display: inline-block;
+    font-style: normal;
+    color: black;
+    position: relative;
+    top: 3px;
+    font-size: 16px;
+}
+
+#page-wrapper-home {
+    padding: 0 15px;
+    min-height: 568px;
+    background-color: #fff;
+}
+
+@media(min-width:768px) {
+    #page-wrapper-home {
+        position: inherit;
+        margin: 0 0 0 0px;
+        padding: 0 30px;
+        border-left: 1px solid #e7e7e7;
+    }
 }
 
 #page-wrapper {
@@ -360,4 +377,53 @@ table.dataTable thead .sorting:after {
 
 .panel-yellow a:hover {
     color: #df8a13;
+}
+
+.secMsg, .secPerMsg {
+    margin-top: -8px;
+}
+
+.indent {
+    margin-left: 30px;
+}
+
+#homeHeading {
+    display: inline;
+}
+/*#addProject {
+    text-align: right;
+    float: right;
+    font-size: 22px;
+    padding-right: 0px;
+}*/
+a#addProject:hover {
+    text-decoration: none;
+}
+
+div#addNew:hover {
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    background-color: #eee;
+    border-color: rgba(119,119,119,0.3);
+    text-decoration: none;
+}
+#addNew {
+    -webkit-box-shadow:none;
+    box-shadow: none;
+    text-align: center;
+    font-size: 16px;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 168px;
+    padding-top: 50px;
+    background-color: #f5f5f5;
+}
+.green{
+    color: #4cae4c;
+}
+.yellow{
+    color: #eea236;
+}
+.red{
+    color: #d43f3a;
 }

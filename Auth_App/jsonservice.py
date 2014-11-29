@@ -46,3 +46,53 @@ def getpmjson(request):
             
     result = {'JSONData':json_linescode, 'JSONData_Progress':JSONData_Progress,'developers':json_developers}
     return HttpResponse(json.dumps(result), content_type='application/json')
+
+def get_column_json(request):   
+    pid = request.session.get('projectid')
+    project = findProjectById(pid)
+    qdevelopers = findDevelopersByProjectId(pid)
+    developers = []
+    expected = []
+    actual = []
+    expectedtasks = []
+    actualtasks = []
+    data = {'projectname': project.name}    
+    for developer in qdevelopers:
+        expdict = {}
+        expdict['name'] = developer.firstName
+        expdict['y'] = 30
+        expdict['drilldown'] = "exp" + developer.firstName
+        expected.append(expdict)
+
+        actdict = {}
+        actdict['name'] = developer.firstName
+        actdict['y'] = 50
+        actdict['drilldown'] = "act" + developer.firstName
+        section = findSectionByProjectIDDeveloperID(pid,developer.id)    
+        actdict['section'] = section.name
+        actual.append(actdict)
+
+        exptaskDict = {}
+        acttaskDict = {}
+        exptaskDict['id'] = 'exp' + developer.firstName
+        acttaskDict['id'] = 'act' + developer.firstName
+        tasks = findTasksBySectionID(section.id)
+        expdata = []
+        actdata = []
+        for task in tasks:
+            exppercentage = float(task.optional3) * 100    
+            expdata.append([task.name, exppercentage])
+            actpercentage = float(task.progress) * 100    
+            actdata.append([task.name, actpercentage])
+
+        exptaskDict['data'] = expdata
+        expectedtasks.append(exptaskDict)
+        acttaskDict['data'] = actdata
+        actualtasks.append(acttaskDict)
+
+    data['expected'] = expected
+    data['actual'] = actual
+    data['expectedtasks'] = expectedtasks
+    data['actualtasks'] = actualtasks
+    result = {'data':data}
+    return HttpResponse(json.dumps(result), content_type='application/json')
