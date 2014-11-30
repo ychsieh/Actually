@@ -7,8 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'Actually.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
+    # url(r'^blog/', include('blog.urls')),	
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'Auth_App.views.index'),
     url(r'^main/', 'Auth_App.views.main'),
@@ -27,6 +26,7 @@ urlpatterns = patterns('',
     url(r'^ajaxtest/$', 'Auth_App.ajaxdata.test'),
     url(r'^jsontest/$', 'Auth_App.jsonservice.test'),
     url(r'^getpmjson/$', 'Auth_App.jsonservice.getpmjson'),
+    url(r'^testexpect/', 'Auth_App.views.expectcal'),
 
                        
  
