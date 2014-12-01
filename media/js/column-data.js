@@ -1,13 +1,9 @@
 $(function () {
-    var jsondata;
 
     $.ajax({
         dataType: "json",
-        url: "http://127.0.0.1:8000/getpmjson"
-    }).done(function(data) {
-        console.log(data);
-        jsondata = data;
-    });
+        url: "http://127.0.0.1:8000/jsontest"
+    }).done(columncallback);
 
     Highcharts.setOptions({
         lang: {
@@ -15,160 +11,177 @@ $(function () {
         }
     });
 
-    var data = 
-        {
-            projectname: 'Facebook',
-            expected:[
-                {
-                    name: 'developer1',
-                    y: 30, //percentage
-                    drilldown: 'expdeveloper1' //'exp' + name
-                },{
-                    name: 'developer2',
-                    y: 40, 
-                    drilldown: 'expdeveloper2'
-                },{
-                    name: 'developer3',
-                    y: 50, 
-                    drilldown: 'expdeveloper3'
-                }
-            ],
+    function columncallback(data){
+        console.log("jsondata is: "+data.data);
+        data = data.data;
 
-            actual:[
-                {
-                    name: 'developer1',
-                    y: 50, 
-                    drilldown: 'actdeveloper1'  //'act' + name
-                },{
-                    name: 'developer2',
-                    y: 40, 
-                    drilldown: 'actdeveloper2'
-                },{
-                    name: 'developer3',
-                    y: 50,
-                    drilldown: 'actdeveloper3'
-                }
-            ],
-
-            expectedtasks:[
-                {
-                    id: 'expdeveloper1', //'exp' + name
-                    data: [   //percentage of each task
-                        ['task1', 20],
-                        ['task2', 70],
-                        ['task3', 50]
-                    ]
-                },{
-                    id: 'expdeveloper2',
-                    data: [
-                        ['task1', 30],
-                        ['task2', 40],
-                        ['task3', 50]
-                    ]
-                },{
-                    id: 'expdeveloper3',
-                    data: [
-                        ['task1', 30],
-                        ['task2', 40],
-                        ['task3', 50]
-                    ]
-                }
-            ],
-
-            actualtasks:[
-                {
-                    id: 'actdeveloper1', //'act' + name
-                    data: [
-                        ['task1', 10],
-                        ['task2', 30],
-                        ['task3', 90]
-                    ]
-                },{
-                    id: 'actdeveloper2',
-                    data: [
-                        ['task1', 30],
-                        ['task2', 40],
-                        ['task3', 50]
-                    ]
-                },{
-                    id: 'actdeveloper3',
-                    data: [
-                        ['task1', 30],
-                        ['task2', 40],
-                        ['task3', 50]
-                    ]
-                }
-            ]
-        };
-
-    var tasksdata = (data.expectedtasks).concat(data.actualtasks);
-
-            // Create the chart
-    $('#overview').highcharts({
-        chart: {
-            type: 'column',
-            //margin: [0, 0, 0, 0],
-            // spaceing: [0, 0, 0, 0]
-        },
-        title: {
-            text: data.projectname
-        },
-        subtitle: {
-            text: 'Click the columns to view the progress for tasks'
-        },
-        xAxis: {
-            type: 'category'
-        },
-        yAxis: {
-            max: 100,
-            title: {
-                text: 'Percentage Completed'
+        data = 
+    {
+        projectname: 'Facebook',
+        expected:[
+            {
+                name: 'developer1',
+                y: 30, //percentage
+                drilldown: 'expdeveloper1' //'exp' + name
+            },{
+                name: 'developer2',
+                y: 40, 
+                drilldown: 'expdeveloper2'
+            },{
+                name: 'developer3',
+                y: 50, 
+                drilldown: 'expdeveloper3'
             }
-        },
-        legend: {
-            enabled: false
-        },
-        plotOptions: {
-            series: {
-                borderWidth: 0,
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.y:.1f}%'
-                }
+        ],
+
+        actual:[
+            {
+                name: 'developer1',
+                y: 50, 
+                drilldown: 'actdeveloper1'  //'act' + name
+            },{
+                name: 'developer2',
+                y: 40, 
+                drilldown: 'actdeveloper2'
+            },{
+                name: 'developer3',
+                y: 50,
+                drilldown: 'actdeveloper3'
             }
-        },
+        ],
 
-        tooltip: {
-            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-        },
+        expectedtasks:[
+            {
+                id: 'expdeveloper1', //'exp' + name
+                name: 'Expected Progress',
+                data: [   //percentage of each task
+                    ['task1', 20],
+                    ['task2', 70],
+                    ['task3', 50]
+                ]
+            },{
+                id: 'expdeveloper2',
+                name: 'Expected Progress',
+                data: [
+                    ['task1', 30],
+                    ['task2', 40],
+                    ['task3', 50]
+                ]
+            },{
+                id: 'expdeveloper3',
+                name: 'Expected Progress',
+                data: [
+                    ['task1', 30],
+                    ['task2', 40],
+                    ['task3', 50]
+                ]
+            }
+        ],
 
-        series: [{
-            name: 'Expected Progress',
-            colorByPoint: true,
-            data: data.expected,
-            allowPointSelect: false,
-            type: 'column'
-        },
-        {
-            name: 'Actual Progress',
-            colorByPoint: true,
-            data: data.actual,
-            allowPointSelect: false,
-            type: 'column'
-        }],
-        drilldown: {
-            drillUpButton: {
-                relativeTo: 'spacingBox',
-                position: {
-                    y: 0,
-                    x: 0
-                },
-                
+        actualtasks:[
+            {
+                id: 'actdeveloper1', //'act' + name
+                name: 'Actual Progress',
+                data: [
+                    ['task1', 10],
+                    ['task2', 30],
+                    ['task3', 90]
+                ]
+            },{
+                id: 'actdeveloper2',
+                name: 'Actual Progress',
+                data: [
+                    ['task1', 30],
+                    ['task2', 40],
+                    ['task3', 50]
+                ]
+            },{
+                id: 'actdeveloper3',
+                name: 'Actual Progress',
+                data: [
+                    ['task1', 30],
+                    ['task2', 40],
+                    ['task3', 50]
+                ]
+            }
+        ]
+    };
+        var tasksdata = (data.expectedtasks).concat(data.actualtasks);
+        var exppro = 'Expected Progress';
+        var actpro = 'Actual Progress';
+
+                // Create the chart
+        $('#overview').highcharts({
+            chart: {
+                type: 'column',
+                //margin: [0, 0, 0, 0],
+                // spaceing: [0, 0, 0, 0]
             },
-            series: tasksdata
-        }
-    });
+            title: {
+                text: data.projectname
+            },
+            subtitle: {
+                text: 'Click the columns to view the progress for tasks'
+            },
+            xAxis: {
+                type: 'category'
+            },
+            yAxis: {
+                max: 100,
+                title: {
+                    text: 'Percentage Completed'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.1f}%'
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.1f}%</b><br/>'
+            },
+
+            series: [{
+                name: 'Expected Progress',
+                colorByPoint: true,
+                data: data.expected,
+                allowPointSelect: false,
+                type: 'column'
+            },
+            {
+                name: 'Actual Progress',
+                colorByPoint: true,
+                data: data.actual,
+                allowPointSelect: false,
+                type: 'column'
+            }],
+            drilldown: {
+                drillUpButton: {
+                    relativeTo: 'spacingBox',
+                    position: {
+                        y: 0,
+                        x: 0
+                    },
+                    
+                },
+                series: tasksdata,
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{point.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.1f}%</b><br/>'
+                },
+            }
+        });
+    }
+   
 
     var data2 = [
         {
