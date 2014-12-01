@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     url(r'^test/', 'Auth_App.views.test'),
     url(r'^viewproject/$', 'Auth_App.views.viewproject'),
     url(r'^ajaxtest/$', 'Auth_App.ajaxdata.test'),
-    url(r'^jsontest/$', 'Auth_App.jsonservice.test'),
+    url(r'^jsontest/$', 'Auth_App.jsonservice.get_column_json'),
     url(r'^getpmjson/$', 'Auth_App.jsonservice.getpmjson'),
     url(r'^testexpect/', 'Auth_App.views.expectcal'),
 
