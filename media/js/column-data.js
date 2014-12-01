@@ -15,7 +15,7 @@ $(function () {
         console.log("jsondata is: "+data.data);
         data = data.data;
 
-        data = 
+        var data3 = 
     {
         projectname: 'Facebook',
         expected:[

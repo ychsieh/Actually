@@ -22,8 +22,10 @@
 
     <!-- DataTables CSS -->
     <link href="/site_media/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="/site_media/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/site_media/css/scrolling-nav.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <link href="/site_media/css/plugins/morris.css" rel="stylesheet">
@@ -53,9 +55,10 @@
 
 </head>
 
-<body class="docs slim framebox_body">
+<body class="docs slim framebox_body" data-spy="scroll" data-target=".navbar-fixed-top">
 
     <div id="wrapper">
+
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -136,19 +139,14 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
+                        <li>
+                            <a class="page-scroll" href="#progress"><i class="fa fa-tasks fa-fw"></i> Progress Overview</a>
                         </li>
                         <li>
-                            <a class="active" href="#progress"><i class="fa fa-tasks fa-fw"></i> Progress Overview</a>
+                            <a class="page-scroll" href="#task"><i class="fa fa-signal fa-fw"></i> Curent Task</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#tasklist"><i class="fa fa-sitemap fa-fw"></i> Task List</a>
                         </li>
                     </ul>
                 </div>
@@ -157,9 +155,9 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" >
             <!-- /.row -->
-            <div class="row">
+            <div class="row" id="progress">
                 <div class="col-lg-12 col-md-12" >
                     <br>
                     <h1 class="page-header">
@@ -178,12 +176,18 @@
                                     <div id="morris-donut-chart2" class ="large"></div>
                                     
                             </div>
+                            
                         </div>
+                        <div id="task"></div>
+                        <br>
+                        <br>
                     </div>
                     <div class="panel panel-default">
+
                             <div class="panel-heading">
                                 <i class="fa fa-signal fa-fw"></i> Current Task
                             </div>
+
                             <div class="panel-body">
                             <div class="col-lg-3">
                                     <div id="morris-donut-chart3"></div>
@@ -197,7 +201,11 @@
                             <div class="col-lg-3">
                                     <div id="morris-donut-chart6"></div>
                             </div>
+                            
                             </div>
+                            <div id="tasklist"></div>
+                            <br>
+                            <br>
                     </div>
                     <!-- /.panel -->
                     <div class="panel panel-default">
@@ -254,10 +262,15 @@
     <!-- DataTables JavaScript -->
     <script src="/site_media/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="/site_media/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
     <!-- Morris Charts JavaScript -->
     <script src="/site_media/js/plugins/morris/raphael.min.js"></script>
     <script src="/site_media/js/plugins/morris/morris.min.js"></script>
     <script src="/site_media/js/plugins/morris/morris-data1.js"></script>
+
+    <!-- Scrolling Nav JavaScript -->
+    <script src="/site_media/js/jquery.easing.min.js"></script>
+    <script src="/site_media/js/scrolling-nav.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="/site_media/js/sb-admin-2.js"></script>

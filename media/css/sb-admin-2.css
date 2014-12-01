@@ -103,9 +103,9 @@ body {
     margin-left: 5px;
 }
 
-.navbar-top-links .dropdown-tasks {
+/*.navbar-top-links .dropdown-tasks {
     margin-left: -59px;
-}
+}*/
 
 .navbar-top-links .dropdown-alerts {
     margin-left: -123px;
@@ -426,4 +426,11 @@ div#addNew:hover {
 }
 .red{
     color: #d43f3a;
+}
+.big {
+    font-size: 28px;
+    margin-top: -5px;
+}
+.panel-heading{
+    font-size: 20px;
 }
