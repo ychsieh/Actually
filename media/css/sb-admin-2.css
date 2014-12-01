@@ -434,3 +434,7 @@ div#addNew:hover {
 .panel-heading{
     font-size: 20px;
 }
+.nav{
+    font-size: 17px;
+    margin-top: -12px;
+}
