@@ -285,7 +285,7 @@ $(function () {
         {
         task: 'Task 2',
         date: '11/16/2014',
-        late: '2 Days Left', //if not past due then return how many days left
+        late: 2, //if not past due then return how many days left
         developer: 'Jin', 
         expected: 95,
         actual: 85
@@ -293,7 +293,7 @@ $(function () {
         {
         task: 'Task 3',
         date: '11/16/2014',
-        late: '6 Days Left', 
+        late: 6, 
         developer: 'Ya-Chen', 
         expected: 90,
         actual: 75
@@ -301,88 +301,96 @@ $(function () {
         {
         task: 'Task 4',
         date: '11/16/2014',
-        late: '3 Days Left',
+        late: 3,
         developer: 'Xinhe', 
         expected: 95,
         actual: 90
         }
     ];
+
     for (var i = 0; i < data4.length; i ++) {
         var newId = "task" + i;
         var newDiv = $( "<div></div>").attr("id",newId);
+
         var expColor = 'rgba(0,0,216,1)';
         var actColor = 'rgba(0,0,216,0.3)';
         if (data4[i]["late"]==="Past Due") {
             expColor = "rgba(216,0,0,1)";
             actColor = "rgba(216,0,0,0.3)";
         }
+
+        var late = data4[i]["late"];
+        if(data4[i]["late"] != 'Past Due')
+            late = late + ' Days Left';
+
         $("#delayed").append(newDiv);
         $("#delayed div#" + newId).highcharts({
-        chart: {
-            type: 'bar',
-            height: 150
-        },
-        title: {
-            text: data4[i]["late"],
-            style: {
-                'font-size': '15px'
-            }
-        },
-        subtitle: {
-            text: data4[i]["task"] + ' Due on ' + data4[i]["date"] //taskname+'Due on'+date
-        },
-        xAxis: {
-            categories: [data4[i]["developer"]], //developer name
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            min: 0,
-            max: 100,
-            title: {
-                text: 'Progress(Percentage)',
-                align: 'high'
+
+            chart: {
+                type: 'bar',
+                height: 150
             },
-            labels: {
-                enabled: false,
-                overflow: 'justify'
-            }
-        },
-        tooltip: {
-            valueSuffix: '%'
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
+            title: {
+                text: late,
+                style: {
+                    'font-size': '15px'
+                }
+            },
+            subtitle: {
+                text: data4[i]["task"] + ' Due on ' + data4[i]["date"] //taskname+'Due on'+date
+            },
+            xAxis: {
+                categories: [data4[i]["developer"]], //developer name
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                max: 100,
+                title: {
+                    text: 'Progress(Percentage)',
+                    align: 'high'
                 },
-            }
-        },
-        legend: {
-            enabled: false,
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 100,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-            shadow: true
-        },
-        credits: {
-            enabled: false
-        },
-        series: [ {
-            name: 'Expected',
-            data: [data4[i]["expected"]], //expected
-            color: expColor
-        },{
-            name: 'Actual',
-            data: [data4[i]["actual"]], //actual
-            color: actColor
-        }]
+                labels: {
+                    enabled: false,
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: '%'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                }
+            },
+            legend: {
+                enabled: false,
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [ {
+                name: 'Expected',
+                data: [data4[i]["expected"]], //expected
+                color: expColor
+            },{
+                name: 'Actual',
+                data: [data4[i]["actual"]], //actual
+                color: actColor
+            }]
         });
     };
 });
