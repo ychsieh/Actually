@@ -273,39 +273,39 @@ $(function () {
 
 
 $(function () {
-    var data4 = [
-    {
-    task: 'Task 1',
-    date: '11/16/2014', 
-    late: 'Past Due',
-    developer: 'Long Ma', 
-    expected: 100,
-    actual: 85
-    },
-    {
-    task: 'Task 2',
-    date: '11/16/2014',
-    late: '2 Days Left',
-    developer: 'Jin Sha', 
-    expected: 95,
-    actual: 85
-    },
-    {
-    task: 'Task 3',
-    date: '11/16/2014',
-    late: '6 Days Left', 
-    developer: 'Yachen Hsieh', 
-    expected: 90,
-    actual: 75
-    },
-    {
-    task: 'Task 4',
-    date: '11/16/2014',
-    late: '3 Days Left',
-    developer: 'Xinhe Lian', 
-    expected: 95,
-    actual: 90
-    }
+    var data4 = [ // the array of delayed tasks decided by checking if expected progress exceed 90%
+        {
+        task: 'Task 1', //task name
+        date: '11/16/2014',  //due date
+        late: 'Past Due', // check if the task past the due date
+        developer: 'Long', //developer name
+        expected: 100,  //expected progress
+        actual: 85      //actual progress
+        },
+        {
+        task: 'Task 2',
+        date: '11/16/2014',
+        late: '2 Days Left', //if not past due then return how many days left
+        developer: 'Jin', 
+        expected: 95,
+        actual: 85
+        },
+        {
+        task: 'Task 3',
+        date: '11/16/2014',
+        late: '6 Days Left', 
+        developer: 'Ya-Chen', 
+        expected: 90,
+        actual: 75
+        },
+        {
+        task: 'Task 4',
+        date: '11/16/2014',
+        late: '3 Days Left',
+        developer: 'Xinhe', 
+        expected: 95,
+        actual: 90
+        }
     ];
     for (var i = 0; i < data4.length; i ++) {
         var newId = "task" + i;
