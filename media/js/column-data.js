@@ -3,14 +3,7 @@ $(function () {
     $.ajax({
         dataType: "json",
         url: "http://127.0.0.1:8000/jsontest"
-<<<<<<< HEAD
-    }).done(function(data) {
-        console.log(data);
-        jsondata = data;
-    });
-=======
     }).done(columncallback);
->>>>>>> FETCH_HEAD
 
     Highcharts.setOptions({
         lang: {
@@ -150,11 +143,6 @@ $(function () {
                         format: '{point.y:.1f}%'
                     }
                 }
-<<<<<<< HEAD
-            ]
-        };
-    data = jsondata;
-=======
             },
 
             tooltip: {
@@ -261,7 +249,6 @@ $(function () {
             verticalAlign: 'middle',
             borderWidth: 0
         },
->>>>>>> FETCH_HEAD
 
         series: data2
         // series: [{
