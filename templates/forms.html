@@ -131,11 +131,16 @@
                 </li>
                 
                 <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                <li class="dropdown" style="margin-right: 0px">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="profile">
+                        <i style="padding-left: 5px;">
+                                <span id="profile-name">Jin Sha<img id="profile-pic" class="img-circle img-responsive" src="/site_media/img/default_profile.jpg"></span>
+
+                            </i>
+                            <!--<i class="fa fa-caret-down"></i>-->
+                        <!--<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>-->
                     </a>
-                    <ul class="dropdown-menu dropdown-user">
+                    <ul class="dropdown-menu dropdown-user" style="display: none">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
@@ -153,7 +158,7 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
+                        <!--<li class="sidebar-search">
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
@@ -162,8 +167,7 @@
                                 </button>
                             </span>
                             </div>
-                            <!-- /input-group -->
-                        </li>
+                        </li>-->
                         <li>
                             <a href="http://127.0.0.1:8000/auth?code=8659a4c18d07b6e4f79a
                             "><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
@@ -181,12 +185,12 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">Project Name and Repository</h2>
+                    <h3 class="page-header" id="formTitle">Step 1 of 3: Project Information</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row">
+            <div class="row" id="step1">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -195,14 +199,14 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form role="form" action="forms2.html">
+                                    <form role="form" action="#">
                                         <div class="form-group">
                                             <label>Project Name</label>
-                                            <input class="form-control">
+                                            <input class="form-control" id="name">
                                         </div>
                                         <div class="form-group">
                                             <label>Github Repository</label>
-                                            <select multiple class="form-control">
+                                            <select multiple class="form-control" id="repo">
                                                     <option>Actually</option>
                                                     <option>Pushcart</option>
                                                     <option>Lifestream</option>
@@ -211,7 +215,7 @@
                                             </select>
                                         </div>
                                         
-                                        <button type="submit" class="btn btn-default">Add</button>
+                                        <button type="button" class="btn btn-default" id="toSecond">Add</button>
                                     </form>
                                 </div>
                                 
@@ -225,11 +229,143 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            <!-- /.row -->
+            <div class="row" id="step2" style="display: none">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Assign Works To Developers
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <form role="form" action="#">
+                                        <div class="form-group" id="sections">
+                                            <label>Developer 1 </label>
+                                            <div class="section" style="margin-left: 30px">
+                                            <!--<div class="addsection">-->
+                                            <p class="form-control-static">Developer: </p>
+                                                <select multiple class="form-control secDeveloper" style="width: 270px">
+                                                    <option>Long Ma</option>
+                                                    <option>Jin Sha</option>
+                                                    <option>Yachen Hsieh</option>
+                                                    <option>Wen Zhu</option>
+                                                    <option>Yiming Jia</option>
+                                                    <option>Zhe Nan</option>
+                                                    <option>Xinhe Lian</option>
+                                                    </select>
+                                            <br>
+                                            <p class="form-control-static">Section Name: </p>
+                                            <span class="help-block secMsg">A section is the work that is assigned to a developer.</span>
+                                            <input class="form-control-inline secName">
+                                            <br>
+                                            <br>
+                                            <p class="form-control-static">Section Percentage: </p>
+                                            <span class="help-block secPerMsg">The percentage that the section constitutes of the whole project workload.</span>
+                                            <input type="number" class="form-control-inline secPer" style="width: 50px" max="100"><span> %</span>
+                                            <br>
+                                            <br>
+                                            </div>
+                                            <!--<p class="form-control-static">Weight in the whole project:
+                                            <select class="form-control-inline">
+                                                <option>20%</option>
+                                                <option>40%</option>
+                                                <option>60%</option>
+                                                <option>80%</option>
+                                            </select>
+                                            </p>-->
+                                            
+                                            <!--</div>-->
+                                            <button type="button" class="btn btn-xs btn-link" id="newSecBtn">Add another developer...</button>
+                                            <p class="help-block totalPer">The percentages must add up to 100%.</p>
+                                            <!--<script>
+                                            var count = 1;
+                                            function addNewSection() {
+                                                count += 1;
+                                                var title = document.createElement("LABEL");
+                                                title.innerHTML = "Section " + count.toString();
+                                                document.getElementById("sections").appendChild(title);
+                                                var oldSection = document.getElementsByClassName("addsection")[count-2];
+                                                var newSection = oldSection.cloneNode(true);
+                                                document.getElementById("sections").appendChild(newSection);
+                                                oldSection.removeChild(oldSection.childNodes[3]);
+                                                //lastSection.removeChild(oldBtn);
+                                            } 
+                                            </script>-->
+                                            
+                                        </div>
+
+                                        <button type="submit" class="btn btn-default" id="toThird">Next</button>
+                                        <!--<button type="reset" class="btn btn-default">Reset</button>-->
+                                    </form>
+                                </div>
+                                
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            <div class="row" id="step3" style="display: none">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Edit Project Milestones
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <form role="form" id="lastStep" action="#">
+                                        <div class="form-group" id="milestones">
+                                            <label>Milestone 1</label>
+                                            <p class="form-control-static indent"> Milestone Name: </p>
+                                            <input class="form-control mileTitle indent" type="text" value="Milestone 1">
+                                            <p class="form-control-static indent"> Estimate Deadline: </p>
+                                            <input class="form-control mileDate indent" type="date" value="2014-09-15">
+                                            <br>
+                                            <label>Milestone 2</label>
+                                            <p class="form-control-static indent"> Milestone Name: </p>
+                                            <input class="form-control mileTitle indent" type="text" value="Milestone 2">
+                                            <p class="form-control-static indent"> Estimate Deadline: </p>
+                                            <input class="form-control mileDate indent" type="date" value="2014-10-15">
+                                            <br>
+                                            <label>Milestone 3</label>
+                                            <p class="form-control-static indent"> Milestone Name: </p>
+                                            <input class="form-control mileTitle indent" type="text" value="Milestone 3">
+                                            <p class="form-control-static indent"> Estimate Deadline: </p>
+                                            <input class="form-control mileDate indent" type="date" value="2014-11-08">
+                                            <br>
+                                            <button type="button" class="btn btn-xs btn-link" id="newMilBtn"><i class="fa fa-plus fa-fw"></i>Add another milestone...</button>
+                                        </div>
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                        <!--<button type="reset" class="btn btn-default">Reset</button>-->
+                                    </form>
+                                </div>
+                                
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>            
         </div>
+
+
         <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
+
+    <div id="page-wrapper" style="display: none">
+            <!-- /.row -->
+    </div>
 
     <!-- jQuery Version 1.11.0 -->
     <script src="/site_media/js/jquery-1.11.0.js"></script>
@@ -242,6 +378,8 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="/site_media/js/sb-admin-2.js"></script>
+    <script src="/site_media/js/forms.js"></script>
+
 
 </body>
 

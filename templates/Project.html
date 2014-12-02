@@ -22,6 +22,7 @@
 
     <!-- Custom CSS -->
     <link href="/site_media/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/site_media/css/scrolling-nav.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <link href="/site_media/css/plugins/morris.css" rel="stylesheet">
@@ -53,7 +54,7 @@
 
 </head>
 
-<body class="docs slim framebox_body">
+<body class="docs slim framebox_body" data-spy="scroll" data-target=".navbar-fixed-top">
 
     <div id="wrapper">
         <!-- Navigation -->
@@ -114,6 +115,27 @@
                     <!-- /.dropdown-tasks -->
                 </li>                
                 <!-- /.dropdown -->
+                <li class="dropdown" style="margin-right: 0px">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="profile">
+                        <i style="padding-left: 5px;">
+                                <span id="profile-name">Jin Sha<img id="profile-pic" class="img-circle img-responsive" src="/site_media/img/default_profile.jpg"></span>
+
+                            </i>
+                            <!--<i class="fa fa-caret-down"></i>-->
+                        <!--<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>-->
+                    </a>
+                    <ul class="dropdown-menu dropdown-user" style="display: none">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="https://github.com/login/oauth/authorize"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
 
@@ -132,13 +154,16 @@
                             
                         </li> -->
                         <li>
-                            <a class="active" href="#progress"><i class="fa fa-tasks fa-fw"></i> Progress Overview</a>
+                            <br>
                         </li>
                         <li>
-                            <a href="#detail"><i class="fa fa-signal fa-fw"></i> Actual Progress</a>
+                            <a class="page-scroll"  href="#progress"><i class="fa fa-tasks fa-fw"></i> Progress Overview</a>
                         </li>
                         <li>
-                            <a href="#updates"><i class="fa fa-clock-o fa-fw"></i> Recent Commits</a>
+                            <a class="page-scroll" href="#detail"><i class="fa fa-signal fa-fw"></i> Actual Progress</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#updates"><i class="fa fa-clock-o fa-fw"></i> Recent Commits</a>
                         </li>
                     </ul>
                 </div>
@@ -149,10 +174,10 @@
 
         <div id="page-wrapper">
             <!-- /.row -->
-            <div class="row">
+            <div class="row" id="progress">
                 <div class="col-lg-12">
                     <br>
-                    <h1 class="page-header" id="progress">
+                    <h1 class="page-header">
                             {{project.name}}
                     </h1>
                     <div class="panel panel-default">
@@ -176,7 +201,7 @@
                                 </div>
                                 <div id="task3">
                                 </div>
-                                <div id="detail">
+                                <div id="task4">
                                 </div>
                                 <br>
                             </div>
@@ -316,7 +341,11 @@
     <script src="/site_media/highcharts/js/modules/drilldown.js"></script>
     <script src="/site_media/highcharts/js/modules/data.js"></script>
     <script type="text/javascript" src="/site_media/js/column-data.js"></script>
-    <script type="text/javascript" src="/site_media/js/bar-data.js"></script>
+
+    <!-- Scrolling Nav JavaScript -->
+    <script src="/site_media/js/jquery.easing.min.js"></script>
+    <script src="/site_media/js/scrolling-nav.js"></script>
+
 </body>
 
 </html>
