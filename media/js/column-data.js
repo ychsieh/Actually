@@ -271,23 +271,62 @@ $(function () {
     
 });
 
+
 $(function () {
-    $('#task1').highcharts({
+    var data4 = [
+    {
+    task: 'Task 1',
+    date: '11/16/2014', 
+    late: 'Past Due',
+    developer: 'Long Ma', 
+    expected: 100,
+    actual: 85
+    },
+    {
+    task: 'Task 2',
+    date: '11/16/2014',
+    late: '2 Days Left',
+    developer: 'Jin Sha', 
+    expected: 95,
+    actual: 85
+    },
+    {
+    task: 'Task 3',
+    date: '11/16/2014',
+    late: '6 Days Left', 
+    developer: 'Yachen Hsieh', 
+    expected: 90,
+    actual: 75
+    },
+    {
+    task: 'Task 4',
+    date: '11/16/2014',
+    late: '3 Days Left',
+    developer: 'Xinhe Lian', 
+    expected: 95,
+    actual: 90
+    }
+    ];
+    for (var i = 0; i < data4.length; i ++) {
+        var newId = "task" + i;
+        var newDiv = $( "<div></div>").attr("id",newId);
+        $("#delayed").append(newDiv);
+        $("#delayed div#" + newId).highcharts({
         chart: {
             type: 'bar',
             height: 150
         },
         title: {
-            text: 'Past due',
+            text: data4[i]["late"],
             style: {
                 'font-size': '15px'
             }
         },
         subtitle: {
-            text: 'Task 1 Due on 11/16/2014'
+            text: data4[i]["task"] + ' Due on ' + data4[i]["date"] //taskname+'Due on'+date
         },
         xAxis: {
-            categories: ['Long Ma'],
+            categories: [data4[i]["developer"]], //developer name
             title: {
                 text: null
             }
@@ -331,154 +370,13 @@ $(function () {
         },
         series: [ {
             name: 'Expected',
-            data: [100],
+            data: [data4[i]["expected"]], //expected
             color: 'rgba(216,0,0,1)'
         },{
             name: 'Actual',
-            data: [85],
+            data: [data4[i]["actual"]], //actual
             color: 'rgba(216,0,0,0.3)'
         }]
-    });
+        });
+    };
 });
-
-$(function () {
-    $('#task2').highcharts({
-        chart: {
-            type: 'bar',
-            height: 150
-        },
-        title: {
-            text: '3 Days Left',
-            style: {
-                'font-size': '15px'
-            }
-        },
-        subtitle: {
-            text: 'Task 2 Due on 11/21/2014'
-        },
-        xAxis: {
-            categories: ['Sha Jin'],
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            min: 0,
-            max: 100,
-            title: {
-                text: 'Progress(Percentage)',
-                align: 'high'
-            },
-            labels: {
-                enabled: false,
-                overflow: 'justify'
-            }
-        },
-        tooltip: {
-            valueSuffix: '%'
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
-                }
-            }
-        },
-        legend: {
-            enabled: false,
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 100,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-            shadow: true
-        },
-        credits: {
-            enabled: false
-        },
-        series: [ {
-            name: 'Expected',
-            data: [90],
-            color: 'rgba(0,0,216,1)'    
-        },{
-            name: 'Actual',
-            data: [75],
-            color: 'rgba(0,0,216,0.3)'
-        }]
-    });
-});
-
-$(function () {
-    $('#task3').highcharts({
-        chart: {
-            type: 'bar',
-            height: 150
-        },
-        title: {
-            text: '4 Days Left',
-            style: {
-                'font-size': '15px'
-            }
-        },
-        subtitle: {
-            text: 'Task 3 Due on 11/22/2014'
-        },
-        xAxis: {
-            categories: ['Long Ma'],
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            min: 0,
-            max: 100,
-            title: {
-                text: 'Progress(Percentage)',
-                align: 'high'
-            },
-            labels: {
-                enabled: false,
-                overflow: 'justify'
-            }
-        },
-        tooltip: {
-            valueSuffix: '%'
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
-                }
-            }
-        },
-        legend: {
-            enabled: false,
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 100,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-            shadow: true
-        },
-        credits: {
-            enabled: false
-        },
-        series: [ {
-            name: 'Expected',
-            data: [90],
-            color: 'rgba(0,0,216,1)'    
-        },{
-            name: 'Actual',
-            data: [80],
-            color: 'rgba(0,0,216,0.3)'
-        }]
-    });
-});
-
-
