@@ -49,6 +49,7 @@
             })
         $("#toThird").click(function() {
             $("#formTitle").html("Step 3 of 3: Milestones");
+            $("#step1").css("display","none");
             $("#step2").css("display","none");
             $("#step3").css("display","block");
             var sections = [];
