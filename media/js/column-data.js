@@ -9,6 +9,7 @@ $(function () {
         lang: {
             drillUpText: '◁ Back to Overview'
         }
+        
     });
 
     function columncallback(data){
