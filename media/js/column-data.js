@@ -310,6 +310,12 @@ $(function () {
     for (var i = 0; i < data4.length; i ++) {
         var newId = "task" + i;
         var newDiv = $( "<div></div>").attr("id",newId);
+        var expColor = 'rgba(0,0,216,1)';
+        var actColor = 'rgba(0,0,216,0.3)';
+        if (data4[i]["late"]==="Past Due") {
+            expColor = "rgba(216,0,0,1)";
+            actColor = "rgba(216,0,0,0.3)";
+        }
         $("#delayed").append(newDiv);
         $("#delayed div#" + newId).highcharts({
         chart: {
@@ -371,11 +377,11 @@ $(function () {
         series: [ {
             name: 'Expected',
             data: [data4[i]["expected"]], //expected
-            color: 'rgba(216,0,0,1)'
+            color: expColor
         },{
             name: 'Actual',
             data: [data4[i]["actual"]], //actual
-            color: 'rgba(216,0,0,0.3)'
+            color: actColor
         }]
         });
     };
