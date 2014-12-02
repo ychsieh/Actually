@@ -3,7 +3,7 @@ $(function () {
 
     $.ajax({
         dataType: "json",
-        url: "http://127.0.0.1:8000/getpmjson"
+        url: "http://127.0.0.1:8000/jsontest"
     }).done(function(data) {
         console.log(data);
         jsondata = data;
@@ -100,6 +100,7 @@ $(function () {
                 }
             ]
         };
+    data = jsondata;
 
     var tasksdata = (data.expectedtasks).concat(data.actualtasks);
 
