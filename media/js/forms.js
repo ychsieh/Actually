@@ -67,7 +67,7 @@
                 var milestone = {};
                 milestone["name"] = $(this).val();
                 milestone["deadline"] = $(".mileDate").eq(index).val();
-                milestones[index]=milestone;
+                milestones[index] = milestone;
             });
             window.formData["milestones"] = milestones;
         });
