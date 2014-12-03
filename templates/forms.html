@@ -266,36 +266,12 @@
                                             <br>
                                             <br>
                                             </div>
-                                            <!--<p class="form-control-static">Weight in the whole project:
-                                            <select class="form-control-inline">
-                                                <option>20%</option>
-                                                <option>40%</option>
-                                                <option>60%</option>
-                                                <option>80%</option>
-                                            </select>
-                                            </p>-->
-                                            
-                                            <!--</div>-->
                                             <button type="button" class="btn btn-xs btn-link" id="newSecBtn">Add another developer...</button>
                                             <p class="help-block totalPer">The percentages must add up to 100%.</p>
-                                            <!--<script>
-                                            var count = 1;
-                                            function addNewSection() {
-                                                count += 1;
-                                                var title = document.createElement("LABEL");
-                                                title.innerHTML = "Section " + count.toString();
-                                                document.getElementById("sections").appendChild(title);
-                                                var oldSection = document.getElementsByClassName("addsection")[count-2];
-                                                var newSection = oldSection.cloneNode(true);
-                                                document.getElementById("sections").appendChild(newSection);
-                                                oldSection.removeChild(oldSection.childNodes[3]);
-                                                //lastSection.removeChild(oldBtn);
-                                            } 
-                                            </script>-->
                                             
                                         </div>
 
-                                        <button type="submit" class="btn btn-default" id="toThird">Next</button>
+                                        <button type="button" class="btn btn-default" id="toThird">Next</button>
                                         <!--<button type="reset" class="btn btn-default">Reset</button>-->
                                     </form>
                                 </div>
@@ -319,7 +295,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form role="form" id="lastStep" action="#">
+                                    <form role="form" action="#">
                                         <div class="form-group" id="milestones">
                                             <label>Milestone 1</label>
                                             <p class="form-control-static indent"> Milestone Name: </p>
@@ -341,7 +317,7 @@
                                             <br>
                                             <button type="button" class="btn btn-xs btn-link" id="newMilBtn"><i class="fa fa-plus fa-fw"></i>Add another milestone...</button>
                                         </div>
-                                        <button type="submit" class="btn btn-default">Submit</button>
+                                        <button type="button" class="btn btn-default" id="lastStep">Submit</button>
                                         <!--<button type="reset" class="btn btn-default">Reset</button>-->
                                     </form>
                                 </div>
