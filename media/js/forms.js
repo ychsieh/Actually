@@ -16,7 +16,7 @@
                     $("#sections").append(newBtn,msg);
             });
         $("#toSecond").click(function() {
-            $("#formTitle").html("Step 2 of 3: Work Distribution");
+            //$("#formTitle").html("Step 2 of 3: Work Distribution");
             $("#step1").css("display","none");
             $("#step2").css("display","block");
             window.formData["projectName"] = $("#name").val();
@@ -48,7 +48,7 @@
                     $("#milestones").append(newBtn);
             });
         $("#toThird").click(function() {
-            $("#formTitle").html("Step 3 of 3: Milestones");
+            //$("#formTitle").html("Step 3 of 3: Milestones");
             $("#step2").css("display","none");
             $("#step3").css("display","block");
             var sections = [];
