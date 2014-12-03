@@ -14,16 +14,16 @@
                     var msg = $(".totalPer").clone(true,true);
                     $(".totalPer").remove();
                     $("#sections").append(newBtn,msg);
-            })
+            });
         $("#toSecond").click(function() {
-            $("#formTitle").html("Step 2 of 3: Work Distribution");
+            //$("#formTitle").html("Step 2 of 3: Work Distribution");
             $("#step1").css("display","none");
             $("#step2").css("display","block");
             window.formData["projectName"] = $("#name").val();
             window.formData["repo"] = $("#repo option:selected").text();
-        })
-                    var mCount = 3;
-            $("#newMilBtn").click(function() {
+        });
+        var mCount = 3;
+        $("#newMilBtn").click(function() {
                     window.mCount += 1;
                     var mileName = "Milestone " + window.mCount.toString();
                     var title = $("<label></label>").text(mileName);
@@ -46,9 +46,9 @@
                     var newBtn = $("#newMilBtn").clone(true,true);
                     $("#newMilBtn").remove();
                     $("#milestones").append(newBtn);
-            })
+            });
         $("#toThird").click(function() {
-            $("#formTitle").html("Step 3 of 3: Milestones");
+            //$("#formTitle").html("Step 3 of 3: Milestones");
             $("#step2").css("display","none");
             $("#step3").css("display","block");
             var sections = [];
@@ -60,14 +60,14 @@
                 sections[index]=section;
             });
             window.formData["sections"] = sections;
-        })
-        $("#lastStep").submit(function() {
+        });
+        $("#lastStep").click(function() {
             var milestones = [];
             $(".mileTitle").each(function(index) {
                 var milestone = {};
                 milestone["name"] = $(this).val();
                 milestone["deadline"] = $(".mileDate").eq(index).val();
-                milestones[index]=milestone;
-            })
+                milestones[index] = milestone;
+            });
             window.formData["milestones"] = milestones;
-        })
+        });
