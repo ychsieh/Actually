@@ -117,11 +117,17 @@ $(function () {
                 //margin: [0, 0, 0, 0],
                 // spaceing: [0, 0, 0, 0]
             },
+            credits: {
+                enabled: false
+            },
             title: {
                 text: data.projectname
             },
             subtitle: {
                 text: 'Click the columns to view the progress for tasks'
+            },
+            exporting: {
+                enabled: false
             },
             xAxis: {
                 type: 'category'
@@ -218,6 +224,12 @@ $(function () {
         subtitle: {
             text: 'Completed portion for each section',
             x: -20
+        },
+        exporting: {
+                enabled: false
+        },
+        credits: {
+                enabled: false
         },
         xAxis: {
             categories: dates,
@@ -335,6 +347,9 @@ $(function () {
                 style: {
                     'font-size': '15px'
                 }
+            },
+            exporting: {
+                enabled: false
             },
             subtitle: {
                 text: data4[i]["task"] + ' Due on ' + data4[i]["date"] //taskname+'Due on'+date
