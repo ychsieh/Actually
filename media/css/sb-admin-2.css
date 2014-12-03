@@ -444,3 +444,7 @@ div#addNew:hover {
 .nav{
     font-size: 17px;
 }
+
+#formTitle {
+    margin-top: 20px;
+}
