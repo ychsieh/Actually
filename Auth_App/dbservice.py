@@ -16,13 +16,13 @@ def findDevelopersByProjectId(pid):
     developers = Developer.objects.filter(project = _project)
     return developers
 
-def findProjectByPM(GivenPMID):
-	findPM = PM.objects.get(id = GivenPMID)
-	findProject = findPM.project.all()
-	if (len(findProject) != 0):
-		return findProject
-	else:
-		print []
+def findProjectByPM(GivegithubName):
+    PMs = PM.objects.filter(githubName = GivegithubName)
+    projects = []
+    for pm in PMs:
+        for i in pm.project.all():
+            projects.append(i)
+    return projects
 
 
 def findProjectByDeveloper(GivenDeveloperID):
@@ -71,11 +71,77 @@ def findCommitTimebyProjectIDDeverloperID(projectID, developerID):
 def findProjectById(pid):
     return Project.objects.get(id = pid)
 
+def getDeveloperBygithubName(GitHubName):
+    developer = Developer.objects.get(githubName = GitHubName)
+    return developer
+
 def test(request):
 	section = findSectionByProjectIDDeveloperID(4, 1)
 	return render_to_response('test.html',{'test':section})
 
+def addProject(inputName, inputdescription, inputstarttime,
+    inputfinishtime,inputprogress,inputrepo,inputrepoOwner,
+    inputoptional1,inputoptional2,inputoptional3):
 
+    project = Project(name = inputName,description = inputdescription
+        ,startTime = inputstarttime,finishTime = inputfinishtime,
+        progress = inputprogress, prevProgress = 0,repo = inputrepo
+        ,repoOwner = inputrepoOwner,optional1 = inputoptional1
+        ,optional2 = inputoptional2,optional3 = inputoptional3)
+    project.save()
+
+def addPM(inputfirstName,inputlastName,inputgithubName,GivenProject,inputoptional1,inputoptional2,inputoptional3):
+    newPM = PM(firstName = inputfirstName,lastName = inputlastName,githubName = inputgithubName,
+        optional1 = inputoptional1,optional2 = inputoptional2,optional3 = inputoptional3)
+    newPM.save()
+    newPM.project.add(GivenProject)
+
+def addDeveloper(inputfirstName,inputlastName,inputgithubName,GivenPM,GivenProject,inputoptional1,inputoptional2,inputoptional3):
+	newDeveloper = Developer(firstName = inputfirstName,lastName = inputlastName,githubName = inputgithubName,
+        optional1 = inputoptional1,optional2 = inputoptional2,optional3 = inputoptional3)
+	newDeveloper.pmAssigned=GivenPM
+	newDeveloper.save()
+	newDeveloper.project.add(GivenProject)
+
+
+def addMilestone(inputname,inputdescription,inputprogress,inputpercentage,inputduedate,Givenproject,Givendeveloper,inputoptional1,inputoptional2,inputoptional3):
+    newMilestone =Milestone(name = inputname,description = inputdescription,progress=inputprogress,
+        prevProgress = 0, percentage=inputpercentage,dueDate=inputduedate,optional1 = inputoptional1,optional2 = inputoptional2,optional3 = inputoptional3)
+    newMilestone.project=Givenproject
+    newMilestone.save()
+    newMilestone.developer.add(Givendeveloper)
+
+
+def addSection(inputname,inputdescription,inputprogress,inputpercentage,Givenproject,Givendeveloper,inputoptional1,inputoptional2,inputoptional3):
+    newSection = Section(name = inputname,description = inputdescription,progress=inputprogress,
+        prevProgress = 0, percentage=inputpercentage,optional1 = inputoptional1,optional2 = inputoptional2,optional3 = inputoptional3)
+    newSection.project=Givenproject
+    newSection.developer=Givendeveloper
+    newSection.save()
+
+def addTask(inputname,inputdescription,inputprogress,inputpercentage,Givensection,Givendeveloper,Givenmilestone
+    ,inputoptional1,inputoptional2,inputoptional3):
+
+    newTask=Task(name = inputname,description = inputdescription,progress=inputprogress,
+        prevProgress=0,percentage=inputpercentage,optional1 = inputoptional1,optional2 = inputoptional2,optional3 = inputoptional3)
+
+    newTask.section=Givensection
+    newTask.developer=Givendeveloper
+    newTask.milestone=Givenmilestone
+    newTask.save()
+
+def addCommit(inputtime,Givendeveloper,Givenproject,Giventask):
+    newCommit=Commit(commitTime = inputtime)
+    newCommit.project=Givenproject
+    newCommit.developer=Givendeveloper
+    newCommit.task=Giventask
+    newCommit.save()
+
+def addExtensibility(inputattribute,inputvalue,Givencommit,Giventask):
+    newExtensibility=Extensibility(attribute =inputattribute,value=inputvalue)
+    newExtensibility.commit=Givencommit
+    newExtensibility.task=Giventask
+    newExtensibility.save()
 
 
 
