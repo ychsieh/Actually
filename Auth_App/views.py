@@ -9,7 +9,9 @@ from Auth_App.models import PM, Developer, Project, Section, Task, Milestone, Co
 from django.http import HttpResponse, HttpRequest
 from django.core import serializers
 from dbservice import *
+from expectcal import *
 from datautils import *
+
 
 
 
@@ -21,6 +23,28 @@ access_token = ''
 
 def index(request):
     return render_to_response('landing.html', {'client_id':GITHUB_CLIENT_ID, 'scope':scope})
+
+def expectcal(request):
+	access_token = None
+	sessionUser = request.session.get("user")
+	if sessionUser != None:
+		access_token = sessionUser.get('access_token')
+	result = get_contributors(access_token, ['Actually','sinkerplus'])
+	#result = get_user(access_token)
+	return HttpResponse(result)
+
+def project1(request):
+    p1 = Project.objects.filter(name = 'Fake')
+    getcommits_from_project(p1[0])
+    return render_to_response('Project.html')
+
+def project2(request):
+    p1 = Project.objects.filter(name = 'Fasta')
+    getcommits_from_project(p1[0])
+    return render_to_response('Project2.html')
+
+def newproject(request):
+    return render_to_response('forms.html')
 
     
 def main(request):
