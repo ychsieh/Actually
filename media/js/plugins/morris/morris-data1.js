@@ -116,7 +116,7 @@ $(function() {
         series: [{
             type: 'pie',
             name: 'Browser share',
-            innerSize: '60%',
+            innerSize: '70%',
             data: [
                 ['Amazon:', 6],               
             ]
@@ -166,7 +166,7 @@ $(function() {
         series: [{
             type: 'pie',
             name: 'Browser share',
-            innerSize: '60%',
+            innerSize: '70%',
             data: [
                 ['Amazon:', 6],               
             ]
@@ -216,7 +216,7 @@ $(function() {
         series: [{
             type: 'pie',
             name: 'Browser share',
-            innerSize: '60%',
+            innerSize: '80%',
             data: [
                 ['Amazon:', 6],               
             ]
@@ -266,7 +266,7 @@ $(function() {
         series: [{
             type: 'pie',
             name: 'Browser share',
-            innerSize: '60%',
+            innerSize: '80%',
             data: [
                 ['Amazon:', 6],               
             ]
@@ -316,7 +316,7 @@ $('#morris-donut-chart5').highcharts({
         series: [{
             type: 'pie',
             name: 'Browser share',
-            innerSize: '60%',
+            innerSize: '80%',
             data: [
                 ['Amazon:', 6],               
             ]
@@ -366,7 +366,7 @@ $('#morris-donut-chart5').highcharts({
         series: [{
             type: 'pie',
             name: 'Browser share',
-            innerSize: '60%',
+            innerSize: '80%',
             data: [
                 ['Amazon:', 6],               
             ]
