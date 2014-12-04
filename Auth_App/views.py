@@ -125,7 +125,7 @@ def auth(request):
     user['username'] = username
     user['userimg'] = getPic(access_token)
     dprojects = []
-    projects = findProjectByPM(1)
+    projects = findProjectByPM(username)
     #return render_to_response("test.html",{"msg":projects})
     if projects != None:
         for project in projects:
@@ -170,15 +170,16 @@ def logout(request):
 
 def view_setup_project(request):
     access_token = request.session.get("access_token")
-    username = reques.session.get("username")
+    username = request.session.get("username")
     projects = get_repo_list(access_token, username)
-    return render_to_response('test.html', {'projects':projects})
+    return render_to_response('forms.html', {'projects':projects})
 
 def viewproject(request):
     type = request.GET.get('type')
     pid = request.GET.get('id')
     project = findProjectById(pid)
     userid = request.session.get("userid")
+    username = request.session.get("username")
     
     developers = findDevelopersByProjectId(pid)
     _developers = []
@@ -193,7 +194,7 @@ def viewproject(request):
     data['name'] = project.name
     dprojects = []
 
-    projects = findProjectByPM(1)
+    projects = findProjectByPM(username)
     for project in projects:
         dict = {}
         dict["name"] = project.name

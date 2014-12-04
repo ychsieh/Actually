@@ -16,13 +16,13 @@ def findDevelopersByProjectId(pid):
     developers = Developer.objects.filter(project = _project)
     return developers
 
-def findProjectByPM(GivenPMID):
-	findPM = PM.objects.get(id = GivenPMID)
-	findProject = findPM.project.all()
-	if (len(findProject) != 0):
-		return findProject
-	else:
-		return None
+def findProjectByPM(GivegithubName):
+    PMs = PM.objects.filter(githubName = GivegithubName)
+    projects = []
+    for pm in PMs:
+        for i in pm.project.all():
+            projects.append(i)
+    return projects
 
 
 def findProjectByDeveloper(GivenDeveloperID):
