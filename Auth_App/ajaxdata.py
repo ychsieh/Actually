@@ -18,41 +18,59 @@ homepage = 'http://127.0.0.1:8000'
 access_token = ''
 
 def test(request):
-    JSONData = [{'period':'2014 Q0','developer_1': 266,'developer_2':123,'developer_3': 1347,'total':1613},{'period': '2014 Q1','developer_1': 2778,'developer_2': 1294,'developer_3': 1941},{'period': '2014 Q2','developer_1': 3712,'developer_2': 1969,'developer_3': 2501},{'period': '2014 Q3','developer_1': 4767,'developer_2': 2597,'developer_3': 3689},{'period': '2014 Q4','developer_1': 5810,'developer_2': 3914,'developer_3': 4293}]
     
     pid = request.session.get('projectid')
-    developers = findDevelopersByProjectId(pid)
-    json_developer = []
-    for developer in developers:
-        ##init bar
-        dict = {}
-        dict['developer'] = developer.lastName + ", " + developer.firstName
-        #need to calculate, now use fake
-        dict['actual_per'] = int(developer.optional2)
-        #need to calculate, now use fake
-        dict['exp_per'] = int(developer.optional3)
-        json_developer.append(dict)
+    project = findProjectById(pid)
+    qdevelopers = findDevelopersByProjectId(pid)
+    developers = []
+    expected = []
+    actual = []
+    expectedtasks = []
+    actualtasks = []
+
+    data = {'projectname': project.name}
+
     
-    JSONData_Progress = {'data': json_developer}
-    
-    #fake JAONDATA
-    json_linescode = []
-    json_developers = []
-    PERIOD_NUM = 5
-    counter = 0
-    while(counter < PERIOD_NUM):
-        dict = {}
-        dict['period'] = '2014 Q' + str(counter)
-        for developer in developers:
-            if(counter == 0):
-                fullname = developer.lastName + ", " + developer.firstName
-                json_developers.append(fullname)
-            dict[fullname] = 300
-        if(counter == 0):
-            dict['total'] = 1613
-        json_linescode.append(dict)
-        counter += 1
-    
-    result = {'JSONData':json_linescode, 'JSONData_Progress':JSONData_Progress,'developers':json_developers}
+    for developer in qdevelopers:
+        expdict = {}
+        expdict['name'] = developer.firstName
+        expdict['y'] = 30
+        expdict['drilldown'] = "exp" + developer.firstName
+        expected.append(expdict)
+
+        actdict = {}
+        actdict['name'] = developer.firstName
+        actdict['y'] = 50
+        actdict['drilldown'] = "act" + developer.firstName
+        section = findSectionByProjectIDDeveloperID(pid,developer.id)    
+        actdict['section'] = section.name
+        actual.append(actdict)
+
+        exptaskDict = {}
+        acttaskDict = {}
+        exptaskDict['id'] = 'exp' + developer.firstName
+        acttaskDict['id'] = 'act' + developer.firstName
+        tasks = findTasksBySectionID(section.id)
+        expdata = []
+        actdata = []
+        for task in tasks:
+            exppercentage = float(task.optional3) * 100    
+            expdata.append([task.name, exppercentage])
+            actpercentage = float(task.progress) * 100    
+            actdata.append([task.name, actpercentage])
+
+        exptaskDict['data'] = expdata
+        expectedtasks.append(exptaskDict)
+        acttaskDict['data'] = actdata
+        actualtasks.append(acttaskDict)
+
+        
+
+    data['expected'] = expected
+    data['actual'] = actual
+    data['expectedtasks'] = expectedtasks
+    data['actualtasks'] = actualtasks
+
+    result = {'data':data}
     return HttpResponse(json.dumps(result), content_type='application/json')
 
