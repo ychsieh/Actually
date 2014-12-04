@@ -107,7 +107,7 @@ def get_oauth(request):
     return access_token
 
 def auth(request):
-    access_token = request.session.get('access_token')
+    access_token = request.session.get('user').get('access_token')
     if access_token == None:
         access_token = get_oauth(request)
     if access_token == "bad_verification_code":
