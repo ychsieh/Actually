@@ -107,13 +107,18 @@ def get_oauth(request):
     return access_token
 
 def auth(request):
-    access_token = request.session.get('user').get('access_token')
+    access_token = None
+    sessionUser = request.session.get("user")
+
+    if sessionUser != None:
+        access_token = sessionUser.get('access_token')
     if access_token == None:
         access_token = get_oauth(request)
     if access_token == "bad_verification_code":
         return render_to_response("error.html",{"msg":"You are unauthorized to view this page!"})
     username = get_user(access_token)
     userid = getDeveloperBygithubName(username).id
+
     #check if data base has the user, if not, create an account.
     #login
 
