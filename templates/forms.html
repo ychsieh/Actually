@@ -119,6 +119,7 @@
 
         <div id="page-wrapper-home">
             <div class="row">
+                {% if repos != "" %}
                 <div class="col-lg-12">
                     <h3 class="page-header" id="formTitle">Create A New Project</h3>
                 </div>
@@ -128,8 +129,11 @@
             <div class="row" id="step1">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
+
                         <div class="panel-heading form-heading">
-                            Step 1 of 3: Select A Repository
+                            
+                                Step 1 of 3: Select A Repository
+                            
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -142,11 +146,9 @@
                                         <div class="form-group">
                                             <label>Github Repository</label>
                                             <select multiple class="form-control" id="repo">
-                                                    <option>Actually</option>
-                                                    <option>Pushcart</option>
-                                                    <option>Lifestream</option>
-                                                    <option>EAF</option>
-                                                    <option>ohmage</option>
+                                                    {% for repo in repos%}
+                                                        <option>{{repo}}</option>
+                                                    {% endfor %}
                                             </select>
                                         </div>
                                         <div class="button-container">
@@ -164,6 +166,11 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+            {% else %}
+                <div class="col-lg-12">
+                    <h3 class="page-header" id="formTitle">We can't find any repos on your Github account, please setup a project on Github first!</h3>
+                </div>
+            {% endif %}
             <!-- /.row -->
             <!-- /.row -->
             <div class="row" id="step2" style="display: none">

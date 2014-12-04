@@ -116,14 +116,12 @@ def auth(request):
     userid = getDeveloperBygithubName(username).id
     #check if data base has the user, if not, create an account.
     #login
-    request.session['userid'] = userid
-    request.session['access_token'] = access_token
-    request.session['username'] = username
-
 
     user = {}
     user['username'] = username
     user['userimg'] = getPic(access_token)
+
+
     dprojects = []
     projects = findProjectByPM(username)
     
@@ -146,8 +144,6 @@ def auth(request):
                 dict["color"] = "red"
             dprojects.append(dict)
 
-    
-
     devprojects = findProjectByDeveloper(userid)
     for project in devprojects:
         dict = {}
@@ -164,30 +160,32 @@ def auth(request):
             dict["color"] = "red"
         dprojects.append(dict)
 
-    request.session['projects'] = dprojects
+    user['projects'] = dprojects
+    user['userid'] = userid
+    user['access_token'] = access_token
+    request.session['user'] = user
     return render_to_response('index.html',{'projects':dprojects, 'user' : user})
 
 def logout(request):
-    if request.session.get("userid") != None:
-        del request.session["userid"]
-        del request.session["access_token"]
-        del request.session["username"]
-        del request.session["projects"]
+    if request.session.get("user") != None:
+        del request.session["user"]
     return render_to_response('landing.html', {'client_id':GITHUB_CLIENT_ID, 'scope':scope})
 
 def view_setup_project(request):
-    access_token = request.session.get("access_token")
-    username = request.session.get("username")
+    user = request.session.get("user")
+    access_token = user.get("access_token")
+    username = user.get("username")
     repos = get_repo_list(access_token, username)
-    projects = request.session.get('projects')
+    projects = user.get('projects')
     return render_to_response('forms.html', {'repos':repos, 'projects':projects})
 
 def viewproject(request):
+    user = request.session.get("user")
     type = request.GET.get('type')
     pid = request.GET.get('id')
     project = findProjectById(pid)
-    userid = request.session.get("userid")
-    username = request.session.get("username")
+    userid = user.get("userid")
+    username = user.get("username")
     
     developers = findDevelopersByProjectId(pid)
     _developers = []
@@ -200,7 +198,7 @@ def viewproject(request):
         
     data = {}
     data['name'] = project.name
-    dprojects = request.session.get('projects')
+    dprojects = user.get('projects')
 
     if(type == 'Developer'):
         #need vaildate

@@ -59,9 +59,6 @@ def getcommits_from_project(access_token, project, repo_info):
 		data.append([result[i]['commit']['message'], result[i]['commit']['author']['name'], result[i]['commit']['author']['date']])
 		print data[i]
 		getPercentage(data[i][0])
-	#for com in data:
-	#	(per,sub_name)=getPercentage(com[0])
-	#	err = save_to_db( per, sub_name, com[1], project, com[2])
 	return data
 
 def getPercentage(data):
@@ -76,12 +73,4 @@ def getPercentage(data):
 			result.append(temp_result)
 		except:
 			pass
-	#pattern1 = re.compile('.*(subtask([0123456789]*))\s*(.*)%')  
-	#try:   
-	#	match1 = pattern1.match(result)
-	#	percent_s = match1.group(3)
-	#	percent=float(percent_s)/100
-	#	subtask_name = match1.group(1)
-	#	return (percent,subtask_name)
-	#except:
 	return result
