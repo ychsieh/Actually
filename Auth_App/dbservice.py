@@ -22,7 +22,7 @@ def findProjectByPM(GivenPMID):
 	if (len(findProject) != 0):
 		return findProject
 	else:
-		print []
+		return None
 
 
 def findProjectByDeveloper(GivenDeveloperID):
@@ -70,6 +70,10 @@ def findCommitTimebyProjectIDDeverloperID(projectID, developerID):
 
 def findProjectById(pid):
     return Project.objects.get(id = pid)
+
+def getDeveloperBygithubName(GitHubName):
+    developer = Developer.objects.get(githubName = GitHubName)
+    return developer
 
 def test(request):
 	section = findSectionByProjectIDDeveloperID(4, 1)
