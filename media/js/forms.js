@@ -43,6 +43,7 @@
                     var newDate = $(".mileDate").first().clone().val("");
                     $("#milestones").append(newDate);
                     $("#milestones").append("<br>");
+                    $("#milestones").append("<br>");
                     var newBtn = $("#newMilBtn").clone(true,true);
                     $("#newMilBtn").remove();
                     $("#milestones").append(newBtn);
