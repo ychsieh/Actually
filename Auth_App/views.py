@@ -126,7 +126,10 @@ def auth(request):
     user['userimg'] = getPic(access_token)
     dprojects = []
     projects = findProjectByPM(username)
-    #return render_to_response("test.html",{"msg":projects})
+    
+    #repos = get_repo_list(access_token, username)
+    #return render_to_response("test.html",{"msg":repos})
+    
     if projects != None:
         for project in projects:
             dict = {}
@@ -142,6 +145,8 @@ def auth(request):
             if(project.progress / float(project.optional1) <= 0.7):
                 dict["color"] = "red"
             dprojects.append(dict)
+
+    
 
     devprojects = findProjectByDeveloper(userid)
     for project in devprojects:
@@ -159,6 +164,7 @@ def auth(request):
             dict["color"] = "red"
         dprojects.append(dict)
 
+    request.session['projects'] = dprojects
     return render_to_response('index.html',{'projects':dprojects, 'user' : user})
 
 def logout(request):
@@ -166,13 +172,15 @@ def logout(request):
         del request.session["userid"]
         del request.session["access_token"]
         del request.session["username"]
+        del request.session["projects"]
     return render_to_response('landing.html', {'client_id':GITHUB_CLIENT_ID, 'scope':scope})
 
 def view_setup_project(request):
     access_token = request.session.get("access_token")
     username = request.session.get("username")
-    projects = get_repo_list(access_token, username)
-    return render_to_response('forms.html', {'projects':projects})
+    repos = get_repo_list(access_token, username)
+    projects = request.session.get('projects')
+    return render_to_response('forms.html', {'repos':repos, 'projects':projects})
 
 def viewproject(request):
     type = request.GET.get('type')
@@ -192,39 +200,7 @@ def viewproject(request):
         
     data = {}
     data['name'] = project.name
-    dprojects = []
-
-    projects = findProjectByPM(username)
-    for project in projects:
-        dict = {}
-        dict["name"] = project.name
-        dict["type"] = 'PM'
-        dict["id"] = project.id
-        dict["progress"] = project.progress * 100
-        dict["expected"] = float(project.optional1) * 100
-        if(project.progress / float(project.optional1) >= 1):
-            dict["color"] = "green"
-        if(project.progress / float(project.optional1) < 1 and project.progress / float(project.optional1) > 0.7):
-            dict["color"] = "yellow"
-        if(project.progress / float(project.optional1) <= 0.7):
-            dict["color"] = "red"
-        dprojects.append(dict)
-
-    devprojects = findProjectByDeveloper(userid)
-    for project in devprojects:
-        dict = {}
-        dict["name"] = project.name
-        dict["type"] = 'Developer'
-        dict["id"] = project.id
-        dict["progress"] = project.progress * 100
-        dict["expected"] = float(project.optional1) * 100
-        if(project.progress / float(project.optional1) >= 1):
-            dict["color"] = "green"
-        if(project.progress / float(project.optional1) < 1 and project.progress / float(project.optional1) > 0.7):
-            dict["color"] = "yellow"
-        if(project.progress / float(project.optional1) <= 0.7):
-            dict["color"] = "red"
-        dprojects.append(dict)
+    dprojects = request.session.get('projects')
 
     if(type == 'Developer'):
         #need vaildate

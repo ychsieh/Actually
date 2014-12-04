@@ -29,16 +29,16 @@ def get_user(access_token):
 	return username
 
 def get_repo_list(access_token, user):
-        url2 = 'https://api.github.com/user/repos'
-        request2=Request(url2)
-        request2.add_header('Authorization', 'token %s' % access_token)
-        response2 = urlopen(request2)
+	url2 = 'https://api.github.com/user/repos'
+	request2=Request(url2)
+	request2.add_header('Authorization', 'token %s' % access_token)
+	response2 = urlopen(request2)
 	result2 = json.load(response2) 
-        result = []
+	result = []
 	for i in result2:
 		if (i['owner']['login'] == user):
 			result.append(i['full_name']) 
-        return result
+	return result
 
 def getcommits_from_project(access_token, project, repo_info):
     user = get_user()
