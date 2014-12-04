@@ -44,8 +44,6 @@ def getcommits_from_project(access_token, project, repo_info):
     user = get_user()
     for i in get_repo_list(user):
        	print i
-  
-
 	owner= repo_info[1]
 	repo = repo_info[0]
 	url = 'https://api.github.com/repos/'+owner+'/'+repo+'/commits'
