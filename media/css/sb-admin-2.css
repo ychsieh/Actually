@@ -447,4 +447,51 @@ div#addNew:hover {
 
 #formTitle {
     margin-top: 20px;
+    text-align: center;
+    border-bottom: none;
+    padding-bottom: 0px;
+}
+
+#step1, #step2, #step3 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+}
+
+@media(max-width:768px) {
+    #step1, #step2, #step3 {
+        width: 100%;
+    }
+    .secName, .secDeveloper {
+        width: 100%;
+    }
+    .mileTitle, .mileDate {
+        width: 90%;
+    }
+}
+
+.form-heading {
+    text-align: center;
+}
+.form-fields {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+@media(min-width:768px) {
+    .secName, .secDeveloper, .mileTitle, .mileDate {
+        width: 40%;
+    }
+}
+#toSecond, #toThird, #lastStep {
+    margin-left: auto;
+    margin-right: auto;
+}
+.button-container {
+    text-align: center;
+    margin-top: 50px;
+}
+.button-container .btn {
+    font-weight: bold;
+    font-size: 16px;
 }

@@ -68,6 +68,10 @@ var data = {
             task: 'task4',
             taskprogress: 20
         },
+        {
+            task: 'task5',
+            taskprogress: 45
+        }
     ]
 }
 
@@ -173,7 +177,62 @@ $(function() {
         }]
     });
 
-    $('#morris-donut-chart3').highcharts({
+    for (var i = 0; i < data.tasks.length; i++) {
+        var newId = "task" + i;
+        //var newDiv = $( "<div></div>").attr("id",newId);
+        $("<div></div>").attr("class","col-lg-4").attr("id", newId).appendTo("#taskCharts");
+        $("#taskCharts div#" + newId).highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        title: {
+            text: '<b style="font-size: 120%; font-weight: bold;">'+data.tasks[i].task+'</b><br>'+data.tasks[i].taskprogress+'%',
+            align: 'center',
+            verticalAlign: 'middle',
+            style: {
+                fontSize: '25px'
+            },
+            y: 0
+        },
+        credits: {
+            enabled: false
+        },
+        exporting: {
+            enabled: false
+        },
+        tooltip: {
+            enabled: false
+        },
+        plotOptions: {
+            pie: {
+                dataLabels: {
+                    enabled: false,
+                    distance: -40,
+                    style: {
+                        fontWeight: 'bold',
+                        color: 'white',
+                        textShadow: '0px 1px 2px black'
+                    }
+                },
+                startAngle: startAngle,
+                endAngle: startAngle + data.tasks[i].taskprogress*0.01*360,
+                center: ['50%', '50%']
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            innerSize: '80%',
+            data: [
+                ['Amazon:', 6],               
+            ]
+        }]
+    });
+    };
+
+    /*$('#morris-donut-chart3').highcharts({
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: 0,
@@ -371,7 +430,7 @@ $('#morris-donut-chart5').highcharts({
                 ['Amazon:', 6],               
             ]
         }]
-    });
+    });*/
     // Morris.Donut({
     //     element: 'morris-donut-chart1',
     //     data: JSONData_Project,
