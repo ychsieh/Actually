@@ -182,7 +182,7 @@ def view_setup_project(request):
     username = user.get("username")
     repos = get_repo_list(access_token, username)
     projects = user.get('projects')
-    return render_to_response('forms.html', {'repos':repos, 'projects':projects})
+    return render_to_response('forms.html', {'repos':repos, 'projects':projects, 'user':user})
 
 def viewproject(request):
     user = request.session.get("user")
@@ -211,12 +211,12 @@ def viewproject(request):
         section = findSectionByProjectIDDeveloperID(pid,userid)
         tasks = findTasksBySectionID(section.id)
         request.session['projectid'] = pid  
-        return render_to_response('Project2.html',{'project':data,'developers':developers,'tasks':tasks,'projects1':dprojects},context_instance=RequestContext(request))
+        return render_to_response('Project2.html',{'project':data,'developers':developers,'tasks':tasks,'projects1':dprojects,'user' : user},context_instance=RequestContext(request))
     elif(type == 'PM'):
         #need vaildate
         request.session['projectid'] = pid
         data['name'] = data['name']
-        return render_to_response('Project.html',{'project':data,'developers':_developers,'projects1':dprojects},context_instance=RequestContext(request))
+        return render_to_response('Project.html',{'project':data,'developers':_developers,'projects1':dprojects,'user' : user},context_instance=RequestContext(request))
     else:
         return render_to_response('error.html',{'msg':'type error!!'})
 
