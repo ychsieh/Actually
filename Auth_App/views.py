@@ -111,7 +111,7 @@ def auth(request):
     if access_token == None:
         access_token = get_oauth(request)
     if access_token == "bad_verification_code":
-        return render_to_response("error.html",{"msg":"You need access token to use our system!"})
+        return render_to_response("error.html",{"msg":"You are unauthorized to view this page!"})
     username = get_user(access_token)
     userid = getDeveloperBygithubName(username).id
     #check if data base has the user, if not, create an account.
@@ -125,7 +125,7 @@ def auth(request):
     user['username'] = username
     user['userimg'] = getPic(access_token)
     dprojects = []
-    projects = findProjectByPM(userid)
+    projects = findProjectByPM(1)
     #return render_to_response("test.html",{"msg":projects})
     if projects != None:
         for project in projects:
@@ -143,7 +143,7 @@ def auth(request):
                 dict["color"] = "red"
             dprojects.append(dict)
 
-    devprojects = findProjectByDeveloper(1)
+    devprojects = findProjectByDeveloper(userid)
     for project in devprojects:
         dict = {}
         dict["name"] = project.name
@@ -193,7 +193,7 @@ def viewproject(request):
     data['name'] = project.name
     dprojects = []
 
-    projects = findProjectByPM(userid)
+    projects = findProjectByPM(1)
     for project in projects:
         dict = {}
         dict["name"] = project.name
@@ -228,7 +228,7 @@ def viewproject(request):
     if(type == 'Developer'):
         #need vaildate
         data['name'] = data['name']
-        section = findSectionByProjectIDDeveloperID(pid,1)
+        section = findSectionByProjectIDDeveloperID(pid,userid)
         tasks = findTasksBySectionID(section.id)
         request.session['projectid'] = pid  
         return render_to_response('Project2.html',{'project':data,'developers':developers,'tasks':tasks,'projects1':dprojects},context_instance=RequestContext(request))
