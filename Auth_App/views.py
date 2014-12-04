@@ -113,30 +113,35 @@ def auth(request):
     if access_token == "bad_verification_code":
         return render_to_response("error.html",{"msg":"You need access token to use our system!"})
     username = get_user(access_token)
+    userid = getDeveloperBygithubName(username).id
     #check if data base has the user, if not, create an account.
     #login
-    request.session['userid'] = 1
+    request.session['userid'] = userid
     request.session['access_token'] = access_token
+    request.session['username'] = username
+
 
     user = {}
     user['username'] = username
     user['userimg'] = getPic(access_token)
     dprojects = []
-    projects = findProjectByPM(1)
-    for project in projects:
-        dict = {}
-        dict["name"] = project.name
-        dict["type"] = 'PM'
-        dict["id"] = project.id
-        dict["progress"] = project.progress * 100
-        dict["expected"] = float(project.optional1) * 100
-        if(project.progress / float(project.optional1) >= 1):
-            dict["color"] = "green"
-        if(project.progress / float(project.optional1) < 1 and project.progress / float(project.optional1) > 0.7):
-            dict["color"] = "yellow"
-        if(project.progress / float(project.optional1) <= 0.7):
-            dict["color"] = "red"
-        dprojects.append(dict)
+    projects = findProjectByPM(userid)
+    #return render_to_response("test.html",{"msg":projects})
+    if projects != None:
+        for project in projects:
+            dict = {}
+            dict["name"] = project.name
+            dict["type"] = 'PM'
+            dict["id"] = project.id
+            dict["progress"] = project.progress * 100
+            dict["expected"] = float(project.optional1) * 100
+            if(project.progress / float(project.optional1) >= 1):
+                dict["color"] = "green"
+            if(project.progress / float(project.optional1) < 1 and project.progress / float(project.optional1) > 0.7):
+                dict["color"] = "yellow"
+            if(project.progress / float(project.optional1) <= 0.7):
+                dict["color"] = "red"
+            dprojects.append(dict)
 
     devprojects = findProjectByDeveloper(1)
     for project in devprojects:
@@ -157,14 +162,23 @@ def auth(request):
     return render_to_response('index.html',{'projects':dprojects, 'user' : user})
 
 def logout(request):
-    del request.session["userid"]
-    del request.session["access_token"]
+    if request.session.get("userid") != None:
+        del request.session["userid"]
+        del request.session["access_token"]
+        del request.session["username"]
     return render_to_response('landing.html', {'client_id':GITHUB_CLIENT_ID, 'scope':scope})
+
+def view_setup_project(request):
+    access_token = request.session.get("access_token")
+    username = reques.session.get("username")
+    projects = get_repo_list(access_token, username)
+    return render_to_response('test.html', {'projects':projects})
 
 def viewproject(request):
     type = request.GET.get('type')
     pid = request.GET.get('id')
     project = findProjectById(pid)
+    userid = request.session.get("userid")
     
     developers = findDevelopersByProjectId(pid)
     _developers = []
@@ -179,7 +193,7 @@ def viewproject(request):
     data['name'] = project.name
     dprojects = []
 
-    projects = findProjectByPM(1)
+    projects = findProjectByPM(userid)
     for project in projects:
         dict = {}
         dict["name"] = project.name
@@ -195,7 +209,7 @@ def viewproject(request):
             dict["color"] = "red"
         dprojects.append(dict)
 
-    devprojects = findProjectByDeveloper(1)
+    devprojects = findProjectByDeveloper(userid)
     for project in devprojects:
         dict = {}
         dict["name"] = project.name
@@ -213,7 +227,7 @@ def viewproject(request):
 
     if(type == 'Developer'):
         #need vaildate
-        data['name'] = data['name'] + ' (Developer : ShaJin)'
+        data['name'] = data['name']
         section = findSectionByProjectIDDeveloperID(pid,1)
         tasks = findTasksBySectionID(section.id)
         request.session['projectid'] = pid  
@@ -221,7 +235,7 @@ def viewproject(request):
     elif(type == 'PM'):
         #need vaildate
         request.session['projectid'] = pid
-        data['name'] = data['name'] + ' (PM : ShaJin)'
+        data['name'] = data['name']
         return render_to_response('Project.html',{'project':data,'developers':_developers,'projects1':dprojects},context_instance=RequestContext(request))
     else:
         return render_to_response('error.html',{'msg':'type error!!'})

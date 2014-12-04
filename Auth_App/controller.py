@@ -10,7 +10,7 @@ from django.core import serializers
 from dbservice import *
 from expectcal import *
 
-def getPic(access_token):
+def setup_project(access_token):
 	url1 = 'https://api.github.com/user'
 	request1=Request(url1)
 	request1.add_header('Authorization', 'token %s' % access_token)
