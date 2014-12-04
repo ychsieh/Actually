@@ -163,12 +163,12 @@
             <div class="row" id="step1">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading form-heading">
                             Step 1 of 3: Select A Repository
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="form-fields">
                                     <form role="form" action="#">
                                         <div class="form-group">
                                             <label>Project Name</label>
@@ -184,8 +184,9 @@
                                                     <option>ohmage</option>
                                             </select>
                                         </div>
-                                        
+                                        <div class="button-container">
                                         <button type="button" class="btn btn-default" id="toSecond">Add</button>
+                                        </div>
                                     </form>
                                 </div>
                                 
@@ -203,19 +204,19 @@
             <div class="row" id="step2" style="display: none">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading form-heading">
                             Step 2 of 3: Assign Works To Developers
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-8">
+                                <div class="form-fields">
                                     <form role="form" action="#">
                                         <div class="form-group" id="sections">
                                             <label>Developer 1 </label>
                                             <div class="section" style="margin-left: 30px">
                                             <!--<div class="addsection">-->
                                             <p class="form-control-static">Developer: </p>
-                                                <select multiple class="form-control secDeveloper" style="width: 270px">
+                                                <select multiple class="form-control secDeveloper">
                                                     <option>Long Ma</option>
                                                     <option>Jin Sha</option>
                                                     <option>Yachen Hsieh</option>
@@ -240,8 +241,9 @@
                                             <p class="help-block totalPer">The percentages must add up to 100%.</p>
                                             
                                         </div>
-
-                                        <button type="button" class="btn btn-default" id="toThird">Next</button>
+                                        <div class="button-container">
+                                            <button type="button" class="btn btn-default" id="toThird">Next</button>
+                                        </div>
                                         <!--<button type="reset" class="btn btn-default">Reset</button>-->
                                     </form>
                                 </div>
@@ -259,35 +261,40 @@
             <div class="row" id="step3" style="display: none">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading form-heading">
                             Step 3 of 3: Edit Project Milestones
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="form-fields">
                                     <form role="form" action="#">
                                         <div class="form-group" id="milestones">
                                             <label>Milestone 1</label>
                                             <p class="form-control-static indent"> Milestone Name: </p>
-                                            <input class="form-control mileTitle indent" type="text" value="Milestone 1">
+                                            <input class="form-control-inline mileTitle indent" type="text" value="Milestone 1">
                                             <p class="form-control-static indent"> Estimate Deadline: </p>
-                                            <input class="form-control mileDate indent" type="date" value="2014-09-15">
+                                            <input class="form-control-inline mileDate indent" type="date" value="2014-09-15">
+                                            <br>
                                             <br>
                                             <label>Milestone 2</label>
                                             <p class="form-control-static indent"> Milestone Name: </p>
-                                            <input class="form-control mileTitle indent" type="text" value="Milestone 2">
+                                            <input class="form-control-inline mileTitle indent" type="text" value="Milestone 2">
                                             <p class="form-control-static indent"> Estimate Deadline: </p>
-                                            <input class="form-control mileDate indent" type="date" value="2014-10-15">
+                                            <input class="form-control-inline mileDate indent" type="date" value="2014-10-15">
+                                            <br>
                                             <br>
                                             <label>Milestone 3</label>
                                             <p class="form-control-static indent"> Milestone Name: </p>
-                                            <input class="form-control mileTitle indent" type="text" value="Milestone 3">
+                                            <input class="form-control-inline mileTitle indent" type="text" value="Milestone 3">
                                             <p class="form-control-static indent"> Estimate Deadline: </p>
-                                            <input class="form-control mileDate indent" type="date" value="2014-11-08">
+                                            <input class="form-control-inline mileDate indent" type="date" value="2014-11-08">
+                                            <br>
                                             <br>
                                             <button type="button" class="btn btn-xs btn-link" id="newMilBtn"><i class="fa fa-plus fa-fw"></i>Add another milestone...</button>
                                         </div>
-                                        <button type="button" class="btn btn-default" id="lastStep">Submit</button>
+                                        <div class="button-container">
+                                            <button type="button" class="btn btn-default" id="lastStep">Submit</button>
+                                        </div>
                                         <!--<button type="reset" class="btn btn-default">Reset</button>-->
                                     </form>
                                 </div>
