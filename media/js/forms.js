@@ -1,3 +1,4 @@
+
 var formData = {};
 var count = 1;
 $("#newSecBtn").click(function() {
@@ -83,3 +84,4 @@ $("#lastStep").click(function() {
         } 
     });
 });
+
