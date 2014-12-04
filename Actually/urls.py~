@@ -15,20 +15,17 @@ urlpatterns = patterns('',
     url(r'^auth', 'Auth_App.views.auth'),
     url(r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.STATIC_PATH}),
     url(r'^site_templates/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.STATIC_PATH_TEMPLATES}),
-    url(r'^project1/', 'Auth_App.views.project1'),
-    url(r'^project2/', 'Auth_App.views.project2'),
-    url(r'^newproject/', 'Auth_App.views.newproject'),
-    url(r'^testerror/', 'Auth_App.views.error'),
-    url(r'^testsenddata/', 'Auth_App.views.newProjectData'),
     url(r'^dbservice/', 'Auth_App.dbservice.test'),
     url(r'^test/', 'Auth_App.views.test'),
+	url(r'^testcontri/$','Auth_App.views.expectcal'), 
     url(r'^viewproject/$', 'Auth_App.views.viewproject'),
     url(r'^ajaxtest/$', 'Auth_App.ajaxdata.test'),
-    url(r'^jsontest/$', 'Auth_App.jsonservice.test'),
+    url(r'^jsontest/$', 'Auth_App.jsonservice.get_column_json'),
     url(r'^getpmjson/$', 'Auth_App.jsonservice.getpmjson'),
-    url(r'^testexpect/', 'Auth_App.views.expectcal'),
-
-                       
+    url(r'^errorpage/$', 'Auth_App.errorhandler.show_error_msg'),
+    url(r'^logout/$', 'Auth_App.views.logout'),
+    url(r'^addproject/$', 'Auth_App.views.view_setup_project'),
+                   
  
 )
 

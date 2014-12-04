@@ -9,12 +9,10 @@ from Auth_App.models import PM, Developer, Project, Section, Task, Milestone, Co
 from django.http import HttpResponse, HttpRequest
 from django.core import serializers
 from dbservice import *
-<<<<<<< HEAD
 from expectcal import *
-=======
 from datautils import *
 
->>>>>>> 66f581e7608fbb1146c2b9c5d39f73014b739309
+
 
 
 GITHUB_CLIENT_ID = 'd8d60af4bfa5ebe8bb67'
@@ -26,16 +24,11 @@ access_token = ''
 def index(request):
     return render_to_response('landing.html', {'client_id':GITHUB_CLIENT_ID, 'scope':scope})
 
-<<<<<<< HEAD
 def expectcal(request):
 	global access_token
-	url1 = 'https://api.github.com/user'
-	request1=Request(url1)
-	request1.add_header('Authorization', 'token %s' % access_token)
-	response1 = urlopen(request1)
-	result1 = json.load(response1)
-	person = result1['avatar_url']
-   	return HttpResponse(person)
+	#result = get_contributors(access_token, ['Fasta','js2839'])
+	result = get_user(access_token)
+	return HttpResponse(result)
 
 def project1(request):
     p1 = Project.objects.filter(name = 'Fake')
@@ -49,8 +42,7 @@ def project2(request):
 
 def newproject(request):
     return render_to_response('forms.html')
-=======
->>>>>>> 66f581e7608fbb1146c2b9c5d39f73014b739309
+
     
 def main(request):
     projects = findProjectByPM('js2839')

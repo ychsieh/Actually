@@ -52,15 +52,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'Auth_App',
-<<<<<<< HEAD
 #    'ShowViewApp',
 #   'south',
 #    'import_export',
-=======
-    # 'ShowViewApp',
-    # 'south',
-    # 'import_export',
->>>>>>> 66f581e7608fbb1146c2b9c5d39f73014b739309
+
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -86,11 +82,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'actually',                     
         'USER': 'root',
-<<<<<<< HEAD
         'PASSWORD': '',
-=======
-        'PASSWORD': 'password',
->>>>>>> 66f581e7608fbb1146c2b9c5d39f73014b739309
+
     }
 }
 
