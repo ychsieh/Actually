@@ -80,11 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'actually',                     
         'USER': 'root',
-<<<<<<< HEAD
         'PASSWORD': 'password',
-=======
-        'PASSWORD': 'qwe123',
->>>>>>> FETCH_HEAD
     }
 }
 

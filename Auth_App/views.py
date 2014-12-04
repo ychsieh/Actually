@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response, redirect, render
 from django.template import RequestContext
+from django.core.urlresolvers import reverse
 import urllib, urllib2
 from urllib2 import urlopen, Request
 import json
@@ -8,6 +9,8 @@ from Auth_App.models import PM, Developer, Project, Section, Task, Milestone, Co
 from django.http import HttpResponse, HttpRequest
 from django.core import serializers
 from dbservice import *
+from datautils import *
+
 
 
 GITHUB_CLIENT_ID = 'd8d60af4bfa5ebe8bb67'
@@ -19,18 +22,6 @@ access_token = ''
 def index(request):
     return render_to_response('landing.html', {'client_id':GITHUB_CLIENT_ID, 'scope':scope})
 
-def project1(request):
-    p1 = Project.objects.filter(name = 'Fake')
-    getcommits_from_project(p1[0])
-    return render_to_response('Project.html')
-
-def project2(request):
-    p1 = Project.objects.filter(name = 'Fasta')
-    getcommits_from_project(p1[0])
-    return render_to_response('Project2.html')
-
-def newproject(request):
-    return render_to_response('forms.html')
     
 def main(request):
     projects = findProjectByPM('js2839')
@@ -105,22 +96,32 @@ def save_to_db(percentage, sub_name, person, project, time):
 		return ''
 
 def get_oauth(request):
-	GITHUB_REQUEST_PERMISSIONS = request.GET.__getitem__('code')
-	url = 'https://github.com/login/oauth/access_token'
-	values = { 'client_id':GITHUB_CLIENT_ID, 'client_secret':GITHUB_CLIENT_SECRET, 'code':GITHUB_REQUEST_PERMISSIONS}
-	data = urllib.urlencode(values, doseq=True)
-	req = urllib2.Request(url, data)
-	response = urllib2.urlopen(req)
-	the_page = response.read()
-	access_token = the_page.split('=', 1)[1].split('&', 1)[0]
-	return access_token
+    GITHUB_REQUEST_PERMISSIONS = request.GET.__getitem__('code')
+    url = 'https://github.com/login/oauth/access_token'
+    values = { 'client_id':GITHUB_CLIENT_ID, 'client_secret':GITHUB_CLIENT_SECRET, 'code':GITHUB_REQUEST_PERMISSIONS}
+    data = urllib.urlencode(values, doseq=True)
+    req = urllib2.Request(url, data)
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    access_token = the_page.split('=', 1)[1].split('&', 1)[0]
+    return access_token
 
 def auth(request):
-    global access_token
-    access_token=get_oauth(request)
+    access_token = request.session.get('access_token')
+    if access_token == None:
+        access_token = get_oauth(request)
+    if access_token == "bad_verification_code":
+        return render_to_response("error.html",{"msg":"You need access token to use our system!"})
+    username = get_user(access_token)
+    #check if data base has the user, if not, create an account.
+    #login
+    request.session['userid'] = 1
+    request.session['access_token'] = access_token
 
+    user = {}
+    user['username'] = username
+    user['userimg'] = getPic(access_token)
     dprojects = []
-    
     projects = findProjectByPM(1)
     for project in projects:
         dict = {}
@@ -153,23 +154,12 @@ def auth(request):
             dict["color"] = "red"
         dprojects.append(dict)
 
-    return render_to_response('index.html',{'projects':dprojects})
+    return render_to_response('index.html',{'projects':dprojects, 'user' : user})
 
-def error(request):
-    return render_to_response('error.html',{'msg':'error!!'})
-
-def sendData2Front(request):
-    return newProjectData(request)
-
-def newProjectData(request):
-    projects = Project.findPmDeveloperByProject('Fasta')
-    print projects
-    return render_to_response('forms.html',{'msg':'error!!'})
-
-def test(request):
-	developer = Developer.objects.get(id = 1)
-	return render_to_response('test.html',{'test':developer })
-
+def logout(request):
+    del request.session["userid"]
+    del request.session["access_token"]
+    return render_to_response('landing.html', {'client_id':GITHUB_CLIENT_ID, 'scope':scope})
 
 def viewproject(request):
     type = request.GET.get('type')

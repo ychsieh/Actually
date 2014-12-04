@@ -27,7 +27,8 @@ urlpatterns = patterns('',
     url(r'^jsontest/$', 'Auth_App.jsonservice.get_column_json'),
     url(r'^getpmjson/$', 'Auth_App.jsonservice.getpmjson'),
     url(r'^testexpect/', 'Auth_App.views.expectcal'),
-
+    url(r'^errorpage/$', 'Auth_App.errorhandler.show_error_msg'),
+    url(r'^logout/$', 'Auth_App.views.logout'),
                        
  
 )
