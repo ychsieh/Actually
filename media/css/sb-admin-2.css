@@ -421,7 +421,7 @@ div#addNew:hover {
     font-size: 16px;
     margin-left: 0px;
     margin-right: 0px;
-    height: 193px;
+    height: 194px;
     padding-top: 70px;
     background-color: #f5f5f5;
 }
@@ -495,9 +495,39 @@ div#addNew:hover {
     font-weight: bold;
     font-size: 16px;
 }
+.lead {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+.circle-background {
+    border: 1px solid transparent;
+    float: right;
+    border-radius: 3px;
+    color: #f5f5f5;
+    padding: 3px; 
+    color: #f5f5f5;
+    vertical-align: middle;
+}
+.panel-green .circle-background {
+    background-color: #5cb85c;
+}
+
+.panel-red .circle-background {
+    background-color: #d43f3a;
+}
+
+.panel-yellow .circle-background {
+    background-color: #eea236;
+}
+
+.typeWrapper {
+    height: 47px;
+    padding-top: 7px;
+}
+
 /* Date Ribbon */
 
-.date {
+/*.date {
     background: #428bca;
     float: left;
     top: 133px;
@@ -527,7 +557,7 @@ div#addNew:hover {
     position: absolute;
     top: -25px;
     width: 90px;
-    /*box-shadow: 0 10px 10px -10px hsla(0,0%,0%,.5);*/
+    /*box-shadow: 0 10px 10px -10px hsla(0,0%,0%,.5);
 
 
 }
@@ -541,8 +571,6 @@ div#addNew:hover {
     margin-top: 38px;
 
 }
-
-/* Traditional Ribbon */
 
 .traditional:after, .traditional:before {
     border-top: 15px solid #428bca; 
@@ -561,4 +589,4 @@ div#addNew:hover {
 .traditional:before {
     border-left: 25px solid transparent;  
     right: 0;  
-}
+}*/
