@@ -283,10 +283,7 @@ $(function () {
 
     
 });
-
-
-$(function () {
-    var data4 = [ // the array of delayed tasks decided by checking if expected progress exceed 90%
+var data10 = [ // the array of delayed tasks decided by checking if expected progress exceed 90%
         {
         task: 'Task 1', //task name
         date: '11/16/2014',  //due date
@@ -321,6 +318,14 @@ $(function () {
         }
     ];
 
+
+$.ajax({
+        dataType: "json",
+        url: "http://127.0.0.1:8000/get_past_due"
+    }).done(duecallback);
+
+function duecallback(data4){
+    console.log(data4);
     for (var i = 0; i < data4.length; i ++) {
         var newId = "task" + i;
         var newDiv = $( "<div></div>").attr("id",newId);
@@ -409,4 +414,4 @@ $(function () {
             }]
         });
     };
-});
+};

@@ -136,7 +136,7 @@ def get_pastdue_json(request):
         dict_item["date"] = info[0]
         dict_item["late"] = info[1]
         dict_item["developer"] = findDeveloperByTask(task.id).firstName
-        dict_item["expected"] = task.optional1
+        dict_item["expected"] = task.optional1 * 100
         dict_item["actual"] = task.progress * 100
         data4.append(dict_item)
 
