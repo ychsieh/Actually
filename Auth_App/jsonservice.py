@@ -104,17 +104,17 @@ def get_developer_json(request):
     project = findProjectById(pid)
     data = {}
     data["projectname"] = project.name
-    data["projectprogress"] = project.progress * 100
+    data["projectprogress"] = float(project.progress) * 100
     section = findSectionByProjectIDDeveloperID(pid, user.get('userid'))
     data["sectionname"] = section.name
-    data["sectionprogress"] = section.progress * 100
+    data["sectionprogress"] = float(section.progress) * 100
 
     tasks = []
     dbtasks = findTasksBySectionID(section.id)
     for task in dbtasks:
         dict_task = {}
         dict_task["task"] = task.name
-        dict_task["taskprogress"] = task.progress * 100
+        dict_task["taskprogress"] = float(task.progress) * 100
         tasks.append(dict_task)
     data["tasks"] = tasks
     return HttpResponse(json.dumps(data), content_type='application/json')
@@ -136,8 +136,8 @@ def get_pastdue_json(request):
         dict_item["date"] = info[0]
         dict_item["late"] = info[1]
         dict_item["developer"] = findDeveloperByTask(task.id).firstName
-        dict_item["expected"] = task.optional1 * 100
-        dict_item["actual"] = task.progress * 100
+        dict_item["expected"] = float(task.optional1) * 100
+        dict_item["actual"] = float(task.progress) * 100
         data4.append(dict_item)
 
     return HttpResponse(json.dumps(data4), content_type='application/json')
@@ -156,3 +156,25 @@ def getDateAndStatus():
     result = str(month) + '/' + str(day) + '/' + str(year) + ':' + str(status)
     return result
 
+def get_process_json(request): 
+    pid = request.session.get('projectid')
+    user = request.session.get('user')
+    developers = findDeveloperByProject(pid)
+
+    initN = 1
+    data1 = []
+    for developer in developers:
+        dict_item = {}
+        dict_item["name"] = developer.lastName
+        data = []
+        for x in range(0, 15):
+            data.append(initN)
+            initN = getNumber(initN)   
+        dict_item["data"] = data
+        data1.append(dict_item)
+        initN = 1
+    return HttpResponse(json.dumps(data1), content_type='application/json')
+
+def getNumber(num):
+    n = random.randint(0, 10)
+    return n + num
