@@ -231,17 +231,24 @@
                                             <input class="form-control-inline secName">
                                             <br>
                                             <br>
-                                            <p class="form-control-static">Section Percentage: </p>
-                                            <span class="help-block secPerMsg">The percentage that the section constitutes of the whole project workload.</span>
-                                            <input type="number" class="form-control-inline secPer" style="width: 50px" max="100"><span> %</span>
-                                            <br>
+                                            <p class="form-control-static">Workload: </p>
+                                            <span class="help-block secPerMsg">Select the workload of the section from the scale of 1 to 10.</span>
+                                            <select class="form-control secPer">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    </select>
+                                            <!--<input type="number" class="form-control-inline secPer" style="width: 50px" max="100"><span> %</span>-->
                                             <br>
                                             </div>
                                             <button type="button" class="btn btn-xs btn-link" id="newSecBtn">Add another developer...</button>
-                                            <p class="help-block totalPer">The percentages must add up to 100%.</p>
+                                            <!--<p class="help-block totalPer">The percentages must add up to 100%.</p>-->
                                             
                                         </div>
                                         <div class="button-container">
+                                            <button type="button" class="btn btn-xs btn-link" id="">Back</button>
                                             <button type="button" class="btn btn-default" id="toThird">Next</button>
                                         </div>
                                         <!--<button type="reset" class="btn btn-default">Reset</button>-->
