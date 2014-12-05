@@ -96,3 +96,24 @@ def get_column_json(request):
     data['actualtasks'] = actualtasks
     result = {'data':data}
     return HttpResponse(json.dumps(result), content_type='application/json')
+
+def get_developer_json(request): 
+    pid = request.session.get('projectid')
+    user = request.session.get('user')
+    project = findProjectById(pid)
+    data = {}
+    data["projectname"] = project.name
+    data["projectprogress"] = project.progress * 100
+    section = findSectionByProjectIDDeveloperID(pid, user.get('userid'))
+    data["sectionname"] = section.name
+    data["sectionprogress"] = section.progress * 100
+
+    tasks = []
+    dbtasks = findTasksBySectionID(section.id)
+    for task in dbtasks:
+        dict_task = {}
+        dict_task["task"] = task.name
+        dict_task["taskprogress"] = task.progress * 100
+        tasks.append(dict_task)
+    data["tasks"] = tasks
+    return HttpResponse(json.dumps(data), content_type='application/json')

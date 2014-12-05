@@ -63,6 +63,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
                         {% for project in projects%}
+                       
                         <li>
                             <a href="/viewproject?type={{project.type}}&id={{project.id}}">
                                 <div>
@@ -174,7 +175,14 @@
                     </a>
                 </div>
                 {% for project in projects %}
+                <div class="date traditional">
+                        <p>
+                            <span class="month">
+                                {{project.type}}</span>
+                        </p>
+                    </div>
                 <div class="col-lg-3 col-md-4">
+                    
 
                     {% if project.color == 'none'%}
                     <div class="panel panel-primary">
@@ -206,13 +214,14 @@
                         </div>
                         
                             <div class="panel-footer">
-                                <span class="pull-left lead"><b>{{project.name}}</b> ({{project.type}})</span>
-                                <span class="pull-right big"><i class="fa fa-arrow-circle-right"></i></span>
+                                <span class="pull-left lead"><b>{{project.name}}</b> </span>
                                 <div class="clearfix"></div>
                             </div>
+
                         </a>
                     </div>
                 </div>
+
                 {% endfor %}
                 
             </div>            

@@ -18,7 +18,22 @@ def getPic(access_token):
 	result1 = json.load(response1)
 	picUrl = result1['avatar_url']
 	return picUrl 
+
+def get_contributors(access_token, repo_info):
+	owner= repo_info[1]
+	repo = repo_info[0]
+	url1 = 'https://api.github.com/repos/'+owner+'/'+repo+'/collaborators'
+	request1=Request(url1)
+	request1.add_header('Authorization', 'token %s' % access_token)
+	response1 = urlopen(request1)
+	result1 = json.load(response1)
+	namelist = []
+	for i in result1:
+		if(i['login'] != owner):
+			namelist.append(i['login'])
+	return namelist
 	
+
 def get_user(access_token):
 	url1 = 'https://api.github.com/user'
 	request1=Request(url1)
@@ -44,8 +59,6 @@ def getcommits_from_project(access_token, project, repo_info):
     user = get_user()
     for i in get_repo_list(user):
        	print i
-  
-
 	owner= repo_info[1]
 	repo = repo_info[0]
 	url = 'https://api.github.com/repos/'+owner+'/'+repo+'/commits'
