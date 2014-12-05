@@ -9,6 +9,10 @@ from django.http import HttpResponse, HttpRequest
 from django.core import serializers
 from dbservice import findTasksBySectionID, findProjectByDeveloper, findPmByProject, findProjectByPM
 from dbservice import *
+import datetime
+import random
+
+
 
 
 GITHUB_CLIENT_ID = 'd8d60af4bfa5ebe8bb67'
@@ -20,26 +24,43 @@ access_token = ''
 
 
 def test(request): 
+
     pid = request.session.get('projectid')
     user = request.session.get('user')
-
     project = findProjectById(pid)
+    data4 = []
+    tasks = findTasksByProjectID(pid)
 
-    data = {}
+    for task in tasks:
+        datestatus = getDateAndStatus()
+        info = datestatus.split(':',1)
+        dict_item = {}
+        dict_item["task"] = task.name
+        dict_item["date"] = info[0]
+        dict_item["late"] = info[1]
+        dict_item["developer"] = findDeveloperByTask(task.id).firstName
+        dict_item["expected"] = task.optional1
+        dict_item["actual"] = task.progress * 100
+        data4.append(dict_item)
 
-    data["projectname"] = project.name
-    data["projectprogress"] = project.progress * 100
-    section = findSectionByProjectIDDeveloperID(pid, user.get('userid'))
-    data["sectionname"] = section.name
-    data["sectionprogress"] = section.progress * 100
+    return HttpResponse(json.dumps(data4), content_type='application/json')
 
-    tasks = []
-    dbtasks = findTasksBySectionID(section.id)
-    for task in dbtasks:
-        dict_task = {}
-        dict_task["task"] = task.name
-        dict_task["taskprogress"] = task.progress * 100
-        tasks.append(dict_task)
-    data["tasks"] = tasks
-    return HttpResponse(json.dumps(data), content_type='application/json')
+def getDateAndStatus():
+    status = 0
+    year = random.randint(2014, 2015)
+    month = random.randint(1,12)
+    day = random.randint(1,30)
+    if year == 2014 and month <= 12 and day < 6:
+        status = 'Past Due'
+    else:
+        status = (year - 2014) * 365 + (month * 30) + day - 11 * 30 + 6
+    if(status <= 0):
+        status = "Past Due"
+    result = str(month) + '/' + str(day) + '/' + str(year) + ':' + str(status)
+    return result
+
+
+
+
+
 
