@@ -17,60 +17,29 @@ scope = 'user,repo'
 homepage = 'http://127.0.0.1:8000'
 access_token = ''
 
-def test(request):
-    
+
+
+def test(request): 
     pid = request.session.get('projectid')
+    user = request.session.get('user')
+
     project = findProjectById(pid)
-    qdevelopers = findDevelopersByProjectId(pid)
-    developers = []
-    expected = []
-    actual = []
-    expectedtasks = []
-    actualtasks = []
 
-    data = {'projectname': project.name}
+    data = {}
 
-    
-    for developer in qdevelopers:
-        expdict = {}
-        expdict['name'] = developer.firstName
-        expdict['y'] = 30
-        expdict['drilldown'] = "exp" + developer.firstName
-        expected.append(expdict)
+    data["projectname"] = project.name
+    data["projectprogress"] = project.progress * 100
+    section = findSectionByProjectIDDeveloperID(pid, user.get('userid'))
+    data["sectionname"] = section.name
+    data["sectionprogress"] = section.progress * 100
 
-        actdict = {}
-        actdict['name'] = developer.firstName
-        actdict['y'] = 50
-        actdict['drilldown'] = "act" + developer.firstName
-        section = findSectionByProjectIDDeveloperID(pid,developer.id)    
-        actdict['section'] = section.name
-        actual.append(actdict)
-
-        exptaskDict = {}
-        acttaskDict = {}
-        exptaskDict['id'] = 'exp' + developer.firstName
-        acttaskDict['id'] = 'act' + developer.firstName
-        tasks = findTasksBySectionID(section.id)
-        expdata = []
-        actdata = []
-        for task in tasks:
-            exppercentage = float(task.optional3) * 100    
-            expdata.append([task.name, exppercentage])
-            actpercentage = float(task.progress) * 100    
-            actdata.append([task.name, actpercentage])
-
-        exptaskDict['data'] = expdata
-        expectedtasks.append(exptaskDict)
-        acttaskDict['data'] = actdata
-        actualtasks.append(acttaskDict)
-
-        
-
-    data['expected'] = expected
-    data['actual'] = actual
-    data['expectedtasks'] = expectedtasks
-    data['actualtasks'] = actualtasks
-
-    result = {'data':data}
-    return HttpResponse(json.dumps(result), content_type='application/json')
+    tasks = []
+    dbtasks = findTasksBySectionID(section.id)
+    for task in dbtasks:
+        dict_task = {}
+        dict_task["task"] = task.name
+        dict_task["taskprogress"] = task.progress * 100
+        tasks.append(dict_task)
+    data["tasks"] = tasks
+    return HttpResponse(json.dumps(data), content_type='application/json')
 
