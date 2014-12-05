@@ -5,8 +5,13 @@ import urllib, urllib2
 from urllib2 import urlopen, Request
 import json
 import re
-from Auth_App.models import PM, Developer, Project, Section, Task, Milestone, Commit
-from django.http import HttpResponse, HttpRequest
+from Auth_App.models import PM
+from Auth_App.models import Developer
+from Auth_App.models import Project
+from Auth_App.models import Section
+from django.http import HttpResponse
+from django.http import HttpRequest
+
 from django.core import serializers
 from dbservice import *
 from expectcal import *
@@ -186,6 +191,7 @@ def view_setup_project(request):
     username = user.get("username")
     repos = get_repo_list(access_token, username)
     newProjects = []
+    isNone = "true"
     for r in repos:
         dict_project = {}
         repo_info = r.split('/',1)
@@ -194,14 +200,20 @@ def view_setup_project(request):
         dict_project["repo"] = repo_info[1]
         dict_project["contributors"] = get_contributors(access_token, reverseInfo)
         newProjects.append(dict_project)
-
+        isNone = "false"
     projects = user.get('projects')
-    return render_to_response('forms.html', {'newprojects':newProjects, 'projects':projects, 'user':user})
+    return render_to_response('forms.html', {'newprojects':newProjects, 'projects':projects, 'user':user, 'isNone':isNone})
 
 def viewproject(request):
     user = request.session.get("user")
     type = request.GET.get('type')
+    if user.get("username") == 'treebug':
+        if type == 'PM':
+            return render_to_response("error.html",{"msg":"You are unauthorized to view this page!"})
+
     pid = request.GET.get('id')
+    if int(pid) > 10:
+        return render_to_response("error.html",{"msg":"404"})
     project = findProjectById(pid)
     userid = user.get("userid")
     username = user.get("username")

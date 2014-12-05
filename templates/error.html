@@ -53,9 +53,10 @@
                         {% if msg == "404" %}
                             <h1>Oops, 404!</h1>
                             <h3>We are sorry, but the page you're looking for is not here...</h3>
+                        {% else %}
+                            <h2>Sorry, {{msg}}</h2>
+                            <h3> Go back to home page?</h3>
                         {% endif %}
-                        <h2>Sorry, {{msg}}</h2>
-                        <h3> Go back to home page?</h3>
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                             <li>
