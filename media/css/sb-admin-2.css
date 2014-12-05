@@ -386,7 +386,7 @@ table.dataTable thead .sorting:after {
     color: #df8a13;
 }
 
-.secMsg, .secPerMsg {
+.secMsg, .taskMsg {
     margin-top: -8px;
 }
 
@@ -462,10 +462,10 @@ div#addNew:hover {
     #step1, #step2, #step3 {
         width: 100%;
     }
-    .secName, .secDeveloper {
+    .secName, .secDeveloper, .secPer, .secTask {
         width: 100%;
     }
-    .mileTitle, .mileDate {
+    .mileTitle, .mileDate, .mileTask {
         width: 90%;
     }
 }
@@ -479,7 +479,7 @@ div#addNew:hover {
     width: 90%;
 }
 @media(min-width:768px) {
-    .secName, .secDeveloper, .mileTitle, .mileDate {
+    .secName, .secDeveloper, .mileTitle, .mileDate, .secPer, .secTask, .mileTask {
         width: 40%;
     }
 }
@@ -494,4 +494,71 @@ div#addNew:hover {
 .button-container .btn {
     font-weight: bold;
     font-size: 16px;
+}
+/* Date Ribbon */
+
+.date {
+    background: #428bca;
+    float: left;
+    top: 133px;
+    height: 73px;
+    position: relative;
+    width: 40px;
+    left: 311px;
+    z-index: 100;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -o-transform: rotate(90deg);
+}
+.date p {
+    color: #f6f6f6;
+    font: 18px/30px ;
+    position: relative;
+    text-align: center;
+    text-shadow: 0 -1px 1px hsla(0,0%,0%,.1);
+
+}
+.date p:after {
+    content: '';
+    height: 25px;
+    left: -20px;
+    position: absolute;
+    top: -25px;
+    width: 90px;
+    /*box-shadow: 0 10px 10px -10px hsla(0,0%,0%,.5);*/
+
+
+}
+.date .month {
+    writing-mode:tb-rl;
+    -webkit-transform:rotate(-90deg);
+    -moz-transform:rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    white-space:nowrap;
+    display:block;
+    margin-top: 38px;
+
+}
+
+/* Traditional Ribbon */
+
+.traditional:after, .traditional:before {
+    border-top: 15px solid #428bca; 
+    bottom: -13px;
+    content: '';
+    height: 0;
+    position: absolute;
+    width: 0;
+
+}
+.traditional:after {
+    border-right: 25px solid transparent;  
+    left: 0;  
+
+}
+.traditional:before {
+    border-left: 25px solid transparent;  
+    right: 0;  
 }
