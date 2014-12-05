@@ -112,13 +112,13 @@
                 <li class="dropdown" style="margin-right: 0px">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="profile">
                         <i style="padding-left: 5px;">
-                                <span id="profile-name">Jin Sha<img id="profile-pic" class="img-circle img-responsive" src="/site_media/img/default_profile.jpg"></span>
+                                <span id="profile-name">{{user.username}}<img id="profile-pic" class="img-circle img-responsive" src="{{user.userimg}}"></span>
 
                             </i>
                             <!--<i class="fa fa-caret-down"></i>-->
                         <!--<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>-->
                     </a>
-                    <ul class="dropdown-menu dropdown-user" style="display: none">
+                    <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>

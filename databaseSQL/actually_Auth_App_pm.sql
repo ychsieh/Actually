@@ -33,7 +33,7 @@ CREATE TABLE `Auth_App_pm` (
   `optional2` varchar(100) DEFAULT NULL,
   `optional3` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `Auth_App_pm` (
 
 LOCK TABLES `Auth_App_pm` WRITE;
 /*!40000 ALTER TABLE `Auth_App_pm` DISABLE KEYS */;
-INSERT INTO `Auth_App_pm` VALUES (1,'Jin','Sha','js2839','','','');
+INSERT INTO `Auth_App_pm` VALUES (1,'Ya-Chen','Hsieh','sinkerplus','','',''),(2,'Long','Ma','treebug','','','');
 /*!40000 ALTER TABLE `Auth_App_pm` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-28 22:46:48
+-- Dump completed on 2014-12-04  1:46:27

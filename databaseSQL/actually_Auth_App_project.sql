@@ -47,7 +47,7 @@ CREATE TABLE `Auth_App_project` (
 
 LOCK TABLES `Auth_App_project` WRITE;
 /*!40000 ALTER TABLE `Auth_App_project` DISABLE KEYS */;
-INSERT INTO `Auth_App_project` VALUES (1,'Fasta','milestone 1 discription','2014-11-04','2014-12-04',0.2,0,'Fasta','js2839','0.153','',''),(2,'Facebook','Friends','2014-11-04','2014-12-04',0.4,0,'Facebook','js2839','0.45','',''),(3,'Google','searching','2014-11-04','2014-12-04',0.09,0,'Google','js2839','0.52','',''),(4,'Amazon','milestone','2014-11-04','2014-12-04',0.66,0,'Amazon','bugbug','0.23','',''),(5,'Actually','Github data analyze','2014-11-04','2014-12-04',0.44,0,'Actually','bugbug','0.58','','');
+INSERT INTO `Auth_App_project` VALUES (1,'Fasta','milestone 1 discription','2014-11-04','2014-12-04',0.2,0,'Fasta','js2839','0.153','',''),(2,'Facebook','Friends','2014-11-04','2014-12-04',0.4,0,'Facebook','js2839','0.45','',''),(3,'Google','searching','2014-11-04','2014-12-04',0.09,0,'Google','js2839','0.52','',''),(4,'Amazon','milestone','2014-11-04','2014-12-04',0.66,0,'Amazon','bugbug','0.23','',''),(5,'Actually','Github data analyze','2014-11-04','2014-12-04',0.44,0,'Actually','treebug','0.58','','');
 /*!40000 ALTER TABLE `Auth_App_project` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-28 22:46:48
+-- Dump completed on 2014-12-04  1:46:27
