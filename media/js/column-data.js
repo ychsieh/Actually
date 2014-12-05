@@ -199,6 +199,10 @@ $(function () {
         {
             name: 'developer2',
             data: [1, 22, 51, 71, 71, 71, 71, 71, 73, 74, 76, 77, 80, 80, 80]
+        },
+        {
+            name: 'developer3',
+            data: [1, 2, 51, 71, 71, 81, 71, 71, 7, 74, 76, 77, 80, 80, 80]
         }
 
     ];
@@ -330,11 +334,11 @@ function duecallback(data4){
         var newId = "task" + i;
         var newDiv = $( "<div></div>").attr("id",newId);
 
-        var expColor = 'rgba(0,0,216,1)';
-        var actColor = 'rgba(0,0,216,0.3)';
+        var expColor = 'rgba(0,0,216,0.6)';
+        var actColor = 'rgba(0,0,216,0.6)';
         if (data4[i]["late"]==="Past Due") {
-            expColor = "rgba(216,0,0,1)";
-            actColor = "rgba(216,0,0,0.3)";
+            expColor = "rgba(216,0,0,0.6)";
+            actColor = "rgba(216,0,0,0.6)";
         }
 
         var late = data4[i]["late"];

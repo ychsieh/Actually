@@ -3,7 +3,7 @@ var formData = {};
 var count = 1;
 $("#newTaskBtn").click(function() {
     var taskField = $(".secTask").first().clone().val("");
-    $(this).parent().append("<br>");
+    // $(this).parent().append("<br>");
     $(this).parent().append(taskField);
     var newBtn = $(this).clone(true,true);
     $(this).css("display","none");
@@ -15,9 +15,8 @@ $("#newSecBtn").click(function() {
         window.count += 1;
         var sectionName = "Developer " + window.count.toString();
         var title = $("<label></label>").text(sectionName);
-        //alert("ads");
         $("#sections").append(title);
-        $("#sections").append("<br>");
+        //$("#sections").append("<br>");
         var newSection = $(".section").first().clone(false, false);
         $("#sections").append(newSection);
         var newsec = $(".section").last().find("input");
@@ -27,6 +26,7 @@ $("#newSecBtn").click(function() {
             }
             else{
                 $( this ).remove();
+                //$(this).find("br").last().remove();
             }
         });
         $("#sections").append("<br>");
@@ -43,7 +43,7 @@ $("#toSecond").click(function() {
     window.formData["repo"] = $("#repo option:selected").text();
 });
 
-var mCount = 3;
+var mCount = 1;
 $("#newMilBtn").click(function() {
     window.mCount += 1;
     var mileName = "Milestone " + window.mCount.toString();
