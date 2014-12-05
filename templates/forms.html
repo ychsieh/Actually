@@ -192,6 +192,7 @@
                                                 <select multiple class="form-control secDeveloper">
                                                    
                                                     {% for newproject in newprojects%}
+                                                        
                                                         {% for contributor in newproject.contributors %}
                                                         <option>{{contributor}}</option>
                                                         {% endfor %}
@@ -199,21 +200,32 @@
                                                     </select>
                                             <br>
                                             <p class="form-control-static">Section Name: </p>
-                                            <span class="help-block secMsg">A section is the work that is assigned to a developer.</span>
+                                            <span class="help-block secMsg">A section is the work proportion assigned to a developer.</span>
                                             <input class="form-control-inline secName">
                                             <br>
                                             <br>
-                                            <p class="form-control-static">Section Percentage: </p>
-                                            <span class="help-block secPerMsg">The percentage that the section constitutes of the whole project workload.</span>
-                                            <input type="number" class="form-control-inline secPer" style="width: 50px" max="100"><span> %</span>
+                                            <p class="form-control-static">Workload: </p>
+                                            <span class="help-block secPerMsg">Select the workload of the section from the scale of 1 to 10.</span>
+                                            <select class="form-control secPer">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    </select>
                                             <br>
-                                            <br>
+                                            <p class="form-control-static">Task(s): </p>
+                                            <span class="help-block secMsg">Add task(s) that the developer should complete for this section.</span>
+                                            <input class="form-control secTask" style="margin-bottom: 8px">
+                                            <button type="button" class="btn btn-xs btn-link" id="newTaskBtn">Add another task...</button>
                                             </div>
+                                            <br>
+                                            
                                             <button type="button" class="btn btn-xs btn-link" id="newSecBtn">Add another developer...</button>
-                                            <p class="help-block totalPer">The percentages must add up to 100%.</p>
                                             
                                         </div>
                                         <div class="button-container">
+                                            <button type="button" class="btn btn-xs btn-link" id="backFirst">Back</button>
                                             <button type="button" class="btn btn-default" id="toThird">Next</button>
                                         </div>
                                         <!--<button type="reset" class="btn btn-default">Reset</button>-->
@@ -243,28 +255,19 @@
                                         <div class="form-group" id="milestones">
                                             <label>Milestone 1</label>
                                             <p class="form-control-static indent"> Milestone Name: </p>
-                                            <input class="form-control-inline mileTitle indent" type="text" value="Milestone 1">
+                                            <input class="form-control-inline mileTitle indent" type="text">
                                             <p class="form-control-static indent"> Estimate Deadline: </p>
-                                            <input class="form-control-inline mileDate indent" type="date" value="2014-09-15">
-                                            <br>
-                                            <br>
-                                            <label>Milestone 2</label>
-                                            <p class="form-control-static indent"> Milestone Name: </p>
-                                            <input class="form-control-inline mileTitle indent" type="text" value="Milestone 2">
-                                            <p class="form-control-static indent"> Estimate Deadline: </p>
-                                            <input class="form-control-inline mileDate indent" type="date" value="2014-10-15">
-                                            <br>
-                                            <br>
-                                            <label>Milestone 3</label>
-                                            <p class="form-control-static indent"> Milestone Name: </p>
-                                            <input class="form-control-inline mileTitle indent" type="text" value="Milestone 3">
-                                            <p class="form-control-static indent"> Estimate Deadline: </p>
-                                            <input class="form-control-inline mileDate indent" type="date" value="2014-11-08">
+                                            <input class="form-control-inline mileDate indent" type="date">
+                                            <p class="form-control-static indent"> Milestone Task(s): </p>
+                                            <span class="help-block taskMsg indent">Task(s) that should be completed by this milestone.</span>
+                                            <select multiple class="form-control mileTask indent">
+                                            </select>
                                             <br>
                                             <br>
                                             <button type="button" class="btn btn-xs btn-link" id="newMilBtn"><i class="fa fa-plus fa-fw"></i>Add another milestone...</button>
                                         </div>
                                         <div class="button-container">
+                                            <button type="button" class="btn btn-xs btn-link" id="backSecond">Back</button>
                                             <button type="button" class="btn btn-default" id="lastStep">Submit</button>
                                         </div>
                                         <!--<button type="reset" class="btn btn-default">Reset</button>-->

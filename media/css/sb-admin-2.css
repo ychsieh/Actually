@@ -25,8 +25,8 @@ body {
 }
 
 #profile-name {
+    color: #428bca;
     font-style: normal;
-    color: black;
     position: relative;
     top: 3px;
     font-size: 16px;
@@ -67,7 +67,14 @@ body {
         float: left;
     }
 }
-
+.navbar-brand {
+    font-size: 22px;
+    background-image: url('http://smalldata.io/startup/common-files/icons/sdl_logo12.png');
+    background-size: 28px;
+    background-repeat: no-repeat;
+    background-position: left 8px center;
+    padding-left: 42px;
+}
 
 .navbar-top-links li {
     display: inline-block;
