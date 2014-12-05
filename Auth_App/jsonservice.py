@@ -9,6 +9,7 @@ from django.http import HttpResponse, HttpRequest
 from django.core import serializers
 from dbservice import *
 from random import randrange
+import random
 
 def getpmjson(request):
     pid = request.session.get('projectid')
@@ -60,13 +61,13 @@ def get_column_json(request):
     for developer in qdevelopers:
         expdict = {}
         expdict['name'] = developer.firstName
-        expdict['y'] = 30
+        expdict['y'] = random.randint(30,75)
         expdict['drilldown'] = "exp" + developer.firstName
         expected.append(expdict)
 
         actdict = {}
         actdict['name'] = developer.firstName
-        actdict['y'] = 50
+        actdict['y'] = random.randint(30,75)
         actdict['drilldown'] = "act" + developer.firstName
         section = findSectionByProjectIDDeveloperID(pid,developer.id)    
         actdict['section'] = section.name
