@@ -89,4 +89,11 @@ $("#lastStep").click(function() {
         } 
     });
 });
-
+$("#backFirst").click(function() {
+    $("#step1").css("display","block");
+    $("#step2").css("display","none");
+});
+$("#backSecond").click(function() {
+    $("#step2").css("display","block");
+    $("#step3").css("display","none");
+})

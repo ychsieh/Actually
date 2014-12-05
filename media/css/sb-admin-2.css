@@ -491,7 +491,9 @@ div#addNew:hover {
     text-align: center;
     margin-top: 50px;
 }
-.button-container .btn {
+.button-container .btn-default {
     font-weight: bold;
+}
+.button-container .btn {
     font-size: 16px;
 }
