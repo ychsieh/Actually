@@ -13,8 +13,6 @@ from expectcal import *
 from datautils import *
 
 
-
-
 GITHUB_CLIENT_ID = 'd8d60af4bfa5ebe8bb67'
 GITHUB_CLIENT_SECRET = '6c174e8d8e473916f542b1016f808097e43ede99'
 scope = 'user,repo'
@@ -32,24 +30,6 @@ def expectcal(request):
 	result = get_contributors(access_token, ['Actually','sinkerplus'])
 	#result = get_user(access_token)
 	return HttpResponse(result)
-
-def project1(request):
-    p1 = Project.objects.filter(name = 'Fake')
-    getcommits_from_project(p1[0])
-    return render_to_response('Project.html')
-
-def project2(request):
-    p1 = Project.objects.filter(name = 'Fasta')
-    getcommits_from_project(p1[0])
-    return render_to_response('Project2.html')
-
-def newproject(request):
-    return render_to_response('forms.html')
-
-    
-def main(request):
-    projects = findProjectByPM('js2839')
-    return render_to_response('index.html',{'projects':projects})
 
 def getcommits_from_project(project):
 	global access_token
@@ -205,8 +185,18 @@ def view_setup_project(request):
     access_token = user.get("access_token")
     username = user.get("username")
     repos = get_repo_list(access_token, username)
+    newProjects = []
+    for r in repos:
+        dict_project = {}
+        repo_info = r.split('/',1)
+        reverseInfo = [repo_info[1], repo_info[0]]
+        print reverseInfo
+        dict_project["repo"] = repo_info[1]
+        dict_project["contributors"] = get_contributors(access_token, reverseInfo)
+        newProjects.append(dict_project)
+
     projects = user.get('projects')
-    return render_to_response('forms.html', {'repos':repos, 'projects':projects, 'user':user})
+    return render_to_response('forms.html', {'newprojects':newProjects, 'projects':projects, 'user':user})
 
 def viewproject(request):
     user = request.session.get("user")

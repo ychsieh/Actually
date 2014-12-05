@@ -79,8 +79,13 @@ var data = {
     ]
 }
 
-$(function() {
+$.ajax({
+    dataType: "json",
+    url: "http://127.0.0.1:8000/get_developer_json"
+}).done(callback);
 
+function callback(data){
+    console.log(data);
     var startAngle = 0;
     $('#morris-donut-chart1').highcharts({
         chart: {
@@ -193,302 +198,55 @@ $(function() {
         //var newDiv = $( "<div></div>").attr("id",newId);
         $("<div></div>").attr("class","col-lg-3").attr("id", newId).appendTo("#taskCharts");
         $("#taskCharts div#" + newId).highcharts({
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: 0,
-            plotShadow: false,
-            height: 220
-        },
-        title: {
-            text: '<b style="font-size: 120%; font-weight: bold;">'+data.tasks[i].task+'</b><br>'+data.tasks[i].taskprogress+'%',
-            align: 'center',
-            verticalAlign: 'middle',
-            style: {
-                fontSize: '25px'
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: 0,
+                plotShadow: false,
+                height: 220
             },
-            y: 0
-        },
-        credits: {
-            enabled: false
-        },
-        exporting: {
-            enabled: false
-        },
-        tooltip: {
-            enabled: false
-        },
-        plotOptions: {
-            pie: {
-                dataLabels: {
-                    enabled: false,
-                    distance: -40,
-                    style: {
-                        fontWeight: 'bold',
-                        color: 'white',
-                        textShadow: '0px 1px 2px black'
-                    }
+            title: {
+                text: '<b style="font-size: 120%; font-weight: bold;">'+data.tasks[i].task+'</b><br>'+data.tasks[i].taskprogress+'%',
+                align: 'center',
+                verticalAlign: 'middle',
+                style: {
+                    fontSize: '25px'
                 },
-                colors: ['rgb(105,180,50)'],
-                startAngle: startAngle,
-                endAngle: startAngle + data.tasks[i].taskprogress*0.01*360,
-                center: ['50%', '50%']
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'Browser share',
-            innerSize: '80%',
-            data: [
-                ['Amazon:', 6],               
-            ]
-        }]
-    });
+                y: 0
+            },
+            credits: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            tooltip: {
+                enabled: false
+            },
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        enabled: false,
+                        distance: -40,
+                        style: {
+                            fontWeight: 'bold',
+                            color: 'white',
+                            textShadow: '0px 1px 2px black'
+                        }
+                    },
+                    colors: ['rgb(105,180,50)'],
+                    startAngle: startAngle,
+                    endAngle: startAngle + data.tasks[i].taskprogress*0.01*360,
+                    center: ['50%', '50%']
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+                innerSize: '80%',
+                data: [
+                    ['Amazon:', 6],               
+                ]
+            }]
+        });
     };
-
-    /*$('#morris-donut-chart3').highcharts({
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: 0,
-            plotShadow: false
-        },
-        title: {
-            text: '<b style="font-size: 120%; font-weight: bold;">'+data.tasks[0].task+'</b><br>'+data.tasks[0].taskprogress+'%',
-            align: 'center',
-            verticalAlign: 'middle',
-            style: {
-                fontSize: '25px'
-            },
-            y: 0
-        },
-        credits: {
-            enabled: false
-        },
-        exporting: {
-            enabled: false
-        },
-        tooltip: {
-            enabled: false
-        },
-        plotOptions: {
-            pie: {
-                dataLabels: {
-                    enabled: false,
-                    distance: -40,
-                    style: {
-                        fontWeight: 'bold',
-                        color: 'white',
-                        textShadow: '0px 1px 2px black'
-                    }
-                },
-                startAngle: startAngle,
-                endAngle: startAngle + data.tasks[0].taskprogress*0.01*360,
-                center: ['50%', '50%']
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'Browser share',
-            innerSize: '80%',
-            data: [
-                ['Amazon:', 6],               
-            ]
-        }]
-    });
-
-    $('#morris-donut-chart4').highcharts({
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: 0,
-            plotShadow: false
-        },
-        title: {
-            text: '<b style="font-size: 120%; font-weight: bold;">'+data.tasks[1].task+'</b><br>'+data.tasks[1].taskprogress+'%',
-            align: 'center',
-            verticalAlign: 'middle',
-            style: {
-                fontSize: '25px'
-            },
-            y: 0
-        },
-        credits: {
-            enabled: false
-        },
-        exporting: {
-            enabled: false
-        },
-        tooltip: {
-            enabled: false
-        },
-        plotOptions: {
-            pie: {
-                dataLabels: {
-                    enabled: false,
-                    distance: -40,
-                    style: {
-                        fontWeight: 'bold',
-                        color: 'white',
-                        textShadow: '0px 1px 2px black'
-                    }
-                },
-                startAngle: startAngle,
-                endAngle: startAngle + data.tasks[1].taskprogress*0.01*360,
-                center: ['50%', '50%']
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'Browser share',
-            innerSize: '80%',
-            data: [
-                ['Amazon:', 6],               
-            ]
-        }]
-    });
-
-$('#morris-donut-chart5').highcharts({
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: 0,
-            plotShadow: false
-        },
-        title: {
-            text: '<b style="font-size: 120%; font-weight: bold;">'+data.tasks[2].task+'</b><br>'+data.tasks[2].taskprogress+'%',
-            align: 'center',
-            verticalAlign: 'middle',
-            style: {
-                fontSize: '25px'
-            },
-            y: 0
-        },
-        credits: {
-            enabled: false
-        },
-        exporting: {
-            enabled: false
-        },
-        tooltip: {
-            enabled: false
-        },
-        plotOptions: {
-            pie: {
-                dataLabels: {
-                    enabled: false,
-                    distance: -40,
-                    style: {
-                        fontWeight: 'bold',
-                        color: 'white',
-                        textShadow: '0px 1px 2px black'
-                    }
-                },
-                startAngle: startAngle,
-                endAngle: startAngle + data.tasks[2].taskprogress*0.01*360,
-                center: ['50%', '50%']
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'Browser share',
-            innerSize: '80%',
-            data: [
-                ['Amazon:', 6],               
-            ]
-        }]
-    });
-
-    $('#morris-donut-chart6').highcharts({
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: 0,
-            plotShadow: false
-        },
-        title: {
-            text: '<b style="font-size: 120%; font-weight: bold;">'+data.tasks[3].task+'</b><br>'+data.tasks[3].taskprogress+'%',
-            align: 'center',
-            verticalAlign: 'middle',
-            style: {
-                fontSize: '25px'
-            },
-            y: 0
-        },
-        credits: {
-            enabled: false
-        },
-        exporting: {
-            enabled: false
-        },
-        tooltip: {
-            enabled: false
-        },
-        plotOptions: {
-            pie: {
-                dataLabels: {
-                    enabled: false,
-                    distance: -40,
-                    style: {
-                        fontWeight: 'bold',
-                        color: 'white',
-                        textShadow: '0px 1px 2px black'
-                    }
-                },
-                startAngle: startAngle,
-                endAngle: startAngle + data.tasks[3].taskprogress*0.01*360,
-                center: ['50%', '50%']
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'Browser share',
-            innerSize: '80%',
-            data: [
-                ['Amazon:', 6],               
-            ]
-        }]
-    });*/
-    // Morris.Donut({
-    //     element: 'morris-donut-chart1',
-    //     data: JSONData_Project,
-    //     resize: true,
-    //     colors: ['rgba(11, 98, 164, 1)', 'rgba(11, 98, 164, 0)'],
-    //     formatter: function (y, data) { return y + '%' }
-    // });
-
-    // Morris.Donut({
-    //     element: 'morris-donut-chart2',
-    //     data: JSONData_Section,
-    //     resize: true,
-    //     colors: ['rgba(122, 146, 163, 1)', 'rgba(122, 146, 163, 0)'],
-    //     formatter: function (y, data) { return y + '%' }
-    // });
-
-    // Morris.Donut({
-    //     element: 'morris-donut-chart3',
-    //     data: JSONData_Task1,
-    //     resize: true,
-    //     colors: ['rgba(77, 167, 77, 1)', 'rgba(77, 167, 77, 0)'],
-    //     formatter: function (y, data) { return y + '%' }
-    // });
-
-    //     Morris.Donut({
-    //     element: 'morris-donut-chart4',
-    //     data: JSONData_Task2,
-    //     resize: true,
-    //     colors: ['rgba(77, 167, 77, 1)', 'rgba(77, 167, 77, 0)'],
-    //     formatter: function (y, data) { return y + '%' }
-    // });
-
-    // Morris.Donut({
-    //     element: 'morris-donut-chart5',
-    //     data: JSONData_Task3,
-    //     resize: true,
-    //     colors: ['rgba(77, 167, 77, 1)', 'rgba(77, 167, 77, 0)'],
-    //     formatter: function (y, data) { return y + '%' }
-    // });
-    
-    //     Morris.Donut({
-    //     element: 'morris-donut-chart6',
-    //     data: JSONData_Task4,
-    //     resize: true,
-    //     colors: ['rgba(77, 167, 77, 1)', 'rgba(77, 167, 77, 0)'],
-    //     formatter: function (y, data) { return y + '%' }
-    // });
-});
+};

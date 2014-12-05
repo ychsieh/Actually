@@ -37,7 +37,15 @@ def findMilestonsByDeveloperProject(developerId, projectId):
     milestones = Milestone.objects.filter(project = projectId, developer = developerId)
     return milestones
 
+def findTasksByProjectID(projectID):
+	sections = findSectionsByProjectID(projectID)
+	alltasks = []
 
+	for section in sections:
+		tasks = Task.objects.filter(section = section)
+    	for task in tasks:
+    		alltasks.append(task)
+	return alltasks
 
 def findSectionByMilestoneID(milestoneID):
 	findSectionByMilestone = Section.objects.filter(milestone = milestoneID)
@@ -52,9 +60,16 @@ def findTasksBySectionID(sectionID):
     return tasks
 
 
+
 def findSectionByProjectIDDeveloperID(projectID,developerID):
     section = Section.objects.get(project = projectID, developer = developerID)
     return section
+
+def findSectionsByProjectID(projectID):
+	project = Project.objects.get(pk = projectID)
+	sections = Section.objects.filter(project = project)
+	return sections
+
 
 def findLinesofCodebyProjectIDDeverloperID(projectID, developerID):
 	commit = Commit.objects.get(project = projectID, developer = developerID)
@@ -76,8 +91,9 @@ def getDeveloperBygithubName(GitHubName):
     return developer
 
 def test(request):
-	section = findSectionByProjectIDDeveloperID(4, 1)
-	return render_to_response('test.html',{'test':section})
+	tasks = findTaskByProject(1)
+	#tasks = findSectionsByProjectID(1)
+	return render_to_response('test.html',{'test':tasks})
 
 def addProject(inputName, inputdescription, inputstarttime,
     inputfinishtime,inputprogress,inputrepo,inputrepoOwner,
@@ -145,4 +161,28 @@ def addExtensibility(inputattribute,inputvalue,Givencommit,Giventask):
 
 
 
+def findTaskByProject(projectId):
+    project = Project.objects.get(pk = projectId)
+    sections = Section.objects.filter(project = project)
+    tasklist = []
+    for section in sections:
+        task = Task.objects.filter(section = section)
+        for itask in task:
+            tasklist.append(itask)
+    return tasklist
+
+def findSectionByProject(projectId):
+    project = Project.objects.get(pk = projectId)
+    sections = Section.objects.filter(project = project)
+    return sections
+
+def findDeveloperByProject(projectId):
+    project = Project.objects.get(pk = projectId)
+    developer = Developer.objects.filter(project = project)
+    return developer
+
+def findDeveloperByTask(taskId):
+    task = Task.objects.get(pk = taskId)
+    developer = task.developer
+    return developer
 

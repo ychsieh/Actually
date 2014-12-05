@@ -9,6 +9,10 @@ from django.http import HttpResponse, HttpRequest
 from django.core import serializers
 from dbservice import findTasksBySectionID, findProjectByDeveloper, findPmByProject, findProjectByPM
 from dbservice import *
+import datetime
+import random
+
+
 
 
 GITHUB_CLIENT_ID = 'd8d60af4bfa5ebe8bb67'
@@ -17,60 +21,46 @@ scope = 'user,repo'
 homepage = 'http://127.0.0.1:8000'
 access_token = ''
 
-def test(request):
-    
+
+
+def test(request): 
+
     pid = request.session.get('projectid')
+    user = request.session.get('user')
     project = findProjectById(pid)
-    qdevelopers = findDevelopersByProjectId(pid)
-    developers = []
-    expected = []
-    actual = []
-    expectedtasks = []
-    actualtasks = []
+    data4 = []
+    tasks = findTasksByProjectID(pid)
 
-    data = {'projectname': project.name}
+    for task in tasks:
+        datestatus = getDateAndStatus()
+        info = datestatus.split(':',1)
+        dict_item = {}
+        dict_item["task"] = task.name
+        dict_item["date"] = info[0]
+        dict_item["late"] = info[1]
+        dict_item["developer"] = findDeveloperByTask(task.id).firstName
+        dict_item["expected"] = task.optional1
+        dict_item["actual"] = task.progress * 100
+        data4.append(dict_item)
 
-    
-    for developer in qdevelopers:
-        expdict = {}
-        expdict['name'] = developer.firstName
-        expdict['y'] = 30
-        expdict['drilldown'] = "exp" + developer.firstName
-        expected.append(expdict)
+    return HttpResponse(json.dumps(data4), content_type='application/json')
 
-        actdict = {}
-        actdict['name'] = developer.firstName
-        actdict['y'] = 50
-        actdict['drilldown'] = "act" + developer.firstName
-        section = findSectionByProjectIDDeveloperID(pid,developer.id)    
-        actdict['section'] = section.name
-        actual.append(actdict)
+def getDateAndStatus():
+    status = 0
+    year = random.randint(2014, 2015)
+    month = random.randint(1,12)
+    day = random.randint(1,30)
+    if year == 2014 and month <= 12 and day < 6:
+        status = 'Past Due'
+    else:
+        status = (year - 2014) * 365 + (month * 30) + day - 11 * 30 + 6
+    if(status <= 0):
+        status = "Past Due"
+    result = str(month) + '/' + str(day) + '/' + str(year) + ':' + str(status)
+    return result
 
-        exptaskDict = {}
-        acttaskDict = {}
-        exptaskDict['id'] = 'exp' + developer.firstName
-        acttaskDict['id'] = 'act' + developer.firstName
-        tasks = findTasksBySectionID(section.id)
-        expdata = []
-        actdata = []
-        for task in tasks:
-            exppercentage = float(task.optional3) * 100    
-            expdata.append([task.name, exppercentage])
-            actpercentage = float(task.progress) * 100    
-            actdata.append([task.name, actpercentage])
 
-        exptaskDict['data'] = expdata
-        expectedtasks.append(exptaskDict)
-        acttaskDict['data'] = actdata
-        actualtasks.append(acttaskDict)
 
-        
 
-    data['expected'] = expected
-    data['actual'] = actual
-    data['expectedtasks'] = expectedtasks
-    data['actualtasks'] = actualtasks
 
-    result = {'data':data}
-    return HttpResponse(json.dumps(result), content_type='application/json')
 
