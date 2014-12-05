@@ -18,8 +18,17 @@ $("#newSecBtn").click(function() {
         //alert("ads");
         $("#sections").append(title);
         $("#sections").append("<br>");
-        var newSection = $(".section").first().clone(true);
+        var newSection = $(".section").first().clone(false, false);
         $("#sections").append(newSection);
+        var newsec = $(".section").last().find("input");
+        newsec.each(function( index ) {
+            if(index == 0 || index == 1){
+                $( this ).val("");
+            }
+            else{
+                $( this ).remove();
+            }
+        });
         $("#sections").append("<br>");
         var newBtn = $("#newSecBtn").clone(true,true);
         $("#newSecBtn").remove();
@@ -36,29 +45,39 @@ $("#toSecond").click(function() {
 
 var mCount = 3;
 $("#newMilBtn").click(function() {
-            window.mCount += 1;
-            var mileName = "Milestone " + window.mCount.toString();
-            var title = $("<label></label>").text(mileName);
-            $("#milestones").append("<br>");
-            $("#milestones").append(title);
-            var tLabel = $("<p></p>").text(" Milestone Name: ").addClass("form-control-static indent");
-            var newMile = $(".mileTitle").first().clone().val("");
-            $("#milestones").append(tLabel);
-            $("#milestones").append(newMile);
-            var date = $("<p></p>").text("Estimate Deadline: ").addClass("form-control-static indent");
-            $("#milestones").append(date);
-            var newDate = $(".mileDate").first().clone().val("");
-            $("#milestones").append(newDate);
-            var taskLabel = $("<p></p>").text("Milestone Task(s): ").addClass("form-control-static indent");
-            var newTask = $(".mileTask").first().clone().val("");
-            $("#milestones").append(taskLabel);
-            $(".taskMsg").first().clone().appendTo("#milestones");
-            $("#milestones").append(newTask);
-            $("#milestones").append("<br>");
-            var newBtn = $("#newMilBtn").clone(true,true);
-            $("#newMilBtn").remove();
-            $("#milestones").append(newBtn);
-    });
+    window.mCount += 1;
+    var mileName = "Milestone " + window.mCount.toString();
+    var title = $("<label></label>").text(mileName);
+    $("#milestones").append("<br>");
+    $("#milestones").append(title);
+    var tLabel = $("<p></p>").text(" Milestone Name: ").addClass("form-control-static indent");
+    var newMile = $(".mileTitle").first().clone().attr("value","");
+    $("#milestones").append(tLabel);
+    $("#milestones").append(newMile);
+    var date = $("<p></p>").text("Estimate Deadline: ").addClass("form-control-static indent");
+    $("#milestones").append(date);
+    var newDate = $(".mileDate").first().clone().attr("value","");
+    $("#milestones").append(newDate);
+
+    // var temp = $(".mileDate").last();
+    // temp.each(function( index ) {
+    //     if(index == 0 || index == 1){
+    //         $( this ).val('');
+    //     }
+    //     else{
+    //         $( this ).remove();
+    //     }
+    // });
+    var taskLabel = $("<p></p>").text("Milestone Task(s): ").addClass("form-control-static indent");
+    var newTask = $(".mileTask").first().clone();
+    $("#milestones").append(taskLabel);
+    $(".taskMsg").first().clone().appendTo("#milestones");
+    $("#milestones").append(newTask);
+    $("#milestones").append("<br>");
+    var newBtn = $("#newMilBtn").clone(true,true);
+    $("#newMilBtn").remove();
+    $("#milestones").append(newBtn);
+});
 
 $("#toThird").click(function() {
     //$("#formTitle").html("Step 3 of 3: Milestones");
