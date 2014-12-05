@@ -187,26 +187,34 @@ $(function () {
                 },
             }
         });
+    }   
+    
+});
+
+var data2 = [
+    {
+        name: 'developer1',
+        data: [1, 2, 5, 7, 9, 11, 15, 15, 15, 15, 20, 23, 25, 28, 28] //actual section progress in 30 days
+                    
+    },
+    {
+        name: 'developer2',
+        data: [1, 22, 51, 71, 71, 71, 71, 71, 73, 74, 76, 77, 80, 80, 80]
+    },
+    {
+        name: 'developer3',
+        data: [1, 2, 51, 71, 71, 81, 71, 71, 7, 74, 76, 77, 80, 80, 80]
     }
-   
 
-    var data2 = [
-        {
-            name: 'developer1',
-            data: [1, 2, 5, 7, 9, 11, 15, 15, 15, 15, 20, 23, 25, 28, 28] //actual section progress in 30 days
-                        
-        },
-        {
-            name: 'developer2',
-            data: [1, 22, 51, 71, 71, 71, 71, 71, 73, 74, 76, 77, 80, 80, 80]
-        },
-        {
-            name: 'developer3',
-            data: [1, 2, 51, 71, 71, 81, 71, 71, 7, 74, 76, 77, 80, 80, 80]
-        }
+];
 
-    ];
 
+$.ajax({
+        dataType: "json",
+        url: "http://127.0.0.1:8000/get_process_json"
+    }).done(linecallback);
+
+function linecallback(data2){
     var d = new Date();
     var target = d.setDate(d.getDate()-30);
     var day = d.getDate();
@@ -219,7 +227,7 @@ $(function () {
         month = d.getMonth();
         day = d.getDate();
     };
-    
+
 
     $('#container').highcharts({
         title: {
@@ -284,9 +292,6 @@ $(function () {
         // }]
 
     });
-
-    
-});
 var data10 = [ // the array of delayed tasks decided by checking if expected progress exceed 90%
         {
         task: 'Task 1', //task name
@@ -418,4 +423,5 @@ function duecallback(data4){
             }]
         });
     };
+};
 };
