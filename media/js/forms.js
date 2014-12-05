@@ -53,13 +53,18 @@ $("#toThird").click(function() {
     $("#step2").css("display","none");
     $("#step3").css("display","block");
     var sections = [];
+    var totalWork = 0;
     $(".secDeveloper").each(function(index){
         var section = {};
         section["developer"] = $("option:selected",this).text();
         section["section"] = $(".secName").eq(index).val();
-        section["percentage"] = $(".secPer").eq(index).val();
+        section["percentage"] = parseInt($(".secPer").eq(index).val());
+        totalWork = totalWork + section["percentage"];
         sections[index]=section;
     });
+    for (var i = 0; i < sections.length; i++) {
+        sections[i]["percentage"] = sections[i]["percentage"]/totalWork*100;
+    }
     window.formData["sections"] = sections;
 });
 $("#lastStep").click(function() {
@@ -84,4 +89,11 @@ $("#lastStep").click(function() {
         } 
     });
 });
-
+$("#backFirst").click(function() {
+    $("#step1").css("display","block");
+    $("#step2").css("display","none");
+});
+$("#backSecond").click(function() {
+    $("#step2").css("display","block");
+    $("#step3").css("display","none");
+})

@@ -9,7 +9,9 @@ from Auth_App.models import PM, Developer, Project, Section, Task, Milestone, Co
 from django.http import HttpResponse, HttpRequest
 from django.core import serializers
 from dbservice import *
+from expectcal import *
 from datautils import *
+
 
 
 
@@ -21,6 +23,28 @@ access_token = ''
 
 def index(request):
     return render_to_response('landing.html', {'client_id':GITHUB_CLIENT_ID, 'scope':scope})
+
+def expectcal(request):
+	access_token = None
+	sessionUser = request.session.get("user")
+	if sessionUser != None:
+		access_token = sessionUser.get('access_token')
+	result = get_contributors(access_token, ['Actually','sinkerplus'])
+	#result = get_user(access_token)
+	return HttpResponse(result)
+
+def project1(request):
+    p1 = Project.objects.filter(name = 'Fake')
+    getcommits_from_project(p1[0])
+    return render_to_response('Project.html')
+
+def project2(request):
+    p1 = Project.objects.filter(name = 'Fasta')
+    getcommits_from_project(p1[0])
+    return render_to_response('Project2.html')
+
+def newproject(request):
+    return render_to_response('forms.html')
 
     
 def main(request):
@@ -107,13 +131,18 @@ def get_oauth(request):
     return access_token
 
 def auth(request):
-    access_token = request.session.get('user').get('access_token')
+    access_token = None
+    sessionUser = request.session.get("user")
+
+    if sessionUser != None:
+        access_token = sessionUser.get('access_token')
     if access_token == None:
         access_token = get_oauth(request)
     if access_token == "bad_verification_code":
         return render_to_response("error.html",{"msg":"You are unauthorized to view this page!"})
     username = get_user(access_token)
     userid = getDeveloperBygithubName(username).id
+
     #check if data base has the user, if not, create an account.
     #login
 
@@ -177,7 +206,7 @@ def view_setup_project(request):
     username = user.get("username")
     repos = get_repo_list(access_token, username)
     projects = user.get('projects')
-    return render_to_response('forms.html', {'repos':repos, 'projects':projects})
+    return render_to_response('forms.html', {'repos':repos, 'projects':projects, 'user':user})
 
 def viewproject(request):
     user = request.session.get("user")
@@ -206,12 +235,12 @@ def viewproject(request):
         section = findSectionByProjectIDDeveloperID(pid,userid)
         tasks = findTasksBySectionID(section.id)
         request.session['projectid'] = pid  
-        return render_to_response('Project2.html',{'project':data,'developers':developers,'tasks':tasks,'projects1':dprojects},context_instance=RequestContext(request))
+        return render_to_response('Project2.html',{'project':data,'developers':developers,'tasks':tasks,'projects1':dprojects,'user' : user},context_instance=RequestContext(request))
     elif(type == 'PM'):
         #need vaildate
         request.session['projectid'] = pid
         data['name'] = data['name']
-        return render_to_response('Project.html',{'project':data,'developers':_developers,'projects1':dprojects},context_instance=RequestContext(request))
+        return render_to_response('Project.html',{'project':data,'developers':_developers,'projects1':dprojects,'user' : user},context_instance=RequestContext(request))
     else:
         return render_to_response('error.html',{'msg':'type error!!'})
 

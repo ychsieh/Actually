@@ -50,7 +50,7 @@ var data = {
     projectname: 'Amazon',
     projectprogress: 66,
     sectionname: 'Front-end',
-    sectionprogress: 70,
+    sectionprogress: 85,
     tasks: [
         {
             task: 'task1',
@@ -71,17 +71,24 @@ var data = {
         {
             task: 'task5',
             taskprogress: 45
+        },
+        {
+            task: 'task6',
+            taskprogress: 85
         }
     ]
 }
 
 $(function() {
-    var startAngle = -90;
+
+    var startAngle = 0;
     $('#morris-donut-chart1').highcharts({
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: 0,
-            plotShadow: false
+            plotShadow: false,
+            height: 400,
+            spacingBottom: 0
         },
         title: {
             text: '<b style="font-size: 120%; font-weight: bold;">'+data.projectname+'</b><br>'+data.projectprogress+'%',
@@ -112,6 +119,7 @@ $(function() {
                         textShadow: '0px 1px 2px black'
                     }
                 },
+                colors: ['#046a95'],
                 startAngle: startAngle,
                 endAngle: startAngle + data.projectprogress*0.01*360,
                 center: ['50%', '50%']
@@ -131,7 +139,9 @@ $(function() {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: 0,
-            plotShadow: false
+            plotShadow: false,
+            height: 400,
+            spacingBottom: 0
         },
         title: {
             text: '<b style="font-size: 120%; font-weight: bold;">'+data.sectionname+'</b><br>'+data.sectionprogress+'%',
@@ -162,6 +172,7 @@ $(function() {
                         textShadow: '0px 1px 2px black'
                     }
                 },
+                colors: ['#058dc7'],
                 startAngle: startAngle,
                 endAngle: startAngle + data.sectionprogress*0.01*360,
                 center: ['50%', '50%']
@@ -180,12 +191,13 @@ $(function() {
     for (var i = 0; i < data.tasks.length; i++) {
         var newId = "task" + i;
         //var newDiv = $( "<div></div>").attr("id",newId);
-        $("<div></div>").attr("class","col-lg-4").attr("id", newId).appendTo("#taskCharts");
+        $("<div></div>").attr("class","col-lg-3").attr("id", newId).appendTo("#taskCharts");
         $("#taskCharts div#" + newId).highcharts({
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: 0,
-            plotShadow: false
+            plotShadow: false,
+            height: 220
         },
         title: {
             text: '<b style="font-size: 120%; font-weight: bold;">'+data.tasks[i].task+'</b><br>'+data.tasks[i].taskprogress+'%',
@@ -216,6 +228,7 @@ $(function() {
                         textShadow: '0px 1px 2px black'
                     }
                 },
+                colors: ['rgb(105,180,50)'],
                 startAngle: startAngle,
                 endAngle: startAngle + data.tasks[i].taskprogress*0.01*360,
                 center: ['50%', '50%']

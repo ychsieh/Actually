@@ -462,7 +462,7 @@ div#addNew:hover {
     #step1, #step2, #step3 {
         width: 100%;
     }
-    .secName, .secDeveloper {
+    .secName, .secDeveloper, .secPer {
         width: 100%;
     }
     .mileTitle, .mileDate {
@@ -479,7 +479,7 @@ div#addNew:hover {
     width: 90%;
 }
 @media(min-width:768px) {
-    .secName, .secDeveloper, .mileTitle, .mileDate {
+    .secName, .secDeveloper, .mileTitle, .mileDate, .secPer {
         width: 40%;
     }
 }
@@ -491,7 +491,9 @@ div#addNew:hover {
     text-align: center;
     margin-top: 50px;
 }
-.button-container .btn {
+.button-container .btn-default {
     font-weight: bold;
+}
+.button-container .btn {
     font-size: 16px;
 }

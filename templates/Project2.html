@@ -120,7 +120,7 @@
                 <li class="dropdown" style="margin-right: 0px">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="profile">
                         <i style="padding-left: 5px;">
-                                <span id="profile-name">Jin Sha<img id="profile-pic" class="img-circle img-responsive" src="/site_media/img/default_profile.jpg"></span>
+                               <span id="profile-name">{{user.username}}<img id="profile-pic" class="img-circle img-responsive" src="{{user.userimg}}"></span>
 
                             </i>
                             <!--<i class="fa fa-caret-down"></i>-->
@@ -170,7 +170,7 @@
                     <h1 class="page-header">
                             {{project.name}}
                     </h1>
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" id="progress">
                         <div class="panel-heading">
                             <i class="fa fa-signal fa-fw"></i> Progress Overview
                         </div>
@@ -183,26 +183,19 @@
                                     <!--<div id="morris-donut-chart2" class ="large"></div>-->
                                     
                             </div>
-                            
                         </div>
-                        <div id="task"></div>
-                        <br>
-                        <br>
+
                     </div>
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" id="task">
 
                             <div class="panel-heading">
-                                <i class="fa fa-signal fa-fw"></i> Current Task
+                                <i class="fa fa-signal fa-fw"></i> Current Tasks
                             </div>
-
                             <div class="panel-body" id="taskCharts">
                             </div>
-                            <div id="tasklist"></div>
-                            <br>
-                            <br>
                     </div>
                     <!-- /.panel -->
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" id="tasklist">
                         <div class="panel-heading">
                             <i class="fa fa-sitemap fa-fw"></i> Task List
                         </div>
