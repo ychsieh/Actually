@@ -39,7 +39,7 @@ CREATE TABLE `Auth_App_milestone` (
   PRIMARY KEY (`id`),
   KEY `Auth_App_milestone_37952554` (`project_id`),
   CONSTRAINT `project_id_refs_id_38b5324b` FOREIGN KEY (`project_id`) REFERENCES `Auth_App_project` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `Auth_App_milestone` (
 
 LOCK TABLES `Auth_App_milestone` WRITE;
 /*!40000 ALTER TABLE `Auth_App_milestone` DISABLE KEYS */;
-INSERT INTO `Auth_App_milestone` VALUES (1,'AmazonM1','milestone 1 discription',0.4,0.3,30,'2014-11-05',4,'','',''),(2,'ActuallyM1','milestone 1 discription',0.67,0,70,'2014-11-05',5,'','','');
+INSERT INTO `Auth_App_milestone` VALUES (1,'AmazonM1','milestone 1 discription',0.4,0.3,30,'2014-11-05',4,'','',''),(2,'ActuallyM1','milestone 1 discription',0.67,0,70,'2014-11-05',5,'','',''),(3,'FBMSTONE1','asdf',0.3,0.5,0.6,'2014-12-05',2,'','',''),(4,'FastaM','adfa',0.2,0.4,0.3,'2014-12-05',1,'','','');
 /*!40000 ALTER TABLE `Auth_App_milestone` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-04  1:46:27
+-- Dump completed on 2014-12-05  3:33:30

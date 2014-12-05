@@ -34,7 +34,7 @@ CREATE TABLE `Auth_App_milestone_developer` (
   KEY `Auth_App_milestone_developer_97ab1235` (`developer_id`),
   CONSTRAINT `developer_id_refs_id_72068c45` FOREIGN KEY (`developer_id`) REFERENCES `Auth_App_developer` (`id`),
   CONSTRAINT `milestone_id_refs_id_a0aeba19` FOREIGN KEY (`milestone_id`) REFERENCES `Auth_App_milestone` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `Auth_App_milestone_developer` (
 
 LOCK TABLES `Auth_App_milestone_developer` WRITE;
 /*!40000 ALTER TABLE `Auth_App_milestone_developer` DISABLE KEYS */;
-INSERT INTO `Auth_App_milestone_developer` VALUES (1,1,1),(2,2,1);
+INSERT INTO `Auth_App_milestone_developer` VALUES (1,1,1),(2,2,1),(3,3,5),(4,4,4);
 /*!40000 ALTER TABLE `Auth_App_milestone_developer` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-04  1:46:27
+-- Dump completed on 2014-12-05  3:33:30

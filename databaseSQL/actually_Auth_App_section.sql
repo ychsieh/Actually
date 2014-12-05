@@ -50,7 +50,7 @@ CREATE TABLE `Auth_App_section` (
 
 LOCK TABLES `Auth_App_section` WRITE;
 /*!40000 ALTER TABLE `Auth_App_section` DISABLE KEYS */;
-INSERT INTO `Auth_App_section` VALUES (1,'CRUD','database CRUD',0.25,0.7,0.8,1,4,'','',''),(2,'FastaSession3','long',10,0.25,0.36,2,1,'','',''),(3,'FastaSession1','long',0.3,0.2,0.36,3,1,'','',''),(4,'FestaSession2','long',0.2,0.2,0.3,4,1,'','',''),(5,'Order System','order system for Amazon',0.25,0.36,0.45,5,2,'','','');
+INSERT INTO `Auth_App_section` VALUES (1,'CRUD','database CRUD',0.25,0.7,0.8,1,4,'','',''),(2,'FastaSession3','long',10,0.25,0.36,2,1,'','',''),(3,'FastaSession1','long',0.3,0.2,0.36,3,1,'','',''),(4,'FestaSession2','long',0.2,0.2,0.3,4,1,'','',''),(5,'SendMssage','order system for Amazon',0.25,0.36,0.45,5,2,'','','');
 /*!40000 ALTER TABLE `Auth_App_section` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -63,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-04  1:46:27
+-- Dump completed on 2014-12-05  3:33:30
