@@ -13,7 +13,7 @@ $("#newTaskBtn").click(function() {
 
 $("#newSecBtn").click(function() {
         window.count += 1;
-        var sectionName = "Developer " + window.count.toString();
+        var sectionName = "Section " + window.count.toString();
         var title = $("<label></label>").text(sectionName);
         $("#sections").append(title);
         //$("#sections").append("<br>");
@@ -36,11 +36,17 @@ $("#newSecBtn").click(function() {
 });
 
 $("#toSecond").click(function() {
-    //$("#formTitle").html("Step 2 of 3: Work Distribution");
+    //$("#formTitle").html("Step 2 of 3: Work Distribution");    
+    var name = $("#name").val();
+    if(name == ''){
+        alert('Project name cannot be none!');
+        return;
+    }
+    else
+        window.formData["projectName"] = $("#name").val();
+    window.formData["repo"] = $("#repo option:selected").text();
     $("#step1").css("display","none");
     $("#step2").css("display","block");
-    window.formData["projectName"] = $("#name").val();
-    window.formData["repo"] = $("#repo option:selected").text();
 });
 
 var mCount = 1;
@@ -58,16 +64,6 @@ $("#newMilBtn").click(function() {
     $("#milestones").append(date);
     var newDate = $(".mileDate").first().clone().attr("value","");
     $("#milestones").append(newDate);
-
-    // var temp = $(".mileDate").last();
-    // temp.each(function( index ) {
-    //     if(index == 0 || index == 1){
-    //         $( this ).val('');
-    //     }
-    //     else{
-    //         $( this ).remove();
-    //     }
-    // });
     var taskLabel = $("<p></p>").text("Milestone Task(s): ").addClass("form-control-static indent");
     var newTask = $(".mileTask").first().clone();
     $("#milestones").append(taskLabel);
@@ -81,14 +77,19 @@ $("#newMilBtn").click(function() {
 
 $("#toThird").click(function() {
     //$("#formTitle").html("Step 3 of 3: Milestones");
-    $("#step2").css("display","none");
-    $("#step3").css("display","block");
     var sections = [];
     var totalWork = 0;
+    var break1 = false;
     $(".section").each(function(index) {
         var section = {};
         section["tasks"] = [];
-        section["developer"] = $(".secDeveloper option:selected", this).text();
+        var deve = $(".secDeveloper option:selected", this).text();
+        if(deve == ''){
+            alert('Section should be assigned to a developer!');
+            break1 = true;
+        }
+        else
+            section["developer"] = deve;
         section["section"] = $(".secName", this).val();
         section["percentage"] = parseInt($(".secPer", this).val());
         totalWork = totalWork + section["percentage"];
@@ -97,6 +98,9 @@ $("#toThird").click(function() {
         });
         sections[index] = section;
     });
+    if(break1)
+        return;
+    
     for (var i = 0; i < sections.length; i++) {
         sections[i]["percentage"] = sections[i]["percentage"]/totalWork*100;
     }
@@ -123,6 +127,8 @@ $("#toThird").click(function() {
         }
     });
     window.formData["sections"] = sections;
+    $("#step2").css("display","none");
+    $("#step3").css("display","block");
 });
 
 $("#lastStep").click(function() {
