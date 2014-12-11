@@ -185,6 +185,71 @@ def logout(request):
         del request.session["user"]
     return render_to_response('landing.html', {'client_id':GITHUB_CLIENT_ID, 'scope':scope})
 
+def create_projcet(request):
+    access_token = None
+    sessionUser = request.session.get("user")
+
+    if sessionUser != None:
+        access_token = sessionUser.get('access_token')
+    if access_token == None:
+        access_token = get_oauth(request)
+    if access_token == "bad_verification_code":
+        return render_to_response("error.html",{"msg":"You are unauthorized to view this page!"})
+    username = get_user(access_token)
+    userid = getDeveloperBygithubName(username).id
+
+    #check if data base has the user, if not, create an account.
+    #login
+
+    user = {}
+    user['username'] = username
+    user['userimg'] = getPic(access_token)
+
+
+    dprojects = []
+    projects = findProjectByPM(username)
+    
+    #repos = get_repo_list(access_token, username)
+    #return render_to_response("test.html",{"msg":repos})
+    
+    if projects != None:
+        for project in projects:
+            dict = {}
+            dict["name"] = project.name
+            dict["type"] = 'PM'
+            dict["id"] = project.id
+            dict["progress"] = project.progress * 100
+            dict["expected"] = float(project.optional1) * 100
+            if(project.progress / float(project.optional1) >= 1):
+                dict["color"] = "green"
+            if(project.progress / float(project.optional1) < 1 and project.progress / float(project.optional1) > 0.7):
+                dict["color"] = "yellow"
+            if(project.progress / float(project.optional1) <= 0.7):
+                dict["color"] = "red"
+            dprojects.append(dict)
+
+    devprojects = findProjectByDeveloper(userid)
+    for project in devprojects:
+        dict = {}
+        dict["name"] = project.name
+        dict["type"] = 'Developer'
+        dict["id"] = project.id
+        dict["progress"] = project.progress * 100
+        dict["expected"] = float(project.optional1) * 100
+        if(project.progress / float(project.optional1) >= 1):
+            dict["color"] = "green"
+        if(project.progress / float(project.optional1) < 1 and project.progress / float(project.optional1) > 0.7):
+            dict["color"] = "yellow"
+        if(project.progress / float(project.optional1) <= 0.7):
+            dict["color"] = "red"
+        dprojects.append(dict)
+
+    user['projects'] = dprojects
+    user['userid'] = userid
+    user['access_token'] = access_token
+    request.session['user'] = user
+    return render_to_response('index.html',{'projects':dprojects, 'user' : user, 'create':"true"})
+
 def view_setup_project(request):
     user = request.session.get("user")
     access_token = user.get("access_token")

@@ -26,6 +26,7 @@ urlpatterns = patterns('',
     url(r'^errorpage/$', 'Auth_App.errorhandler.show_error_msg'),
     url(r'^logout/$', 'Auth_App.views.logout'),
     url(r'^addproject/$', 'Auth_App.views.view_setup_project'),
+    url(r'^createproject/$', 'Auth_App.views.create_projcet'),
  
 )
 

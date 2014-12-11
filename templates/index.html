@@ -226,6 +226,39 @@
                 </div>
 
                 {% endfor %}
+
+                {% if create == "true" %}
+                <div class="col-lg-3 col-md-4">
+
+
+                    <div class="panel panel-green">
+                    
+                        <a href="/viewproject?type={{project.type}}&id={{project.id}}">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-tasks fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">0%</div>
+                                    <div>0% Expected</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                            <div class="panel-footer">
+                                
+                                <div class="clearfix">
+                                    <span class="pull-left lead"><b>hello</b> </span>
+                                    <div class="typeWrapper"><span class="circle-background">PM</span></div>
+                                </div>
+                            </div>
+
+                        </a>
+                    </div>
+                </div>
+
+                {% endif %}
                 
             </div>            
         </div>
