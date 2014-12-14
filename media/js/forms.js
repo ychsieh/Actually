@@ -132,31 +132,6 @@ $("#toThird").click(function() {
 });
 
 $("#lastStep").click(function() {
-    // var milestones = [];
-    // $(".mileTitle").each(function(index) {
-    //     var milestone = {};
-    //     milestone["name"] = $(this).val();
-    //     milestone["deadline"] = $(".mileDate").eq(index).val();
-    //     milestone["tasks"] = [];
-    //     var selected = $(".mileTask").eq(index).find(":selected");
-    //     $.each(selected, function(index) {
-    //         milestone["tasks"][index] = $(this).text();
-    //     });
-    //     milestones[index] = milestone;
-    // });
-    // window.formData["milestones"] = milestones;
-    // console.log(formData);
-    
-    // $.ajax({                    
-    //     url: "http://127.0.0.1:8000/createproject",     
-    //     type: 'post', // performing a POST request
-    //     data : formData,
-    //     dataType: 'json',                   
-    //     success: function(data)         
-    //     {
-    //         console.log(data);
-    //     } 
-    // });
     window.location.href = "http://127.0.0.1:8000/createproject/";
 });
 
