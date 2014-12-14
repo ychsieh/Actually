@@ -12,14 +12,10 @@ from dbservice import *
 from expectcal import *
 from datautils import *
 
-
-
-
-
 GITHUB_CLIENT_ID = 'd8d60af4bfa5ebe8bb67'
 GITHUB_CLIENT_SECRET = '6c174e8d8e473916f542b1016f808097e43ede99'
 scope = 'user,repo'
-homepage = 'http://127.0.0.1:8000'
+homepage = 'http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com'
 access_token = ''
 
 def index(request):
@@ -120,6 +116,7 @@ def save_to_db(percentage, sub_name, person, project, time):
 				pass
 		return ''
 
+# get access token of a specific user from GitHub
 def get_oauth(request):
     GITHUB_REQUEST_PERMISSIONS = request.GET.__getitem__('code')
     url = 'https://github.com/login/oauth/access_token'
@@ -131,6 +128,7 @@ def get_oauth(request):
     access_token = the_page.split('=', 1)[1].split('&', 1)[0]
     return access_token
 
+# verify user's identity and get user's data on GitHub using access token   
 def auth(request):
     access_token = None
     sessionUser = request.session.get("user")
