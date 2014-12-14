@@ -68,7 +68,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="http://127.0.0.1:8000/auth?code=8659a4c18d07b6e4f79a">ACTUALLY</a>
+                <a class="navbar-brand" href={{back}}>ACTUALLY</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -108,7 +108,7 @@
                         <li class="divider"></li>
                         {% endfor %}
                         <li>
-                            <a class="text-center" href="http://127.0.0.1:8000/auth?code=2055b1ff8b4be0682542">
+                            <a class="text-center" href={{back}}>
                                 <strong>See All Projects</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
@@ -132,7 +132,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="http://127.0.0.1:8000/logout/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href={{back}}+"/logout/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

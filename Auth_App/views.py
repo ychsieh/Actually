@@ -15,7 +15,8 @@ from datautils import *
 GITHUB_CLIENT_ID = 'd8d60af4bfa5ebe8bb67'
 GITHUB_CLIENT_SECRET = '6c174e8d8e473916f542b1016f808097e43ede99'
 scope = 'user,repo'
-homepage = 'http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com'
+landingpage = 'http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com'
+home = 'http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/auth'
 access_token = ''
 
 def index(request):
@@ -33,20 +34,20 @@ def expectcal(request):
 def project1(request):
     p1 = Project.objects.filter(name = 'Fake')
     getcommits_from_project(p1[0])
-    return render_to_response('Project.html')
+    return render_to_response('Project.html', 'back': home)
 
 def project2(request):
     p1 = Project.objects.filter(name = 'Fasta')
     getcommits_from_project(p1[0])
-    return render_to_response('Project2.html')
+    return render_to_response('Project2.html', 'back':home)
 
 def newproject(request):
-    return render_to_response('forms.html')
+    return render_to_response('forms.html', {'back': home})
 
     
 def main(request):
     projects = findProjectByPM('js2839')
-    return render_to_response('index.html',{'projects':projects})
+    return render_to_response('index.html',{'projects':projects, 'back': home})
 
 def getcommits_from_project(project):
 	global access_token
@@ -138,7 +139,7 @@ def auth(request):
     if access_token == None:
         access_token = get_oauth(request)
     if access_token == "bad_verification_code":
-        return render_to_response("error.html",{"msg":"You are unauthorized to view this page!"})
+        return render_to_response("error.html",{"msg":"You are unauthorized to view this page!", 'back': landingpage})
     username = get_user(access_token)
     userid = getDeveloperBygithubName(username).id
 
@@ -192,7 +193,7 @@ def auth(request):
     user['userid'] = userid
     user['access_token'] = access_token
     request.session['user'] = user
-    return render_to_response('index.html',{'projects':dprojects, 'user' : user})
+    return render_to_response('index.html',{'projects':dprojects, 'user' : user, 'back': home})
 
 def logout(request):
     if request.session.get("user") != None:
@@ -234,14 +235,14 @@ def viewproject(request):
         section = findSectionByProjectIDDeveloperID(pid,userid)
         tasks = findTasksBySectionID(section.id)
         request.session['projectid'] = pid  
-        return render_to_response('Project2.html',{'project':data,'developers':developers,'tasks':tasks,'projects1':dprojects,'user' : user},context_instance=RequestContext(request))
+        return render_to_response('Project2.html',{'project':data,'developers':developers,'tasks':tasks,'projects1':dprojects,'user' : user, 'back':home},context_instance=RequestContext(request))
     elif(type == 'PM'):
         #need vaildate
         request.session['projectid'] = pid
         data['name'] = data['name']
-        return render_to_response('Project.html',{'project':data,'developers':_developers,'projects1':dprojects,'user' : user},context_instance=RequestContext(request))
+        return render_to_response('Project.html',{'project':data,'developers':_developers,'projects1':dprojects,'user' : user, 'back': home},context_instance=RequestContext(request))
     else:
-        return render_to_response('error.html',{'msg':'type error!!'})
+        return render_to_response('error.html',{'msg':'type error!!', 'back': home})
 
 
 
