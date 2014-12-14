@@ -17,6 +17,7 @@ GITHUB_CLIENT_SECRET = '6c174e8d8e473916f542b1016f808097e43ede99'
 scope = 'user,repo'
 landingpage = 'http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com'
 home = 'http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/auth'
+logout = 'http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/logout'
 access_token = ''
 
 def index(request):
@@ -34,12 +35,12 @@ def expectcal(request):
 def project1(request):
     p1 = Project.objects.filter(name = 'Fake')
     getcommits_from_project(p1[0])
-    return render_to_response('Project.html', 'back': home)
+    return render_to_response('Project.html', {'back': home})
 
 def project2(request):
     p1 = Project.objects.filter(name = 'Fasta')
     getcommits_from_project(p1[0])
-    return render_to_response('Project2.html', 'back':home)
+    return render_to_response('Project2.html', {'back':home, 'logout': logout})
 
 def newproject(request):
     return render_to_response('forms.html', {'back': home})
@@ -235,7 +236,7 @@ def viewproject(request):
         section = findSectionByProjectIDDeveloperID(pid,userid)
         tasks = findTasksBySectionID(section.id)
         request.session['projectid'] = pid  
-        return render_to_response('Project2.html',{'project':data,'developers':developers,'tasks':tasks,'projects1':dprojects,'user' : user, 'back':home},context_instance=RequestContext(request))
+        return render_to_response('Project2.html',{'project':data,'developers':developers,'tasks':tasks,'projects1':dprojects,'user' : user, 'back':home, 'logout': logout},context_instance=RequestContext(request))
     elif(type == 'PM'):
         #need vaildate
         request.session['projectid'] = pid
