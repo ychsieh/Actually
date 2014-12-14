@@ -6,13 +6,15 @@ from Auth_App.models import Project, PM, Developer, Milestone, Section, Task, Co
 from django.http import HttpResponse, HttpResponseRedirect
 from itertools import chain
 
+##Calculate expected progress percentage of a certain task
 def getExpectTask(task):
 	milestone = Milestone.objects.get(task = task)
 	task.optional3 = milestone.optional3
 	task.save()
 	return task.optional3
 
-
+##Calculate expected progress percentage of a certain section
+## Also Update subordinate tasks
 def getExpectSection(section):
 	project = section.project
 	milestoneList = Milestone.objects.filter(project = project)
@@ -26,6 +28,7 @@ def getExpectSection(section):
 		getExpectTask(j)
 	return per
 
+## Calculate expected progress percentage of a certain milestone
 def getExpectMilestone(milestone ):
 	currentTime = datetime.date.today()
 	maxdate = milestone.project.startTime
@@ -46,6 +49,8 @@ def getExpectMilestone(milestone ):
 	milestone.save()
 	return per
 
+## Calculate expected progress percentage of a certain project
+## Also Update subordinate sections
 def getExpectProject(project):
 	milestoneList = Milestone.objects.filter(project = project)
 	per = 0
@@ -57,7 +62,7 @@ def getExpectProject(project):
 	for j in sectionList:
 		getExpectSection(j)	
 	return per
-
+## Update function, use this to update entire database
 def updateExpect():
 	projectList = Project.objects.filter()
 	for i in projectList:

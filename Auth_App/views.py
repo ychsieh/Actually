@@ -27,52 +27,6 @@ access_token = ''
 def index(request):
     return render_to_response('landing.html', {'client_id':GITHUB_CLIENT_ID, 'scope':scope})
 
-def expectcal(request):
-	access_token = None
-	sessionUser = request.session.get("user")
-	if sessionUser != None:
-		access_token = sessionUser.get('access_token')
-	result = get_contributors(access_token, ['Actually','sinkerplus'])
-	#result = get_user(access_token)
-	return HttpResponse(result)
-
-def getcommits_from_project(project):
-	global access_token
-	url1 = 'https://api.github.com/user'
-	request1=Request(url1)
-	request1.add_header('Authorization', 'token %s' % access_token)
-	response1 = urlopen(request1)
-	result1 = json.load(response1)
-	person = result1['login']
-	repo_info=['Fasta','js2839']
-	owner= repo_info[1]
-	repo = repo_info[0]
-	url = 'https://api.github.com/repos/'+owner+'/'+repo+'/commits'
-	data=[]
-	request = Request(url)
-	request.add_header('Authorization', 'token %s' % access_token)
-	response = urlopen(request)
-	result = json.load(response)
-	for i in range(len(result)):
-		print 'result0'
-		data.append([result[i]['commit']['message'], result[i]['commit']['author']['name'], result[i]['commit']['author']['date']])
-		print data[i]
-	for com in data:
-		(per,sub_name)=getPercentage(com[0])
-		err = save_to_db( per, sub_name, com[1], project, com[2])
-	return 
-
-def getPercentage(result):
-	pattern1 = re.compile('.*(subtask([0123456789]*))\s*(.*)%')  
-	try:   
-		match1 = pattern1.match(result)
-		percent_s = match1.group(3)
-		percent=float(percent_s)/100
-		subtask_name = match1.group(1)
-		return (percent,subtask_name)
-	except:
-		return (-1,"")
-
 def getStats():
 	global access_token
 	url = 'https://api.github.com/repos/sinkerplus/Actually/stats/contributors'
@@ -104,14 +58,18 @@ def save_to_db(percentage, sub_name, person, project, time):
 				pass
 		return ''
 
+## used to get oauth from gitHub
 def get_oauth(request):
     GITHUB_REQUEST_PERMISSIONS = request.GET.__getitem__('code')
     url = 'https://github.com/login/oauth/access_token'
     values = { 'client_id':GITHUB_CLIENT_ID, 'client_secret':GITHUB_CLIENT_SECRET, 'code':GITHUB_REQUEST_PERMISSIONS}
     data = urllib.urlencode(values, doseq=True)
     req = urllib2.Request(url, data)
+## A http request with our authorized client id and sercret key
+## is sent to github
     response = urllib2.urlopen(req)
     the_page = response.read()
+## an access_token is returned
     access_token = the_page.split('=', 1)[1].split('&', 1)[0]
     return access_token
 
