@@ -10,6 +10,8 @@ from django.core import serializers
 from dbservice import *
 from expectcal import *
 
+## used to get the user's profile picture
+## return value is the picture's url
 def getPic(access_token):
 	url1 = 'https://api.github.com/user'
 	request1=Request(url1)

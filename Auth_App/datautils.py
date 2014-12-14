@@ -10,6 +10,8 @@ from django.core import serializers
 from dbservice import *
 from expectcal import *
 
+## used to get the user's profile picture
+## return value is the picture's url
 def getPic(access_token):
 	url1 = 'https://api.github.com/user'
 	request1=Request(url1)
@@ -19,6 +21,8 @@ def getPic(access_token):
 	picUrl = result1['avatar_url']
 	return picUrl 
 
+## used to get all contributors of a certain repo
+## return value is a list of all contributors github login name
 def get_contributors(access_token, repo_info):
 	owner= repo_info[1]
 	repo = repo_info[0]
@@ -33,7 +37,8 @@ def get_contributors(access_token, repo_info):
 			namelist.append(i['login'])
 	return namelist
 	
-
+## used to get user's info from access_token
+## return value is user's github login name
 def get_user(access_token):
 	url1 = 'https://api.github.com/user'
 	request1=Request(url1)
@@ -43,6 +48,8 @@ def get_user(access_token):
 	username = result1['login']
 	return username
 
+## used to get user's repolist
+## return value is a list of all repos
 def get_repo_list(access_token, user):
 	url2 = 'https://api.github.com/user/repos'
 	request2=Request(url2)
@@ -55,6 +62,8 @@ def get_repo_list(access_token, user):
 			result.append(i['full_name']) 
 	return result
 
+## used to get all commis of a project
+## All commits will be handled and stored into database
 def getcommits_from_project(access_token, project, repo_info):
     user = get_user()
     for i in get_repo_list(user):
@@ -74,6 +83,9 @@ def getcommits_from_project(access_token, project, repo_info):
 		getPercentage(data[i][0])
 	return data
 
+## Used to handle all commits 
+## return vaule will be a list of [attribute_name, attribute_value]
+## e.g. [[att1, val1],[att2,val2],[att,val3]....]
 def getPercentage(data):
 	temp = data.split(';')
 	print temp
