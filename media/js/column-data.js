@@ -207,11 +207,11 @@ $(function () {
             var newId = "task" + i;
             var newDiv = $( "<div></div>").attr("id",newId);
 
-            var expColor = 'rgba(0,0,216,0.6)';
-            var actColor = 'rgba(0,0,216,0.6)';
+            var expColor = 'rgba(0,0,216,0.5)';
+            var actColor = 'rgba(0,0,216,0.8)';
             if (data4[i]["late"]==="Past Due") {
-                expColor = "rgba(216,0,0,0.6)";
-                actColor = "rgba(216,0,0,0.6)";
+                expColor = "rgba(216,0,0,0.5)";
+                actColor = "rgba(216,0,0,0.8)";
             }
 
             var late = data4[i]["late"];
