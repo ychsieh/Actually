@@ -3,8 +3,8 @@ $(function () {
     //get all the expected and actuall progresses of developers in a project and display them using column charts from Highcharts
     $.ajax({
         dataType: "json",
-        // url: "http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/jsontest"
-        url: "http://127.0.0.1:8000/jsontest"
+        url: "http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/jsontest"
+        // url: "http://127.0.0.1:8000/jsontest"
     }).done(columncallback);
 
     Highcharts.setOptions({
@@ -124,8 +124,8 @@ $(function () {
     ////get all developer actual processes in a project and display them using line chart from Highcharts
     $.ajax({
             dataType: "json",
-            // url: "http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/get_process_json"
-            url: "http://127.0.0.1:8000/get_process_json"
+            url: "http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/get_process_json"
+            // url: "http://127.0.0.1:8000/get_process_json"
         }).done(linecallback);
 
     function linecallback(data2){
@@ -197,8 +197,8 @@ $(function () {
     //get all the delayed tasks of a project and display them using bar charts from Highcharts
     $.ajax({
             dataType: "json",
-            // url: "http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/get_past_due"
-            url: "http://127.0.0.1:8000/get_past_due"
+            url: "http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/get_past_due"
+            // url: "http://127.0.0.1:8000/get_past_due"
         }).done(duecallback);
 
     function duecallback(data4){
