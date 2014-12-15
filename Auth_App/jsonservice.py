@@ -139,8 +139,8 @@ def get_pastdue_json(request):
         dict_item["expected"] = float(task.optional1) * 100
         dict_item["actual"] = float(task.progress) * 100
         data4.append(dict_item)
-
-    return HttpResponse(json.dumps(data4), content_type='application/json')
+    return render_to_response("error.html",{"msg":data4})
+    #return HttpResponse(json.dumps(data4), content_type='application/json')
 
 def getDateAndStatus():
     status = 0
