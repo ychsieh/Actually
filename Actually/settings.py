@@ -22,7 +22,7 @@ STATIC_PATH_TEMPLATES = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = 'r_2tlo(92yug5ik*f8r&v4rie2@dx)q7^8d=i_u-qn4glpu13$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = False
 
