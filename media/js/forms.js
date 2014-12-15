@@ -155,7 +155,7 @@ $("#lastStep").click(function() {
     console.log(formData);
 
     $.ajax({                    
-        url: "http://127.0.0.1:8000/createproject/",     
+        url: "http://localhost:8000/createproject/",     
         type: 'get', // performing a POST request
         data : formData,
         // dataType: 'json',                   
@@ -163,7 +163,10 @@ $("#lastStep").click(function() {
         {
             console.log(data);
             $('html').html(data);
-        } 
+        } ,
+        error: function(error){
+            console.log(error);
+        }
     });
 });
 
