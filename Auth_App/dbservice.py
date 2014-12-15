@@ -96,12 +96,12 @@ def test(request):
 	return render_to_response('test.html',{'test':tasks})
 
 def addProject(inputName, inputdescription, inputstarttime,
-    inputfinishtime,inputprogress,inputrepo,inputrepoOwner,
+    inputfinishtime,inputprogress,inputprevProgress,inputrepo,inputrepoOwner,
     inputoptional1,inputoptional2,inputoptional3):
 
     project = Project(name = inputName,description = inputdescription
         ,startTime = inputstarttime,finishTime = inputfinishtime,
-        progress = inputprogress, prevProgress = 0,repo = inputrepo
+        progress = inputprogress, prevProgress = inputprevProgress,repo = inputrepo
         ,repoOwner = inputrepoOwner,optional1 = inputoptional1
         ,optional2 = inputoptional2,optional3 = inputoptional3)
     project.save()
@@ -185,4 +185,14 @@ def findDeveloperByTask(taskId):
     task = Task.objects.get(pk = taskId)
     developer = task.developer
     return developer
+
+def addProject(inputName, inputdescription, inputstarttime,
+    inputfinishtime,inputprogress,inputrepo,inputrepoOwner,
+    inputoptional1,inputoptional2,inputoptional3):
+    project = Project(name = inputName,description = inputdescription
+        ,startTime = inputstarttime,finishTime = inputfinishtime,
+        progress = inputprogress, prevProgress = 0,repo = inputrepo
+        ,repoOwner = inputrepoOwner,optional1 = inputoptional1
+        ,optional2 = inputoptional2,optional3 = inputoptional3)
+    project.save()
 

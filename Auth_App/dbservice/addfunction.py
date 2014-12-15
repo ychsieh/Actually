@@ -4,12 +4,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from itertools import chain
 
 def addProject(inputName, inputdescription, inputstarttime,
-    inputfinishtime,inputprogress,inputrepo,inputrepoOwner,
+    inputfinishtime,inputprogress,inputprevProgress,inputrepo,inputrepoOwner,
     inputoptional1,inputoptional2,inputoptional3):
 
     project = Project(name = inputName,description = inputdescription
         ,startTime = inputstarttime,finishTime = inputfinishtime,
-        progress = inputprogress, prevProgress = 0,repo = inputrepo
+        progress = inputprogress, prevProgress = inputprevProgress,repo = inputrepo
         ,repoOwner = inputrepoOwner,optional1 = inputoptional1
         ,optional2 = inputoptional2,optional3 = inputoptional3)
     project.save()

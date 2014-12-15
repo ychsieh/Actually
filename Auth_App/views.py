@@ -11,6 +11,8 @@ from django.core import serializers
 from dbservice import *
 from expectcal import *
 from datautils import *
+import datetime
+#from dbservice.addfunction import *
 
 GITHUB_CLIENT_ID = 'd8d60af4bfa5ebe8bb67'
 GITHUB_CLIENT_SECRET = '6c174e8d8e473916f542b1016f808097e43ede99'
@@ -354,9 +356,30 @@ def test(request):
 
     return render_to_response('test.html',{'test':progress})
 def create_project(request):
-    print request
-    data = request.POST.get("projectName")
-    return render_to_response("error.html",{"msg":data})
+    user = request.session.get("user")
+    pid = request.GET.get('id')
+    userid = user.get("userid")
+    username = user.get("username")
+    repo = request.GET.get("repo")
+    projectName = request.GET.get("projectName")
+    sections = request.GET.get("sections")
+    milestones = request.GET.get("milestones")
+    
+    starttime = datetime.datetime.now()
+
+    #add a project
+    project = Project(name = projectName,description = projectName
+        ,startTime = starttime,finishTime = starttime,
+        progress = 0, expectedProgress = 0.01,repo = repo
+        ,repoOwner = username,optional1 = None
+        ,optional2 = None,optional3 = None)
+    project.save()
+
+    userdev = Developer.objects.get(id = userid)
+
+    addPM(userdev.firstName,userdev.lastName,username,project,None,None,None)
+
+    return render_to_response("test.html",{"msg":"success!"})
 
 def findTaskByProject(projectId):
     project = Project.objects.get(pk = projectId)
