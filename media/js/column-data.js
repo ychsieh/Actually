@@ -28,6 +28,8 @@ $(function () {
                 //margin: [0, 0, 0, 0],
                 // spaceing: [0, 0, 0, 0]
             },
+            colors: ['#7cb5ec','#2f7ed8'
+            ],
             credits: {
                 enabled: false
             },
@@ -69,14 +71,14 @@ $(function () {
 
             series: [{
                 name: 'Expected Progress',
-                colorByPoint: true,
+                colorByPoint: false,
                 data: data.expected,
                 allowPointSelect: false,
                 type: 'column'
             },
             {
                 name: 'Actual Progress',
-                colorByPoint: true,
+                colorByPoint: false,
                 data: data.actual,
                 allowPointSelect: false,
                 type: 'column'
