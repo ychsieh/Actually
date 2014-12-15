@@ -1,7 +1,7 @@
 var formData = {};
 var count = 1;
 
-//create a new task
+//add a new task
 $("#newTaskBtn").click(function() {
     var taskField = $(".secTask").first().clone().val("");
     // $(this).parent().append("<br>");
@@ -12,7 +12,7 @@ $("#newTaskBtn").click(function() {
     $(this).remove();
 });
 
-//create a new section
+//add a new section
 $("#newSecBtn").click(function() {
         window.count += 1;
         var sectionName = "Section " + window.count.toString();
@@ -37,7 +37,7 @@ $("#newSecBtn").click(function() {
         $("#sections").append(newBtn);
 });
 
-//move to step 2
+//go to step 2
 $("#toSecond").click(function() {
     //$("#formTitle").html("Step 2 of 3: Work Distribution");    
     var name = $("#name").val();
@@ -53,7 +53,7 @@ $("#toSecond").click(function() {
 });
 
 var mCount = 1;
-//create a new milestone
+//add a new milestone
 $("#newMilBtn").click(function() {
     window.mCount += 1;
     var mileName = "Milestone " + window.mCount.toString();
@@ -79,7 +79,7 @@ $("#newMilBtn").click(function() {
     $("#milestones").append(newBtn);
 });
 
-//move to step 3
+//go to step 3
 $("#toThird").click(function() {
     //$("#formTitle").html("Step 3 of 3: Milestones");
     var sections = [];
