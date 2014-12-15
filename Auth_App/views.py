@@ -12,11 +12,12 @@ from dbservice import *
 from expectcal import *
 from datautils import *
 
-
 GITHUB_CLIENT_ID = 'd8d60af4bfa5ebe8bb67'
 GITHUB_CLIENT_SECRET = '6c174e8d8e473916f542b1016f808097e43ede99'
 scope = 'user,repo'
-homepage = 'http://127.0.0.1:8000'
+landingpage = 'http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com'
+home = 'http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/auth'
+logout = 'http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/logout'
 access_token = ''
 
 def index(request):
@@ -34,20 +35,19 @@ def expectcal(request):
 def project1(request):
     p1 = Project.objects.filter(name = 'Fake')
     getcommits_from_project(p1[0])
-    return render_to_response('Project.html')
+    return render_to_response('Project.html', {'back': home})
 
 def project2(request):
     p1 = Project.objects.filter(name = 'Fasta')
     getcommits_from_project(p1[0])
-    return render_to_response('Project2.html')
+    return render_to_response('Project2.html', {'back':home, 'logout': logout})
 
 def newproject(request):
-    return render_to_response('forms.html')
-
+    return render_to_response('forms.html', {'back': home})
     
 def main(request):
     projects = findProjectByPM('js2839')
-    return render_to_response('index.html',{'projects':projects})
+    return render_to_response('index.html',{'projects':projects, 'back': home})
 
 def getcommits_from_project(project):
 	global access_token
@@ -117,6 +117,7 @@ def save_to_db(percentage, sub_name, person, project, time):
 				pass
 		return ''
 
+# get access token of a specific user from GitHub
 def get_oauth(request):
     GITHUB_REQUEST_PERMISSIONS = request.GET.__getitem__('code')
     url = 'https://github.com/login/oauth/access_token'
@@ -128,6 +129,7 @@ def get_oauth(request):
     access_token = the_page.split('=', 1)[1].split('&', 1)[0]
     return access_token
 
+# verify user's identity and get user's data on GitHub using access token   
 def auth(request):
     access_token = None
     sessionUser = request.session.get("user")
@@ -137,7 +139,7 @@ def auth(request):
     if access_token == None:
         access_token = get_oauth(request)
     if access_token == "bad_verification_code":
-        return render_to_response("error.html",{"msg":"You are unauthorized to view this page!"})
+        return render_to_response("error.html",{"msg":"You are unauthorized to view this page!", 'back': landingpage})
     username = get_user(access_token)
     userid = getDeveloperBygithubName(username).id
 
@@ -191,7 +193,7 @@ def auth(request):
     user['userid'] = userid
     user['access_token'] = access_token
     request.session['user'] = user
-    return render_to_response('index.html',{'projects':dprojects, 'user' : user})
+    return render_to_response('index.html',{'projects':dprojects, 'user' : user, 'back': home})
 
 def logout(request):
     if request.session.get("user") != None:
@@ -203,19 +205,8 @@ def view_setup_project(request):
     access_token = user.get("access_token")
     username = user.get("username")
     repos = get_repo_list(access_token, username)
-    newProjects = []
-    isNone = "true"
-    for r in repos:
-        dict_project = {}
-        repo_info = r.split('/',1)
-        reverseInfo = [repo_info[1], repo_info[0]]
-        print reverseInfo
-        dict_project["repo"] = repo_info[1]
-        dict_project["contributors"] = get_contributors(access_token, reverseInfo)
-        newProjects.append(dict_project)
-        isNone = "false"
     projects = user.get('projects')
-    return render_to_response('forms.html', {'newprojects':newProjects, 'projects':projects, 'user':user, 'isNone':isNone})
+    return render_to_response('forms.html', {'repos':repos, 'projects':projects, 'user':user})
 
 def viewproject(request):
     user = request.session.get("user")
@@ -244,16 +235,116 @@ def viewproject(request):
         section = findSectionByProjectIDDeveloperID(pid,userid)
         tasks = findTasksBySectionID(section.id)
         request.session['projectid'] = pid  
-        return render_to_response('Project2.html',{'project':data,'developers':developers,'tasks':tasks,'projects1':dprojects,'user' : user},context_instance=RequestContext(request))
+        return render_to_response('Project2.html',{'project':data,'developers':developers,'tasks':tasks,'projects1':dprojects,'user' : user, 'back':home, 'logout': logout},context_instance=RequestContext(request))
     elif(type == 'PM'):
         #need vaildate
         request.session['projectid'] = pid
         data['name'] = data['name']
-        return render_to_response('Project.html',{'project':data,'developers':_developers,'projects1':dprojects,'user' : user},context_instance=RequestContext(request))
+        return render_to_response('Project.html',{'project':data,'developers':_developers,'projects1':dprojects,'user' : user, 'back': home},context_instance=RequestContext(request))
     else:
-        return render_to_response('error.html',{'msg':'type error!!'})
+        return render_to_response('error.html',{'msg':'type error!!', 'back': home})
 
 
+
+def findTaskByProject(projectId):
+    project = Project.objects.get(pk = projectId)
+    sections = Section.objects.filter(project = project)
+    tasklist = []
+    for section in sections:
+        task = Task.objects.filter(section = section)
+        for itask in task:
+            tasklist.append(itask)
+    return tasklist
+
+def findDelayTaskByProject(projectId):
+    project = Project.objects.get(pk = projectId)
+    sections = Section.objects.filter(project = project)
+    tasklist = []
+    for section in sections:
+        task = Task.objects.filter(section = section)
+        for itask in task:
+            if (float(itask.expectedProgress)>0.9 and float(itask.expectedProgress)>float(itask.progress)):
+                tasklist.append(itask)
+    return tasklist
+
+def findSectionByProject(projectId):
+    project = Project.objects.get(pk = projectId)
+    sections = Section.objects.filter(project = project)
+    return sections
+
+def findDeveloperByProject(projectId):
+    project = Project.objects.get(pk = projectId)
+    developer = Developer.objects.filter(project = project)
+    return developer
+
+def findDeveloperByTask(taskId):
+    task = Task.objects.get(pk = taskId)
+    developer = task.developer
+    developerName = ''
+    developerName += developer.firstName
+    developerName += ' '
+    developerName += developer.lastName
+    return developerName
+
+def findActualExpectedByDeveloper(developerId, projectId):
+    developer = Developer.objects.get(pk = developerId)
+    project = Project.objects.get(pk = projectId)
+
+    section = Section.objects.get(developer = developer, project = project)
+
+    return [section.expec]
+
+#this function aims to store today's progress to a 15-day progress list,
+#it's a string stored in Section.fifteenDaysProgressList
+def storeFifteenDaysData(project, developer):
+    thisSection = Section.objects.get(project = project, developer = developer)
+    thisProgress = thisSection.progress
+
+    progressList = str(thisSection.fifteenDaysProgressList)
+    date_progress = progressList.split()
+
+    if(len(date_progress)<15):
+        date_progress.append(str(thisProgress))
+    else:
+        for i in range(14):
+            date_progress[i] = date_progress[i+1]
+        date_progress[14] = str(thisProgress)
+        
+    # update the fifteenDaysProgressList
+    progressStr = ""
+    for i in range(len(date_progress)):
+        progressStr += str(date_progress[i])
+        progressStr +=" "
+    progressStr.rstrip()
+    thisSection.fifteenDaysProgressList = progressStr
+    return thisSection.fifteenDaysProgressList
+    thisSection.save()
+    # return thisSection.fifteenDaysProgressList, multiple values added
+
+def getFifteenDaysData(projectId, developerId):
+    thisProject = Project.objects.get(pk = projectId)
+    thisDeveloper = Developer.objects.get(pk = developerId)
+    return str(Section.objects.get(project = thisProject, developer = thisDeveloper).fifteenDaysProgressList).split()
+    
+
+#this function is just for testing
+def test(request):
+    # task = findTaskByProject(1)
+    # task = findSectionByProject(1)
+    # task = findDeveloperByProject(1)
+    # task = findDeveloperByTask(4)
+    # task = findDelayTaskByProject(1)
+    progress=storeFifteenDaysData(1,1)
+    # progress = getFifteenDaysData(2,1)
+    # thisProject = Project.objects.get(pk = 1)
+    # thisDeveloper = Developer.objects.get(pk = 1)
+    # thissection = Section.objects.get(project = thisProject, developer = thisDeveloper)
+
+    return render_to_response('test.html',{'test':progress})
+def create_project(request):
+    print request
+    data = request.POST.get("projectName")
+    return render_to_response("error.html",{"msg":data})
 
 def findTaskByProject(projectId):
     project = Project.objects.get(pk = projectId)
@@ -344,6 +435,5 @@ def test(request):
     repos = get_repo_list(access_token, username)
     projects = user.get('projects')
     return render_to_response('.html', {'test':repos, 'projects':projects, 'user':user})
-
 
     

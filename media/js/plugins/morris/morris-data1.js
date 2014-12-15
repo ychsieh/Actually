@@ -1,7 +1,7 @@
 //get progresses of different tasks for a specific developer
 $.ajax({
     dataType: "json",
-    url: "http://127.0.0.1:8000/get_developer_json"
+    url: "http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/get_developer_json"
 }).done(callback);
 
 function callback(data){

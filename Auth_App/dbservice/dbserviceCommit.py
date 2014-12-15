@@ -24,3 +24,4 @@ def storeAttrValue(commit, attrValueList):
 def findLinesofCodebyProjectIDDeverloperID(projectID, developerID):
 	commit = Commit.objects.get(project = projectID, developer = developerID)
 	return commit.linescode
+
