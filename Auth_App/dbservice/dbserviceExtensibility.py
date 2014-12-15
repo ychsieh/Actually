@@ -1,7 +1,16 @@
-from django.shortcuts import render, render_to_response
-from Auth_App.models import Project, PM, Developer, Milestone, Section, Task, Commit
-from django.http import HttpResponse, HttpResponseRedirect
-from itertools import chain
+from django.shortcuts import render_to_response, redirect, render
+from django.template import RequestContext
+import urllib, urllib2
+from urllib2 import urlopen, Request
+import json
+import re
+from Auth_App.models import PM, Developer, Project, Section, Task, Milestone, Commit
+from django.http import HttpResponse, HttpRequest
+from django.core import serializers
+from dbservice import *
+from django import forms
+import datetime
+from django.utils import timezone
 
 def findPmByProject(GivenProject):
 		findProject = Project.objects.filter(name = GivenProject)
@@ -70,24 +79,5 @@ def findCommitTimebyProjectIDDeverloperID(projectID, developerID):
 
 def findProjectById(pid):
     return Project.objects.get(id = pid)
-
-def test(request):
-    developers = findDevelopersByProjectId(1)
-    #    json_developer = []
-        #for developer in developers:
-    #dict
-    #developer = developers.size
-    json_developer = []
-    for developer in developers:
-        dict = {}
-        dict['name'] = developer.lastName + ", " + developer.firstName
-        json_developer.append(dict)
-    
-    #data = findTasksBySectionID(section.id)
-    return render_to_response('test.html',{'test':json_developer})
-
-
-
-
 
 

@@ -13,12 +13,13 @@ class Project(models.Model):
     startTime = models.DateField('date the project starts')
     finishTime = models.DateField('date the project finishes', null = True, blank = True)
     progress = models.FloatField(default = 0)
-    prevProgress =models.FloatField(default = 0)
+    expectedProgress = models.FloatField(default = 0)
     repo = models.CharField(max_length = 100, null = True)
     repoOwner = models.CharField(max_length = 100, null = True, blank = True)
-    optional1 = models.CharField(max_length = 100, null = True, blank = True)
-    optional2 = models.CharField(max_length = 100, null = True, blank = True)
-    optional3 = models.CharField(max_length = 100, null = True, blank = True)
+
+    optional1 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional2 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional3 = models.CharField(max_length = 1000, null = True, blank = True)
         
         
     def __unicode__(self):
@@ -30,9 +31,10 @@ class PM(models.Model):
     lastName = models.CharField(max_length = 50)
     githubName = models.CharField(max_length =50,default = 0)
     project = models.ManyToManyField(Project, null = True, blank = True)
-    optional1 = models.CharField(max_length = 100, null = True, blank = True)
-    optional2 = models.CharField(max_length = 100, null = True, blank = True)
-    optional3 = models.CharField(max_length = 100, null = True, blank = True)
+
+    optional1 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional2 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional3 = models.CharField(max_length = 1000, null = True, blank = True)
         
         
     def __unicode__(self):
@@ -46,9 +48,10 @@ class Developer(models.Model):
     githubName = models.CharField(max_length =50)
     pmAssigned = models.ForeignKey(PM, null = True, blank = True)
     project = models.ManyToManyField(Project, null = True, blank = True)
-    optional1 = models.CharField(max_length = 100, null = True, blank = True)
-    optional2 = models.CharField(max_length = 100, null = True, blank = True)
-    optional3 = models.CharField(max_length = 100, null = True, blank = True)
+
+    optional1 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional2 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional3 = models.CharField(max_length = 1000, null = True, blank = True)
         
         
     def __unicode__(self):
@@ -59,15 +62,15 @@ class Milestone(models.Model):
     name = models.CharField(max_length = 100)
     description = models.CharField(max_length = 1000, null = True, blank = True)
     progress = models.FloatField(default = 0)
-    prevProgress = models.FloatField(default = 0)
+    expectedProgress = models.FloatField(default = 0)
     percentage = models.FloatField(null = True)
     dueDate = models.DateField()
     project = models.ForeignKey(Project)
     developer = models.ManyToManyField(Developer)
     
-    optional1 = models.CharField(max_length = 100, null = True, blank = True)
-    optional2 = models.CharField(max_length = 100, null = True, blank = True)
-    optional3 = models.CharField(max_length = 100, null = True, blank = True)
+    optional1 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional2 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional3 = models.CharField(max_length = 1000, null = True, blank = True)
         
         
     def __unicode__(self):
@@ -79,13 +82,14 @@ class Section(models.Model):
     description = models.CharField(max_length = 1000, null = True, blank = True)
     percentage = models.FloatField('the percentage in the the project')
     progress = models.FloatField(default = 0)
-    prevProgress = models.FloatField(default = 0)
-    developer = models.OneToOneField(Developer, null = True, blank = True)
-    project = models.ForeignKey(Project, null = True)
+    expectedProgress = models.FloatField(default = 0)
+    fifteenDaysProgressList = models.CharField(max_length = 200, null = True, blank = True)
+    developer = models.ForeignKey(Developer, null = True, blank = True)
+    project = models.ForeignKey(Project, null = True, blank = True)
         
-    optional1 = models.CharField(max_length = 100, null = True, blank = True)
-    optional2 = models.CharField(max_length = 100, null = True, blank = True)
-    optional3 = models.CharField(max_length = 100, null = True, blank = True)
+    optional1 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional2 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional3 = models.CharField(max_length = 1000, null = True, blank = True)
         
     def __unicode__(self):
         return self.name
@@ -94,38 +98,42 @@ class Section(models.Model):
 class Task(models.Model):
     name = models.CharField(max_length = 100)
     description = models.CharField(max_length = 1000, null = True, blank = True)
-    percentage = models.FloatField('the percentage in the the section')
+    percentage = models.FloatField('the percentage in the the section', null = True, blank = True)
+    mPercentage = models.FloatField('the percentage in the the milestone', null = True, blank = True)
     progress = models.FloatField(default = 0)
-    prevProgress = models.FloatField(default = 0)
+    expectedProgress = models.FloatField(default = 0)
+    status = models.BooleanField(default = False)
     section = models.ForeignKey(Section)
     milestone = models.ForeignKey(Milestone)
     developer = models.ForeignKey(Developer,null = True, blank = True)
     
-    optional1 = models.CharField(max_length = 100, null = True, blank = True)
-    optional2 = models.CharField(max_length = 100, null = True, blank = True)
-    optional3 = models.CharField(max_length = 100, null = True, blank = True)
+    optional1 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional2 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional3 = models.CharField(max_length = 1000, null = True, blank = True)
         
     def __unicode__(self):
         return self.name
 
 class Commit(models.Model):
-	commitTime = models.DateTimeField()
-	# progress = models.FloatField()
-	developer = models.ForeignKey(Developer)
-	project = models.ForeignKey(Project)
-	task = models.ForeignKey(Task)
-	# linescode = models.CharField(max_length = 1000, null = True, blank = True)
-	# commitmessage = models.CharField(max_length = 1000, null = True, blank = True)
+    commitTime = models.DateTimeField()
+    developer = models.ForeignKey(Developer)
+    project = models.ForeignKey(Project)
+    task = models.ForeignKey(Task)
 
-	# def __unicode__(self):
-	# 	return '{} {} {} {:.2f} {}'.format(self.developer.firstName, self.developer.lastName, 
-	# 		self.task.name, self.progress, self.commitTime)
+    optional1 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional2 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional3 = models.CharField(max_length = 1000, null = True, blank = True)
+
 
 class Extensibility(models.Model):
-	commit = models.ForeignKey(Commit)
-	task = models.ForeignKey(Task)
-	attribute = models.CharField(max_length = 100)
-	value = models.CharField(max_length = 100)
+    commit = models.ForeignKey(Commit)
+    attribute = models.CharField(max_length = 100)
+    value = models.CharField(max_length = 100)
+
+    optional1 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional2 = models.CharField(max_length = 1000, null = True, blank = True)
+    optional3 = models.CharField(max_length = 1000, null = True, blank = True)
+
 
 
 

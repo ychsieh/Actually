@@ -1,93 +1,55 @@
-from django.shortcuts import render, render_to_response
-from Auth_App.models import Project, PM, Developer, Milestone, Section, Task, Commit
-from django.http import HttpResponse, HttpResponseRedirect
-from itertools import chain
-
-def findPmByProject(GivenProject):
-		findProject = Project.objects.filter(name = GivenProject)
-		if (len(findProject) != 0):
-			PmName= PM.objects.filter(project =findProject)
-			return PmName
-		else:
-			print 'no PM found by project'
-
-def findDevelopersByProjectId(pid):
-    _project = Project.objects.filter(id = pid)
-    developers = Developer.objects.filter(project = _project)
-    return developers
-
-def findProjectByPM(GivenPMID):
-	findPM = PM.objects.get(id = GivenPMID)
-	findProject = findPM.project.all()
-	if (len(findProject) != 0):
-		return findProject
-	else:
-		print []
-
-
-def findProjectByDeveloper(GivenDeveloperID):
-	findDeveloper = Developer.objects.get(id = GivenDeveloperID)
-	findProject = findDeveloper.project.all()
-	if(len(findProject) != 0):
-		return findProject
-	else:
-		print []
-
-def findMilestonsByDeveloperProject(developerId, projectId):
-    milestones = Milestone.objects.filter(project = projectId, developer = developerId)
-    return milestones
-
-
+from django.shortcuts import render_to_response, redirect, render
+from django.template import RequestContext
+import urllib, urllib2
+from urllib2 import urlopen, Request
+import json
+import re
+from Auth_App.models import PM, Developer, Project, Section, Task, Milestone, Commit
+from django.http import HttpResponse, HttpRequest
+from django.core import serializers
+from dbservice import *
+from django import forms
+import datetime
+from django.utils import timezone
 
 def findSectionByMilestoneID(milestoneID):
 	findSectionByMilestone = Section.objects.filter(milestone = milestoneID)
-	if (len(findSectionByMilestone) != 0):
-		return findSectionByMilestone
-	else:
-		print 'error happening'
+	return findSectionByMilestone
 
-
-def findTasksBySectionID(sectionID):
-    tasks = Task.objects.filter(section = sectionID)
-    return tasks
 
 def findSectionByProjectIDDeveloperID(projectID,developerID):
     section = Section.objects.get(project = projectID, developer = developerID)
     return section
 
+#this function aims to store today's progress to a 15-day progress list,
+#it's a string stored in Section.fifteenDaysProgressList
+def storeFifteenDaysData(project, developer):
+    thisSection = Section.objects.get(project = project, developer = developer)
+    thisProgress = thisSection.progress
 
-def findLinesofCodebyProjectIDDeverloperID(projectID, developerID):
-	commit = Commit.objects.get(project = projectID, developer = developerID)
-	return commit.linescode
+    progressList = str(thisSection.fifteenDaysProgressList)
+    date_progress = progressList.split()
 
-def findCommitMessagebyProjectIDDeverloperID(projectID, developerID):
-	commit = Commit.objects.get(project = projectID, developer = developerID)
-	return commit.commitmessage
+    if(len(date_progress)<15):
+        date_progress.append(str(thisProgress))
+    else:
+        for i in range(14):
+            date_progress[i] = date_progress[i+1]
+        date_progress[14] = str(thisProgress)
+        
+    # update the fifteenDaysProgressList
+    print "fuck"
+    progressStr = ""
+    for i in range(len(date_progress)):
+        progressStr += str(date_progress[i])
+        progressStr +=" "
+    progressStr.rstrip()
+    thisSection.fifteenDaysProgressList = progressStr
+    thisSection.save()
 
-def findCommitTimebyProjectIDDeverloperID(projectID, developerID):
-	commit = Commit.objects.get(project = projectID, developer = developerID)
-	return commit.commitTime
-
-def findProjectById(pid):
-    return Project.objects.get(id = pid)
-
-def test(request):
-    developers = findDevelopersByProjectId(1)
-    #    json_developer = []
-        #for developer in developers:
-    #dict
-    #developer = developers.size
-    json_developer = []
-    for developer in developers:
-        dict = {}
-        dict['name'] = developer.lastName + ", " + developer.firstName
-        json_developer.append(dict)
-    
-    #data = findTasksBySectionID(section.id)
-    return render_to_response('test.html',{'test':json_developer})
-
-
-
-
+def getFifteenDaysData(projectId, developerId):
+    thisProject = Project.objects.get(pk = projectId)
+    thisDeveloper = Developer.objects.get(pk = developerId)
+    return str(Section.objects.get(project = thisProject, developer = thisDeveloper).fifteenDaysProgressList).split()
 
 
