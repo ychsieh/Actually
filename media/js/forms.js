@@ -1,6 +1,7 @@
-
 var formData = {};
 var count = 1;
+
+//create a new task
 $("#newTaskBtn").click(function() {
     var taskField = $(".secTask").first().clone().val("");
     // $(this).parent().append("<br>");
@@ -11,6 +12,7 @@ $("#newTaskBtn").click(function() {
     $(this).remove();
 });
 
+//create a new section
 $("#newSecBtn").click(function() {
         window.count += 1;
         var sectionName = "Section " + window.count.toString();
@@ -35,6 +37,7 @@ $("#newSecBtn").click(function() {
         $("#sections").append(newBtn);
 });
 
+//move to step 2
 $("#toSecond").click(function() {
     //$("#formTitle").html("Step 2 of 3: Work Distribution");    
     var name = $("#name").val();
@@ -50,6 +53,7 @@ $("#toSecond").click(function() {
 });
 
 var mCount = 1;
+//create a new milestone
 $("#newMilBtn").click(function() {
     window.mCount += 1;
     var mileName = "Milestone " + window.mCount.toString();
@@ -75,6 +79,7 @@ $("#newMilBtn").click(function() {
     $("#milestones").append(newBtn);
 });
 
+//move to step 3
 $("#toThird").click(function() {
     //$("#formTitle").html("Step 3 of 3: Milestones");
     var sections = [];
@@ -131,15 +136,44 @@ $("#toThird").click(function() {
     $("#step3").css("display","block");
 });
 
+//submit the form using AJAX
 $("#lastStep").click(function() {
-    window.location.href = "http://127.0.0.1:8000/createproject/";
+    // window.location.href = 'http://127.0.0.1:8000/auth';
+    var milestones = [];
+    $(".mileTitle").each(function(index) {
+        var milestone = {};
+        milestone["name"] = $(this).val();
+        milestone["deadline"] = $(".mileDate").eq(index).val();
+        milestone["tasks"] = [];
+        var selected = $(".mileTask").eq(index).find(":selected");
+        $.each(selected, function(index) {
+            milestone["tasks"][index] = $(this).text();
+        });
+        milestones[index] = milestone;
+    });
+    window.formData["milestones"] = milestones;
+    console.log(formData);
+
+    $.ajax({                    
+        url: "http://127.0.0.1:8000/createproject/",     
+        type: 'get', // performing a POST request
+        data : formData,
+        // dataType: 'json',                   
+        success: function(data)         
+        {
+            console.log(data);
+            $('html').html(data);
+        } 
+    });
 });
 
+//back to step 1
 $("#backFirst").click(function() {
     $("#step1").css("display","block");
     $("#step2").css("display","none");
 });
 
+//back to step 2
 $("#backSecond").click(function() {
     $("#step2").css("display","block");
     $("#step3").css("display","none");

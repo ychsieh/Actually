@@ -342,6 +342,10 @@ def test(request):
     # thissection = Section.objects.get(project = thisProject, developer = thisDeveloper)
 
     return render_to_response('test.html',{'test':progress})
+def create_project(request):
+    print request
+    data = request.POST.get("projectName")
+    return render_to_response("error.html",{"msg":data})
 
 
 
