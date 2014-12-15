@@ -205,8 +205,20 @@ def view_setup_project(request):
     access_token = user.get("access_token")
     username = user.get("username")
     repos = get_repo_list(access_token, username)
+    newProjects = []
+    isNone = "true"
+    for r in repos:
+        dict_project = {}
+        repo_info = r.split('/',1)
+        reverseInfo = [repo_info[1], repo_info[0]]
+        print reverseInfo
+        dict_project["repo"] = repo_info[1]
+        dict_project["contributors"] = get_contributors(access_token, reverseInfo)
+        newProjects.append(dict_project)
+        isNone = "false"
     projects = user.get('projects')
-    return render_to_response('forms.html', {'repos':repos, 'projects':projects, 'user':user})
+    return render_to_response('forms.html', {'newprojects':newProjects, 'projects':projects, 'user':user, 'isNone':isNone})
+
 
 def viewproject(request):
     user = request.session.get("user")

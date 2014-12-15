@@ -3,7 +3,8 @@ $(function () {
     //get all the expected and actuall progresses of developers in a project and display them using column charts from Highcharts
     $.ajax({
         dataType: "json",
-        url: "http://127.0.0.1:8000/jsontest"
+        url: "http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/jsontest"
+        // url: "http://127.0.0.1:8000/jsontest"
     }).done(columncallback);
 
     Highcharts.setOptions({
@@ -28,6 +29,8 @@ $(function () {
                 //margin: [0, 0, 0, 0],
                 // spaceing: [0, 0, 0, 0]
             },
+            colors: ['#7cb5ec','#2f7ed8'
+            ],
             credits: {
                 enabled: false
             },
@@ -69,14 +72,14 @@ $(function () {
 
             series: [{
                 name: 'Expected Progress',
-                colorByPoint: true,
+                colorByPoint: false,
                 data: data.expected,
                 allowPointSelect: false,
                 type: 'column'
             },
             {
                 name: 'Actual Progress',
-                colorByPoint: true,
+                colorByPoint: false,
                 data: data.actual,
                 allowPointSelect: false,
                 type: 'column'
@@ -101,7 +104,7 @@ $(function () {
     
 
 
-    var data2 = [
+    var data3 = [
         {
             name: 'developer1',
             data: [1, 2, 5, 7, 9, 11, 15, 15, 15, 15, 20, 23, 25, 28, 28] //actual section progress in 30 days
@@ -121,7 +124,8 @@ $(function () {
     ////get all developer actual processes in a project and display them using line chart from Highcharts
     $.ajax({
             dataType: "json",
-            url: "http://127.0.0.1:8000/get_process_json"
+            url: "http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/get_process_json"
+            // url: "http://127.0.0.1:8000/get_process_json"
         }).done(linecallback);
 
     function linecallback(data2){
@@ -193,7 +197,7 @@ $(function () {
     //get all the delayed tasks of a project and display them using bar charts from Highcharts
     $.ajax({
             dataType: "json",
-            url: "http://127.0.0.1:8000/get_past_due"
+            url: "http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/get_past_due"
         }).done(duecallback);
 
     function duecallback(data4){
