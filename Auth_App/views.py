@@ -156,12 +156,8 @@ def auth(request):
     user['username'] = username
     user['userimg'] = getPic(access_token)
 
-
     dprojects = []
     projects = findProjectByPM(username)
-    
-    #repos = get_repo_list(access_token, username)
-    #return render_to_response("test.html",{"msg":repos})
     
     if projects != None:
         for project in projects:
@@ -209,12 +205,13 @@ def auth(request):
     return render_to_response('index.html',{'projects':dprojects, 'user' : user, 'back': home})
 
 
-
+#logout fuction
 def logout(request):
     if request.session.get("user") != None:
         del request.session["user"]
     return render_to_response('landing.html', {'client_id':GITHUB_CLIENT_ID, 'scope':scope})
 
+#view setup project page 
 def view_setup_project(request):
     user = request.session.get("user")
     access_token = user.get("access_token")
@@ -234,7 +231,7 @@ def view_setup_project(request):
     projects = user.get('projects')
     return render_to_response('forms.html', {'newprojects':newProjects, 'projects':projects, 'user':user, 'isNone':isNone})
 
-
+#view index.html
 def viewproject(request):
     user = request.session.get("user")
     type = request.GET.get('type')
@@ -273,53 +270,6 @@ def viewproject(request):
 
 
 
-def findTaskByProject(projectId):
-    project = Project.objects.get(pk = projectId)
-    sections = Section.objects.filter(project = project)
-    tasklist = []
-    for section in sections:
-        task = Task.objects.filter(section = section)
-        for itask in task:
-            tasklist.append(itask)
-    return tasklist
-
-def findDelayTaskByProject(projectId):
-    project = Project.objects.get(pk = projectId)
-    sections = Section.objects.filter(project = project)
-    tasklist = []
-    for section in sections:
-        task = Task.objects.filter(section = section)
-        for itask in task:
-            if (float(itask.expectedProgress)>0.9 and float(itask.expectedProgress)>float(itask.progress)):
-                tasklist.append(itask)
-    return tasklist
-
-def findSectionByProject(projectId):
-    project = Project.objects.get(pk = projectId)
-    sections = Section.objects.filter(project = project)
-    return sections
-
-def findDeveloperByProject(projectId):
-    project = Project.objects.get(pk = projectId)
-    developer = Developer.objects.filter(project = project)
-    return developer
-
-def findDeveloperByTask(taskId):
-    task = Task.objects.get(pk = taskId)
-    developer = task.developer
-    developerName = ''
-    developerName += developer.firstName
-    developerName += ' '
-    developerName += developer.lastName
-    return developerName
-
-def findActualExpectedByDeveloper(developerId, projectId):
-    developer = Developer.objects.get(pk = developerId)
-    project = Project.objects.get(pk = projectId)
-
-    section = Section.objects.get(developer = developer, project = project)
-
-    return [section.expec]
 
 #this function aims to store today's progress to a 15-day progress list,
 #it's a string stored in Section.fifteenDaysProgressList
@@ -346,13 +296,14 @@ def storeFifteenDaysData(project, developer):
     thisSection.fifteenDaysProgressList = progressStr
     return thisSection.fifteenDaysProgressList
     thisSection.save()
-    # return thisSection.fifteenDaysProgressList, multiple values added
+
 
 def getFifteenDaysData(projectId, developerId):
     thisProject = Project.objects.get(pk = projectId)
     thisDeveloper = Developer.objects.get(pk = developerId)
     return str(Section.objects.get(project = thisProject, developer = thisDeveloper).fifteenDaysProgressList).split()
-    
+  
+#create new project  
 def create_project(request):
     user = request.session.get("user")
     pid = request.GET.get('id')
@@ -379,6 +330,7 @@ def create_project(request):
 
     return render_to_response("test.html",{"msg":"success!"})
 
+#update user's firstName and lastName
 def update_name(request):
     firstName = request.GET.get("firstName")
     lastName = request.GET.get("lastName")
