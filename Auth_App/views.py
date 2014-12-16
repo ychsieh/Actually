@@ -36,7 +36,7 @@ def expectcal(request):
 def project1(request):
     p1 = Project.objects.filter(name = 'Fake')
     getcommits_from_project(p1[0])
-    return render_to_response('Project.html', {'back': home})
+    return render_to_response('Project.html', {'back': home, 'logout': logout})
 
 def project2(request):
     p1 = Project.objects.filter(name = 'Fasta')
@@ -44,11 +44,11 @@ def project2(request):
     return render_to_response('Project2.html', {'back':home, 'logout': logout})
 
 def newproject(request):
-    return render_to_response('forms.html', {'back': home})
+    return render_to_response('forms.html', {'back': home, 'logout': logout})
     
 def main(request):
     projects = findProjectByPM('js2839')
-    return render_to_response('index.html',{'projects':projects, 'back': home})
+    return render_to_response('index.html',{'projects':projects, 'back': home, 'logout': logout})
 
 def getcommits_from_project(project):
     global access_token
@@ -200,9 +200,9 @@ def auth(request):
     #check if data base has the user's name
     devObj = Developer.objects.get(githubName = username)
     if devObj.firstName == "None" or devObj.firstName == None:
-        return render_to_response("forms4.html",{'projects':dprojects, 'user' : user, 'back': home})
+        return render_to_response("forms4.html",{'projects':dprojects, 'user' : user, 'back': home, 'logout': logout})
 
-    return render_to_response('index.html',{'projects':dprojects, 'user' : user, 'back': home})
+    return render_to_response('index.html',{'projects':dprojects, 'user' : user, 'back': home, 'logout': logout})
 
 
 #logout fuction
@@ -229,7 +229,7 @@ def view_setup_project(request):
         newProjects.append(dict_project)
         isNone = "false"
     projects = user.get('projects')
-    return render_to_response('forms.html', {'newprojects':newProjects, 'projects':projects, 'user':user, 'isNone':isNone})
+    return render_to_response('forms.html', {'newprojects':newProjects, 'projects':projects, 'user':user, 'isNone':isNone, 'back': home, 'logout': logout})
 
 #view index.html
 def viewproject(request):
@@ -264,9 +264,9 @@ def viewproject(request):
         #need vaildate
         request.session['projectid'] = pid
         data['name'] = data['name']
-        return render_to_response('Project.html',{'project':data,'developers':_developers,'projects1':dprojects,'user' : user, 'back': home},context_instance=RequestContext(request))
+        return render_to_response('Project.html',{'project':data,'developers':_developers,'projects1':dprojects,'user' : user, 'back': home, 'logout': logout},context_instance=RequestContext(request))
     else:
-        return render_to_response('error.html',{'msg':'type error!!', 'back': home})
+        return render_to_response('error.html',{'msg':'type error!!', 'back': home, 'logout': logout})
 
 
 
@@ -342,7 +342,7 @@ def update_name(request):
     devObj.firstName = firstName
     devObj.lastName = lastName
     devObj.save()
-    return render_to_response('index.html',{'projects':dprojects, 'user' : user, 'back': home})
+    return render_to_response('index.html',{'projects':dprojects, 'user' : user, 'back': home, 'logout': logout})
 
 
     
