@@ -165,7 +165,7 @@ def get_process_json(request):
     data1 = []
     for developer in developers:
         dict_item = {}
-        dict_item["name"] = developer.lastName
+        dict_item["name"] = developer.firstName
         data = []
         for x in range(0, 15):
             data.append(initN)
