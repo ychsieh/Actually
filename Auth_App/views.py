@@ -314,6 +314,7 @@ def create_project(request):
     sections = request.GET.get("sections")
     milestones = request.GET.get("milestones")
     dprojects = user.get("projects")
+
     
     starttime = datetime.datetime.now()
 
@@ -324,7 +325,7 @@ def create_project(request):
         ,repoOwner = username,optional1 = None
         ,optional2 = None,optional3 = None)
     project.save()
-
+    dprojects.append(project)
     userdev = Developer.objects.get(id = userid)
 
     addPM(userdev.firstName,userdev.lastName,username,project,None,None,None)
