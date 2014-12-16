@@ -155,7 +155,7 @@ $("#lastStep").click(function() {
     console.log(formData);
 
     $.ajax({                    
-        url: "http://localhost:8000/createproject/",     
+        url: "http://ec2-54-188-224-227.us-west-2.compute.amazonaws.com/createproject/",     
         type: 'get', // performing a POST request
         data : formData,
         // dataType: 'json',                   
