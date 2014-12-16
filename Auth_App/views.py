@@ -313,6 +313,7 @@ def create_project(request):
     projectName = request.GET.get("projectName")
     sections = request.GET.get("sections")
     milestones = request.GET.get("milestones")
+
     
     starttime = datetime.datetime.now()
 
@@ -327,8 +328,7 @@ def create_project(request):
     userdev = Developer.objects.get(id = userid)
 
     addPM(userdev.firstName,userdev.lastName,username,project,None,None,None)
-
-    return render_to_response("index.html",{"msg":"success!"})
+    return render_to_response('index.html',{'projects':user.get（"projects"）, 'user' : user, 'back': home})
 
 #update user's firstName and lastName
 def update_name(request):
