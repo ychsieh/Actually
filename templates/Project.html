@@ -196,52 +196,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <ul class="timeline">
-                                 <li>
-                                    <div class="timeline-badge danger"><i class="fa fa-warning"></i>
-                                    </div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h4 class="timeline-title">Zhu, Wen</h4>
-                                            <p><small class="text-muted"><i class="fa fa-clock-o"></i> 11 hours ago</small>
-                                            </p>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Hours of work: 5</p>
-                                            <p>Difficulty message: Unable to update Django setting</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="timeline-inverted">
-                                    <div class="timeline-badge"><i class="fa fa-check"></i>
-                                    </div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h4 class="timeline-title">Ma, Long</h4>
-                                            <p><small class="text-muted"><i class="fa fa-clock-o"></i> 15 hours ago</small>
-                                            </p>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Hours of work: 8</p>
-                                            <p>Difficulty message: None</p>
-                                        </div>
-                                    </div>
-                                </li> 
-                                <li>
-                                    <div class="timeline-badge danger"><i class="fa fa-warning"></i>
-                                    </div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h4 class="timeline-title">Ma, Long</h4>
-                                            <p><small class="text-muted"><i class="fa fa-clock-o"></i> 18 hours ago</small>
-                                            </p>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Hours of work: 5</p>
-                                            <p>Difficulty message: Encounter the issue of browser compatibility</p>
-                                        </div>
-                                    </div>
-                                </li>                                 
+                            <ul class="timeline">                              
                             {% load app_filters %}
                             {% for developer in developers %}
                                 {% if forloop.counter0|mymod:2 %}
