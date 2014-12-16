@@ -325,7 +325,17 @@ def create_project(request):
         ,repoOwner = username,optional1 = None
         ,optional2 = None,optional3 = None)
     project.save()
-    dprojects.append(project)
+
+    dict = {}
+    dict["name"] = project.name
+    dict["type"] = 'PM'
+    dict["id"] = project.id
+    dict["progress"] = 0
+    dict["expected"] = 0
+    dict["color"] = "green"
+
+    dprojects.append(dict)
+
     userdev = Developer.objects.get(id = userid)
 
     addPM(userdev.firstName,userdev.lastName,username,project,None,None,None)
