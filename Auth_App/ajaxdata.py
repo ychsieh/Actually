@@ -18,7 +18,6 @@ import random
 GITHUB_CLIENT_ID = 'd8d60af4bfa5ebe8bb67'
 GITHUB_CLIENT_SECRET = '6c174e8d8e473916f542b1016f808097e43ede99'
 scope = 'user,repo'
-homepage = 'http://127.0.0.1:8000'
 access_token = ''
 
 
