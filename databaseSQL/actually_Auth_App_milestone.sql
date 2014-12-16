@@ -29,7 +29,7 @@ CREATE TABLE `Auth_App_milestone` (
   `name` varchar(100) NOT NULL,
   `description` varchar(1000) DEFAULT NULL,
   `progress` double NOT NULL,
-  `prevProgress` double NOT NULL,
+  `expectedProgress` double NOT NULL,
   `percentage` double DEFAULT NULL,
   `dueDate` date NOT NULL,
   `project_id` int(11) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `Auth_App_milestone` (
   PRIMARY KEY (`id`),
   KEY `Auth_App_milestone_37952554` (`project_id`),
   CONSTRAINT `project_id_refs_id_38b5324b` FOREIGN KEY (`project_id`) REFERENCES `Auth_App_project` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `Auth_App_milestone` (
 
 LOCK TABLES `Auth_App_milestone` WRITE;
 /*!40000 ALTER TABLE `Auth_App_milestone` DISABLE KEYS */;
-INSERT INTO `Auth_App_milestone` VALUES (1,'AmazonM1','milestone 1 discription',0.4,0.3,30,'2014-11-05',4,'','',''),(2,'ActuallyM1','milestone 1 discription',0.67,0,70,'2014-11-05',5,'','',''),(3,'FBMSTONE1','asdf',0.3,0.5,0.6,'2014-12-05',2,'','',''),(4,'FastaM','adfa',0.2,0.4,0.3,'2014-12-05',1,'','','');
+INSERT INTO `Auth_App_milestone` VALUES (1,'GoogleM1','',0.53,0.98,0.4,'2015-02-05',1,'','',''),(2,'GoogleM2','',0.2,0.1,0.4,'2015-03-05',1,'','',''),(3,'GoogleM3','',0,0,0.2,'2015-05-05',1,'','',''),(4,'AmazonM1','',0.5,0.2,0.5,'2015-01-05',2,'','',''),(5,'AmazonM2','',0,0,0.5,'2015-06-05',2,'','',''),(6,'OracleM1','',0.3,0.1,0.4,'2015-01-05',3,'','',''),(7,'OracleM2','',0,0,0.6,'2015-05-05',3,'','',''),(8,'FacebookM1','fbm1',0.3,0.5,0.3,'2014-12-24',98,'','',''),(9,'FacebookM2','fbm2',0.3,0.4,0.5,'2014-12-26',98,'','','');
 /*!40000 ALTER TABLE `Auth_App_milestone` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-05  3:33:30
+-- Dump completed on 2014-12-15 21:55:28

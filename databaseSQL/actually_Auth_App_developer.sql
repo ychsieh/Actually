@@ -36,7 +36,7 @@ CREATE TABLE `Auth_App_developer` (
   PRIMARY KEY (`id`),
   KEY `Auth_App_developer_d3712109` (`pmAssigned_id`),
   CONSTRAINT `pmAssigned_id_refs_id_31d65d2f` FOREIGN KEY (`pmAssigned_id`) REFERENCES `Auth_App_pm` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `Auth_App_developer` (
 
 LOCK TABLES `Auth_App_developer` WRITE;
 /*!40000 ALTER TABLE `Auth_App_developer` DISABLE KEYS */;
-INSERT INTO `Auth_App_developer` VALUES (1,'Jin','Sha','js2839',NULL,'','',''),(2,'Long','Ma','treebug',1,'I am Long Ma','65','35'),(3,'XinHe','Lian','ellielan',1,'XinHe made this commit','25','32'),(4,'Wen','Zhu','zw123',1,'This msg is from Wen Zhu','20','30'),(5,'Ya-Chen','Hsieh','sinkerplus',1,'Jason made this commit','40','35');
+INSERT INTO `Auth_App_developer` VALUES (1,'Wen','Zhu','spoiled_piggy',1,'0.111','0.222',''),(2,'Long','Ma','treebug',1,'0.111','0.222',''),(3,'Sha','Jin','jinsha',1,'0.111','0.222',''),(4,'Yachen','Xie','xieyachen',2,'0.111','0.222',''),(5,'Yiming','Jia','jiayiming',2,'0.111','0.222',''),(7,'bb','aaa','aaaa',NULL,'','',''),(8,'xie','yachen','sinkerplus',NULL,NULL,NULL,NULL),(10,'Zhe','Nan','Maggie199',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `Auth_App_developer` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-05  3:33:30
+-- Dump completed on 2014-12-15 21:55:28

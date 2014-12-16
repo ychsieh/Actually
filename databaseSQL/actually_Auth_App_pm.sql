@@ -29,11 +29,11 @@ CREATE TABLE `Auth_App_pm` (
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
   `githubName` varchar(50) NOT NULL,
-  `optional1` varchar(100) DEFAULT NULL,
-  `optional2` varchar(100) DEFAULT NULL,
-  `optional3` varchar(100) DEFAULT NULL,
+  `optional1` varchar(1000) DEFAULT NULL,
+  `optional2` varchar(1000) DEFAULT NULL,
+  `optional3` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `Auth_App_pm` (
 
 LOCK TABLES `Auth_App_pm` WRITE;
 /*!40000 ALTER TABLE `Auth_App_pm` DISABLE KEYS */;
-INSERT INTO `Auth_App_pm` VALUES (1,'Ya-Chen','Hsieh','sinkerplus','','',''),(2,'Long','Ma','treebug','','','');
+INSERT INTO `Auth_App_pm` VALUES (1,'Wen','Zhu','spoiled_piggy','','',''),(2,'Yiming','Jia','yjsirus','','',''),(3,'Long','Ma','treebug','','',''),(4,'Long','Ma','treebug',NULL,NULL,NULL),(5,'Long','Ma','treebug',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `Auth_App_pm` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-05  3:33:30
+-- Dump completed on 2014-12-15 21:55:28

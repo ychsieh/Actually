@@ -34,7 +34,7 @@ CREATE TABLE `Auth_App_pm_project` (
   KEY `Auth_App_pm_project_37952554` (`project_id`),
   CONSTRAINT `pm_id_refs_id_4637873c` FOREIGN KEY (`pm_id`) REFERENCES `Auth_App_pm` (`id`),
   CONSTRAINT `project_id_refs_id_c68fc4d6` FOREIGN KEY (`project_id`) REFERENCES `Auth_App_project` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `Auth_App_pm_project` (
 
 LOCK TABLES `Auth_App_pm_project` WRITE;
 /*!40000 ALTER TABLE `Auth_App_pm_project` DISABLE KEYS */;
-INSERT INTO `Auth_App_pm_project` VALUES (11,1,1),(12,1,3),(13,1,4),(7,2,5);
+INSERT INTO `Auth_App_pm_project` VALUES (2,1,1),(3,1,2),(4,2,3),(5,3,98),(7,5,104);
 /*!40000 ALTER TABLE `Auth_App_pm_project` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-05  3:33:30
+-- Dump completed on 2014-12-15 21:55:28

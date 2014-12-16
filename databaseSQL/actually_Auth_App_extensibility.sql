@@ -27,14 +27,14 @@ DROP TABLE IF EXISTS `Auth_App_extensibility`;
 CREATE TABLE `Auth_App_extensibility` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `commit_id` int(11) NOT NULL,
-  `task_id` int(11) NOT NULL,
   `attribute` varchar(100) NOT NULL,
   `value` varchar(100) NOT NULL,
+  `optional1` varchar(1000) DEFAULT NULL,
+  `optional2` varchar(1000) DEFAULT NULL,
+  `optional3` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Auth_App_extensibility_0b918771` (`commit_id`),
-  KEY `Auth_App_extensibility_ef96c3b8` (`task_id`),
-  CONSTRAINT `commit_id_refs_id_3185d21b` FOREIGN KEY (`commit_id`) REFERENCES `Auth_App_commit` (`id`),
-  CONSTRAINT `task_id_refs_id_900ad6f6` FOREIGN KEY (`task_id`) REFERENCES `Auth_App_task` (`id`)
+  CONSTRAINT `commit_id_refs_id_3185d21b` FOREIGN KEY (`commit_id`) REFERENCES `Auth_App_commit` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-05  3:33:30
+-- Dump completed on 2014-12-15 21:55:28

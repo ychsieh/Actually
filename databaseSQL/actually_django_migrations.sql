@@ -39,7 +39,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2014-11-05 00:29:31'),(2,'auth','0001_initial','2014-11-05 00:29:32'),(3,'admin','0001_initial','2014-11-05 00:29:32'),(4,'sessions','0001_initial','2014-11-05 00:29:32'),(5,'sites','0001_initial','2014-11-05 00:29:32');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2014-12-05 05:59:03'),(2,'auth','0001_initial','2014-12-05 05:59:04'),(3,'admin','0001_initial','2014-12-05 05:59:04'),(4,'sessions','0001_initial','2014-12-05 05:59:04'),(5,'sites','0001_initial','2014-12-05 05:59:04');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-05  3:33:30
+-- Dump completed on 2014-12-15 21:55:27

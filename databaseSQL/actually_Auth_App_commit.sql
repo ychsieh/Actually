@@ -27,15 +27,12 @@ DROP TABLE IF EXISTS `Auth_App_commit`;
 CREATE TABLE `Auth_App_commit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `commitTime` datetime NOT NULL,
-  `progress` double NOT NULL,
   `developer_id` int(11) NOT NULL,
-  `project_id` int(11) DEFAULT NULL,
+  `project_id` int(11) NOT NULL,
   `task_id` int(11) NOT NULL,
-  `linescode` varchar(1000) DEFAULT NULL,
-  `commitmessage` varchar(1000) DEFAULT NULL,
-  `optional1` varchar(100) DEFAULT NULL,
-  `optional2` varchar(100) DEFAULT NULL,
-  `optional3` varchar(100) DEFAULT NULL,
+  `optional1` varchar(1000) DEFAULT NULL,
+  `optional2` varchar(1000) DEFAULT NULL,
+  `optional3` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Auth_App_commit_97ab1235` (`developer_id`),
   KEY `Auth_App_commit_37952554` (`project_id`),
@@ -64,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-05  3:33:30
+-- Dump completed on 2014-12-15 21:55:27
