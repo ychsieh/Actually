@@ -328,7 +328,7 @@ def create_project(request):
 
     addPM(userdev.firstName,userdev.lastName,username,project,None,None,None)
 
-    return render_to_response("test.html",{"msg":"success!"})
+    return render_to_response("index.html",{"msg":"success!"})
 
 #update user's firstName and lastName
 def update_name(request):
