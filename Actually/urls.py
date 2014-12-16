@@ -28,6 +28,7 @@ urlpatterns = patterns('',
     url(r'^test/$', 'Auth_App.views.test'),
     url(r'^addproject/$', 'Auth_App.views.view_setup_project'),
     url(r'^createproject/$', 'Auth_App.views.create_project'),
+    url(r'^updatename/$', 'Auth_App.views.update_name'),
  
 )
 
